@@ -12,7 +12,7 @@ namespace movielandia_.net_api.Repositories.Implementations
 {
     public class MovieRepository : GenericRepository<Movie>, IMovieRepository
     {
-        private readonly ApplicationDbContext _context;
+        private new readonly ApplicationDbContext _context;
 
         public MovieRepository(ApplicationDbContext context) : base(context)
         {
@@ -32,7 +32,7 @@ namespace movielandia_.net_api.Repositories.Implementations
                 .ToListAsync();
         }
 
-        public async Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDto filter)
+        public async Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDTO filter)
         {
             var query = _context.Movies.AsQueryable();
 
@@ -308,7 +308,7 @@ namespace movielandia_.net_api.Repositories.Implementations
             return await _context.Movies.CountAsync();
         }
 
-        public async Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesByTitleAsync(string title, MovieFilterDto filter)
+        public async Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesByTitleAsync(string title, MovieFilterDTO filter)
         {
             var query = _context.Movies
                 .Where(m => m.Title.Contains(title));

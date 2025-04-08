@@ -27,7 +27,7 @@ namespace movielandia_.net_api.Services.Implementations
             return await _movieRepository.GetAllMoviesAsync();
         }
 
-        public async Task<(IEnumerable<MovieDto> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDto filter)
+        public async Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDTO filter)
         {
             var (movies, totalCount) = await _movieRepository.GetMoviesWithFiltersAsync(filter);
             
@@ -38,35 +38,35 @@ namespace movielandia_.net_api.Services.Implementations
             var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
 
             // Process each movie to add extra data (ratings, bookmarks)
-            List<MovieDto> result = new List<MovieDto>();
+            List<MovieDTO> result = new List<MovieDTO>();
             
             foreach (var movie in movies)
             {
-                var movieDto = MapToDto(movie);
+                var movieDTO = MapToDTO(movie);
                 
                 // Add rating info
                 if (ratingsByMovieId.TryGetValue(movie.Id, out var ratingInfo))
                 {
-                    movieDto.AverageRating = ratingInfo.AverageRating;
-                    movieDto.TotalReviews = ratingInfo.TotalReviews;
+                    movieDTO.AverageRating = ratingInfo.AverageRating;
+                    movieDTO.TotalReviews = ratingInfo.TotalReviews;
                 }
 
                 // Check if movie is bookmarked by user
                 if (filter.UserId.HasValue)
                 {
-                    movieDto.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, filter.UserId.Value);
+                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, filter.UserId.Value);
                 }
 
-                result.Add(movieDto);
+                result.Add(movieDTO);
             }
 
             return (result, totalCount);
         }
 
-        public async Task<IEnumerable<MovieDto>> GetMoviesForHomePageAsync()
+        public async Task<IEnumerable<MovieDTO>> GetMoviesForHomePageAsync()
         {
             // Try to get from cache
-            if (!_cache.TryGetValue("HomePageMovies", out List<MovieDto> cachedMovies))
+            if (!_cache.TryGetValue("HomePageMovies", out List<MovieDTO> cachedMovies))
             {
                 var movies = await _movieRepository.GetMoviesForHomePageAsync();
                 
@@ -77,7 +77,7 @@ namespace movielandia_.net_api.Services.Implementations
                 // Map to DTOs and add rating info
                 cachedMovies = movies.Select(m => 
                 {
-                    var dto = MapToDto(m);
+                    var dto = MapToDTO(m);
                     if (ratingsByMovieId.TryGetValue(m.Id, out var ratingInfo))
                     {
                         dto.AverageRating = ratingInfo.AverageRating;
@@ -93,7 +93,7 @@ namespace movielandia_.net_api.Services.Implementations
             return cachedMovies;
         }
 
-        public async Task<MovieDetailDto> GetMovieByIdAsync(int id, MovieQueryParameters parameters)
+        public async Task<MovieDetailDTO> GetMovieByIdAsync(int id, MovieQueryParameters parameters)
         {
             // Get movie with all necessary details
             var movie = await _movieRepository.GetMovieByIdWithDetailsAsync(id, parameters);
@@ -104,7 +104,7 @@ namespace movielandia_.net_api.Services.Implementations
             }
 
             // Map to detail DTO
-            var movieDetail = MapToDetailDto(movie);
+            var movieDetail = MapToDetailDTO(movie);
 
             // Add total counts
             var totalCast = movie.Cast?.Count() ?? 0;
@@ -148,7 +148,7 @@ namespace movielandia_.net_api.Services.Implementations
             return movieDetail;
         }
 
-        public async Task<MovieDetailDto> GetMovieByTitleAsync(string title, MovieQueryParameters parameters)
+        public async Task<MovieDetailDTO> GetMovieByTitleAsync(string title, MovieQueryParameters parameters)
         {
             // Get movie with all necessary details
             var movie = await _movieRepository.GetMovieByTitleWithDetailsAsync(title, parameters);
@@ -159,7 +159,7 @@ namespace movielandia_.net_api.Services.Implementations
             }
 
             // Map to detail DTO
-            var movieDetail = MapToDetailDto(movie);
+            var movieDetail = MapToDetailDTO(movie);
 
             // Calculate average rating
             var (averageRating, totalReviews) = await _movieRepository.CalculateMovieRatingAsync(movie.Id);
@@ -197,11 +197,11 @@ namespace movielandia_.net_api.Services.Implementations
             return movieDetail;
         }
 
-        public async Task<IEnumerable<MovieDto>> GetLatestMoviesAsync(int? userId = null)
+        public async Task<IEnumerable<MovieDTO>> GetLatestMoviesAsync(int? userId = null)
         {
             // Try to get from cache if no userId provided
             string cacheKey = "LatestMovies";
-            if (userId == null && _cache.TryGetValue(cacheKey, out List<MovieDto> cachedMovies))
+            if (userId == null && _cache.TryGetValue(cacheKey, out List<MovieDTO> cachedMovies))
             {
                 return cachedMovies;
             }
@@ -213,26 +213,26 @@ namespace movielandia_.net_api.Services.Implementations
             var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
             
             // Map to DTOs and add rating info
-            List<MovieDto> result = new List<MovieDto>();
+            List<MovieDTO> result = new List<MovieDTO>();
             
             foreach (var movie in movies)
             {
-                var movieDto = MapToDto(movie);
+                var movieDTO = MapToDTO(movie);
                 
                 // Add rating info
                 if (ratingsByMovieId.TryGetValue(movie.Id, out var ratingInfo))
                 {
-                    movieDto.AverageRating = ratingInfo.AverageRating;
-                    movieDto.TotalReviews = ratingInfo.TotalReviews;
+                    movieDTO.AverageRating = ratingInfo.AverageRating;
+                    movieDTO.TotalReviews = ratingInfo.TotalReviews;
                 }
 
                 // Check if movie is bookmarked by user
                 if (userId.HasValue)
                 {
-                    movieDto.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, userId.Value);
+                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, userId.Value);
                 }
 
-                result.Add(movieDto);
+                result.Add(movieDTO);
             }
             
             // Cache only if no userId provided (since results are personalized with userId)
@@ -244,11 +244,11 @@ namespace movielandia_.net_api.Services.Implementations
             return result;
         }
 
-        public async Task<(IEnumerable<MovieDto> Movies, int TotalCount)> GetRelatedMoviesAsync(int id, int? userId, int page, int perPage)
+        public async Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetRelatedMoviesAsync(int id, int? userId, int page, int perPage)
         {
             // Use cache only if no user id (since results could be personalized)
             string cacheKey = $"RelatedMovies_{id}_{page}_{perPage}";
-            if (userId == null && _cache.TryGetValue(cacheKey, out (List<MovieDto> Movies, int TotalCount) cachedResult))
+            if (userId == null && _cache.TryGetValue(cacheKey, out (List<MovieDTO> Movies, int TotalCount) cachedResult))
             {
                 return cachedResult;
             }
@@ -257,7 +257,7 @@ namespace movielandia_.net_api.Services.Implementations
             
             if (relatedMovies == null || !relatedMovies.Any())
             {
-                return (new List<MovieDto>(), 0);
+                return (new List<MovieDTO>(), 0);
             }
             
             // Get ratings for all movies
@@ -265,26 +265,26 @@ namespace movielandia_.net_api.Services.Implementations
             var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
             
             // Map to DTOs and add rating info
-            List<MovieDto> result = new List<MovieDto>();
+            List<MovieDTO> result = new List<MovieDTO>();
             
             foreach (var movie in relatedMovies)
             {
-                var movieDto = MapToDto(movie);
+                var movieDTO = MapToDTO(movie);
                 
                 // Add rating info
                 if (ratingsByMovieId.TryGetValue(movie.Id, out var ratingInfo))
                 {
-                    movieDto.AverageRating = ratingInfo.AverageRating;
-                    movieDto.TotalReviews = ratingInfo.TotalReviews;
+                    movieDTO.AverageRating = ratingInfo.AverageRating;
+                    movieDTO.TotalReviews = ratingInfo.TotalReviews;
                 }
 
                 // Check if movie is bookmarked by user
                 if (userId.HasValue)
                 {
-                    movieDto.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, userId.Value);
+                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, userId.Value);
                 }
 
-                result.Add(movieDto);
+                result.Add(movieDTO);
             }
             
             // Cache only if no userId provided (since results are personalized with userId)
@@ -312,19 +312,19 @@ namespace movielandia_.net_api.Services.Implementations
             return count;
         }
 
-        public async Task<MovieDto> CreateMovieAsync(MovieDto movieDto)
+        public async Task<MovieDTO> CreateMovieAsync(MovieDTO movieDTO)
         {
             // Map DTO to entity
             var movie = new Movie
             {
-                Title = movieDto.Title,
-                PhotoSrc = movieDto.PhotoSrc,
-                PhotoSrcProd = movieDto.PhotoSrcProd,
-                TrailerSrc = movieDto.TrailerSrc,
-                Duration = movieDto.Duration,
-                RatingImdb = movieDto.RatingImdb,
-                DateAired = movieDto.DateAired,
-                Description = movieDto.Description
+                Title = movieDTO.Title,
+                PhotoSrc = movieDTO.PhotoSrc,
+                PhotoSrcProd = movieDTO.PhotoSrcProd,
+                TrailerSrc = movieDTO.TrailerSrc,
+                Duration = movieDTO.Duration,
+                RatingImdb = movieDTO.RatingImdb,
+                DateAired = movieDTO.DateAired,
+                Description = movieDTO.Description
             };
 
             // Add movie to repository
@@ -333,10 +333,10 @@ namespace movielandia_.net_api.Services.Implementations
             // Invalidate related cache entries
             InvalidateMovieCache();
             
-            return MapToDto(createdMovie);
+            return MapToDTO(createdMovie);
         }
 
-        public async Task<MovieDto> UpdateMovieAsync(int id, MovieDto movieDto)
+        public async Task<MovieDTO> UpdateMovieAsync(int id, MovieDTO movieDTO)
         {
             // Find existing movie
             var existingMovie = await _movieRepository.GetByIdAsync(id);
@@ -347,14 +347,14 @@ namespace movielandia_.net_api.Services.Implementations
             }
             
             // Update properties
-            existingMovie.Title = movieDto.Title;
-            existingMovie.PhotoSrc = movieDto.PhotoSrc;
-            existingMovie.PhotoSrcProd = movieDto.PhotoSrcProd;
-            existingMovie.TrailerSrc = movieDto.TrailerSrc;
-            existingMovie.Duration = movieDto.Duration;
-            existingMovie.RatingImdb = movieDto.RatingImdb;
-            existingMovie.DateAired = movieDto.DateAired;
-            existingMovie.Description = movieDto.Description;
+            existingMovie.Title = movieDTO.Title;
+            existingMovie.PhotoSrc = movieDTO.PhotoSrc;
+            existingMovie.PhotoSrcProd = movieDTO.PhotoSrcProd;
+            existingMovie.TrailerSrc = movieDTO.TrailerSrc;
+            existingMovie.Duration = movieDTO.Duration;
+            existingMovie.RatingImdb = movieDTO.RatingImdb;
+            existingMovie.DateAired = movieDTO.DateAired;
+            existingMovie.Description = movieDTO.Description;
             
             // Update movie
             await _movieRepository.UpdateAsync(existingMovie);
@@ -362,7 +362,7 @@ namespace movielandia_.net_api.Services.Implementations
             // Invalidate related cache entries
             InvalidateMovieCache();
             
-            return MapToDto(existingMovie);
+            return MapToDTO(existingMovie);
         }
 
         public async Task<bool> DeleteMovieAsync(int id)
@@ -382,13 +382,13 @@ namespace movielandia_.net_api.Services.Implementations
             return true;
         }
 
-        public async Task<(IEnumerable<MovieDto> Movies, int TotalCount)> SearchMoviesByTitleAsync(string title, MovieFilterDto filter)
+        public async Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> SearchMoviesByTitleAsync(string title, MovieFilterDTO filter)
         {
             var (movies, totalCount) = await _movieRepository.SearchMoviesByTitleAsync(title, filter);
             
             if (movies == null || !movies.Any())
             {
-                return (new List<MovieDto>(), 0);
+                return (new List<MovieDTO>(), 0);
             }
             
             // Get ratings for all movies
@@ -396,26 +396,26 @@ namespace movielandia_.net_api.Services.Implementations
             var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
             
             // Map to DTOs and add rating info
-            List<MovieDto> result = new List<MovieDto>();
+            List<MovieDTO> result = new List<MovieDTO>();
             
             foreach (var movie in movies)
             {
-                var movieDto = MapToDto(movie);
+                var movieDTO = MapToDTO(movie);
                 
                 // Add rating info
                 if (ratingsByMovieId.TryGetValue(movie.Id, out var ratingInfo))
                 {
-                    movieDto.AverageRating = ratingInfo.AverageRating;
-                    movieDto.TotalReviews = ratingInfo.TotalReviews;
+                    movieDTO.AverageRating = ratingInfo.AverageRating;
+                    movieDTO.TotalReviews = ratingInfo.TotalReviews;
                 }
 
                 // Check if movie is bookmarked by user
                 if (filter.UserId.HasValue)
                 {
-                    movieDto.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, filter.UserId.Value);
+                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(movie.Id, filter.UserId.Value);
                 }
 
-                result.Add(movieDto);
+                result.Add(movieDTO);
             }
             
             return (result, totalCount);
@@ -423,14 +423,14 @@ namespace movielandia_.net_api.Services.Implementations
 
         #region Helper Methods
         
-        private MovieDto MapToDto(Movie movie)
+        private MovieDTO MapToDTO(Movie movie)
         {
             if (movie == null)
             {
                 return null;
             }
             
-            return new MovieDto
+            return new MovieDTO
             {
                 Id = movie.Id,
                 Title = movie.Title,
@@ -444,13 +444,13 @@ namespace movielandia_.net_api.Services.Implementations
             };
         }
         
-        private MovieDetailDto MapToDetailDto(Movie movie)
+        private MovieDetailDTO MapToDetailDTO(Movie movie)
         {
             if (movie == null) return null;
 
-            var dto = new MovieDetailDto
+            var dto = new MovieDetailDTO
             {
-                // Base properties from MovieDto
+                // Base properties from MovieDTO
                 Id = movie.Id,
                 Title = movie.Title,
                 PhotoSrc = movie.PhotoSrc,
@@ -462,14 +462,14 @@ namespace movielandia_.net_api.Services.Implementations
                 Description = movie.Description,
                 
                 // Related collections
-                Genres = movie.Genres?.Select(mg => new MovieGenreDto
+                Genres = movie.Genres?.Select(mg => new MovieGenreDTO
                 {
                     Id = mg.Id,
                     GenreId = mg.GenreId,
                     Name = mg.Genre?.Name
                 }),
                 
-                Cast = movie.Cast?.Select(cm => new MovieCastDto
+                Cast = movie.Cast?.Select(cm => new MovieCastDTO
                 {
                     Id = cm.Id,
                     ActorId = cm.ActorId,
@@ -477,7 +477,7 @@ namespace movielandia_.net_api.Services.Implementations
                     PhotoSrc = cm.Actor?.PhotoSrc
                 }),
                 
-                Crew = movie.Crew?.Select(cm => new MovieCrewDto
+                Crew = movie.Crew?.Select(cm => new MovieCrewDTO
                 {
                     Id = cm.Id,
                     CrewId = cm.CrewId,
@@ -486,7 +486,7 @@ namespace movielandia_.net_api.Services.Implementations
                     PhotoSrc = cm.Crew?.PhotoSrc
                 }),
                 
-                Reviews = movie.Reviews?.Select(r => new MovieReviewDto
+                Reviews = movie.Reviews?.Select(r => new MovieReviewDTO
                 {
                     Id = r.Id,
                     Content = r.Content,

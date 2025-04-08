@@ -25,7 +25,7 @@ namespace movielandia_.net_api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetMoviesWithFilters([FromQuery] MovieFilterDto filter)
+        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMoviesWithFilters([FromQuery] MovieFilterDTO filter)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace movielandia_.net_api.Controllers
         [HttpGet("homepage")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetMoviesForHomePage()
+        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMoviesForHomePage()
         {
             try
             {
@@ -69,7 +69,7 @@ namespace movielandia_.net_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDetailDto>> GetMovieById(int id, [FromQuery] MovieQueryParameters parameters)
+        public async Task<ActionResult<MovieDetailDTO>> GetMovieById(int id, [FromQuery] MovieQueryParameters parameters)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace movielandia_.net_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDetailDto>> GetMovieByTitle(string title, [FromQuery] MovieQueryParameters parameters)
+        public async Task<ActionResult<MovieDetailDTO>> GetMovieByTitle(string title, [FromQuery] MovieQueryParameters parameters)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace movielandia_.net_api.Controllers
         [HttpGet("latest")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetLatestMovies([FromQuery] int? userId = null)
+        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetLatestMovies([FromQuery] int? userId = null)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace movielandia_.net_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetRelatedMovies(
+        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetRelatedMovies(
             int id, 
             [FromQuery] int? userId = null,
             [FromQuery] int page = 1,
@@ -195,9 +195,9 @@ namespace movielandia_.net_api.Controllers
         [HttpGet("search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> SearchMovies(
+        public async Task<ActionResult<IEnumerable<MovieDTO>>> SearchMovies(
             [FromQuery] string title, 
-            [FromQuery] MovieFilterDto filter)
+            [FromQuery] MovieFilterDTO filter)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -226,16 +226,16 @@ namespace movielandia_.net_api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDto>> CreateMovie([FromBody] MovieDto movieDto)
+        public async Task<ActionResult<MovieDTO>> CreateMovie([FromBody] MovieDTO movieDTO)
         {
             try
             {
-                if (movieDto == null)
+                if (movieDTO == null)
                 {
                     return BadRequest(new { message = "Movie data is required" });
                 }
                 
-                var createdMovie = await _movieService.CreateMovieAsync(movieDto);
+                var createdMovie = await _movieService.CreateMovieAsync(movieDTO);
                 
                 return CreatedAtAction(nameof(GetMovieById), new { id = createdMovie.Id }, createdMovie);
             }
@@ -254,16 +254,16 @@ namespace movielandia_.net_api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDto>> UpdateMovie(int id, [FromBody] MovieDto movieDto)
+        public async Task<ActionResult<MovieDTO>> UpdateMovie(int id, [FromBody] MovieDTO movieDTO)
         {
             try
             {
-                if (movieDto == null)
+                if (movieDTO == null)
                 {
                     return BadRequest(new { message = "Movie data is required" });
                 }
                 
-                var updatedMovie = await _movieService.UpdateMovieAsync(id, movieDto);
+                var updatedMovie = await _movieService.UpdateMovieAsync(id, movieDTO);
                 
                 if (updatedMovie == null)
                 {

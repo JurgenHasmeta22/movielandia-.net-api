@@ -7,7 +7,7 @@ namespace movielandia_.net_api.Repositories.Interfaces
 {
     public interface IMovieRepository : IGenericRepository<Movie>
     {
-        Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDto filter);
+        Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDTO filter);
         Task<IEnumerable<Movie>> GetMoviesForHomePageAsync();
         Task<IEnumerable<Movie>> GetAllMoviesAsync();
         Task<Movie> GetMovieByIdWithDetailsAsync(int id, MovieQueryParameters parameters);
@@ -15,7 +15,7 @@ namespace movielandia_.net_api.Repositories.Interfaces
         Task<IEnumerable<Movie>> GetLatestMoviesAsync(int? userId = null, int count = 6);
         Task<(IEnumerable<Movie> Movies, int TotalCount)> GetRelatedMoviesAsync(int id, int? userId, int page, int perPage);
         Task<int> GetMoviesTotalCountAsync();
-        Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesByTitleAsync(string title, MovieFilterDto filter);
+        Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesByTitleAsync(string title, MovieFilterDTO filter);
         
         // Check if movie is bookmarked and reviewed by user
         Task<bool> IsMovieBookmarkedByUserAsync(int movieId, int userId);
