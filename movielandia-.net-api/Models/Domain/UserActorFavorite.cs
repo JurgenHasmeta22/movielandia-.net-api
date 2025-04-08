@@ -7,7 +7,7 @@ namespace movielandia_.net_api.Models.Domain
         public int ActorId { get; set; }
         
         // Navigation properties
-        public virtual User User { get; set; }
-        public virtual Actor Actor { get; set; }
+        public virtual required User User { get; set; }
+        public virtual required Actor Actor { get; set; }
     }
 }

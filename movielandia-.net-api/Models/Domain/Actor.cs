@@ -22,6 +22,11 @@ namespace movielandia_.net_api.Models.Domain
 
         public Actor()
         {
+            Fullname = string.Empty;
+            PhotoSrc = string.Empty;
+            PhotoSrcProd = string.Empty;
+            Description = string.Empty;
+            Debut = string.Empty;
             StarredMovies = new HashSet<CastMovie>();
             StarredSeries = new HashSet<CastSerie>();
             Reviews = new HashSet<ActorReview>();

@@ -8,8 +8,8 @@ namespace movielandia_.net_api.Models.Domain
         public int EpisodeReviewId { get; set; }
         
         // Navigation properties
-        public virtual User User { get; set; }
-        public virtual Episode Episode { get; set; }
-        public virtual EpisodeReview EpisodeReview { get; set; }
+        public virtual required User User { get; set; }
+        public virtual required Episode Episode { get; set; }
+        public virtual required EpisodeReview EpisodeReview { get; set; }
     }
 }

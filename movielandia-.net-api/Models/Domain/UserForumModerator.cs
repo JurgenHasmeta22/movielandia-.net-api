@@ -10,7 +10,7 @@ namespace movielandia_.net_api.Models.Domain
         public int CategoryId { get; set; }
 
         // Navigation properties
-        public virtual User User { get; set; }
-        public virtual ForumCategory Category { get; set; }
+        public virtual required User User { get; set; }
+        public virtual required ForumCategory Category { get; set; }
     }
 }
