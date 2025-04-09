@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using movielandia_.net_api.Enums;
 
 namespace movielandia_.net_api.Models.Domain
 {
@@ -43,12 +44,5 @@ namespace movielandia_.net_api.Models.Domain
             Watchers = new HashSet<UserForumTopicWatch>();
             Tags = new HashSet<ForumTag>();
         }
-    }
-
-    public enum TopicStatus
-    {
-        Open,
-        Closed,
-        Archived
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using movielandia_.net_api.Enums;
 
 namespace movielandia_.net_api.Models.Domain
 {
@@ -69,17 +70,5 @@ namespace movielandia_.net_api.Models.Domain
             ActorReviews = new HashSet<ActorReview>();
             CrewReviews = new HashSet<CrewReview>();
         }
-    }
-
-    public enum UserType
-    {
-        User,
-        Admin
-    }
-
-    public enum Gender
-    {
-        Male,
-        Female
     }
 }

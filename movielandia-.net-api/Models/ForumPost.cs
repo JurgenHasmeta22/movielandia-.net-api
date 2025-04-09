@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using movielandia_.net_api.Enums;
 
 namespace movielandia_.net_api.Models.Domain
 {
@@ -44,14 +45,5 @@ namespace movielandia_.net_api.Models.Domain
             Downvotes = new HashSet<DownvoteForumPost>();
             History = new HashSet<ForumPostHistory>();
         }
-    }
-
-    public enum PostType
-    {
-        Normal,
-        Announcement,
-        Sticky,
-        Question,
-        Answered
     }
 }
