@@ -52,8 +52,6 @@ namespace movielandia_.net_api.Data
         public DbSet<DownvoteEpisodeReview> DownvoteEpisodeReviews { get; set; }
         public DbSet<UpvoteActorReview> UpvoteActorReviews { get; set; }
         public DbSet<DownvoteActorReview> DownvoteActorReviews { get; set; }
-        public DbSet<UpvoteCrewReview> UpvoteCrewReviews { get; set; }
-        public DbSet<DownvoteCrewReview> DownvoteCrewReviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -80,14 +78,14 @@ namespace movielandia_.net_api.Data
             modelBuilder
                 .Entity<Episode>()
                 .HasOne(e => e.Season)
-                .WithMany()
+                .WithMany(s => s.Episodes)
                 .HasForeignKey(e => e.SeasonId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
                 .Entity<Season>()
                 .HasOne(s => s.Serie)
-                .WithMany()
+                .WithMany(s => s.Seasons)
                 .HasForeignKey(s => s.SerieId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -96,35 +94,35 @@ namespace movielandia_.net_api.Data
                 .HasOne(fp => fp.User)
                 .WithMany()
                 .HasForeignKey(fp => fp.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<ForumReply>()
                 .HasOne(fr => fr.User)
                 .WithMany()
                 .HasForeignKey(fr => fr.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<ForumTopic>()
                 .HasOne(ft => ft.User)
                 .WithMany()
                 .HasForeignKey(ft => ft.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteForumPost>()
                 .HasOne(ufp => ufp.User)
                 .WithMany()
                 .HasForeignKey(ufp => ufp.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<DownvoteForumPost>()
                 .HasOne(dfp => dfp.User)
                 .WithMany()
                 .HasForeignKey(dfp => dfp.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteForumReply>()
@@ -260,6 +258,20 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder
+                .Entity<Message>()
+                .HasOne(m => m.Receiver)
+                .WithMany()
+                .HasForeignKey(m => m.ReceiverId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder
                 .Entity<UserInbox>()
                 .HasOne(ui => ui.Inbox)
                 .WithMany()
@@ -290,9 +302,9 @@ namespace movielandia_.net_api.Data
             modelBuilder
                 .Entity<EpisodeReview>()
                 .HasOne(er => er.User)
-                .WithMany()
+                .WithMany(u => u.EpisodeReviews)
                 .HasForeignKey(er => er.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteEpisodeReview>()
@@ -358,11 +370,25 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<MovieReview>()
+                .HasOne(mr => mr.User)
+                .WithMany(u => u.MovieReviews)
+                .HasForeignKey(mr => mr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<SerieReview>()
                 .HasOne(sr => sr.Serie)
                 .WithMany()
                 .HasForeignKey(sr => sr.SerieId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<SerieReview>()
+                .HasOne(sr => sr.User)
+                .WithMany(u => u.SerieReviews)
+                .HasForeignKey(sr => sr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<SeasonReview>()
@@ -372,6 +398,13 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<SeasonReview>()
+                .HasOne(sr => sr.User)
+                .WithMany(u => u.SeasonReviews)
+                .HasForeignKey(sr => sr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<ActorReview>()
                 .HasOne(ar => ar.Actor)
                 .WithMany()
@@ -379,11 +412,25 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<ActorReview>()
+                .HasOne(ar => ar.User)
+                .WithMany(u => u.ActorReviews)
+                .HasForeignKey(ar => ar.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<CrewReview>()
                 .HasOne(cr => cr.Crew)
                 .WithMany()
                 .HasForeignKey(cr => cr.CrewId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<CrewReview>()
+                .HasOne(cr => cr.User)
+                .WithMany(u => u.CrewReviews)
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UserEpisodeRating>()
@@ -404,14 +451,14 @@ namespace movielandia_.net_api.Data
                 .HasOne(uer => uer.User)
                 .WithMany()
                 .HasForeignKey(uer => uer.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<DownvoteEpisodeReview>()
                 .HasOne(der => der.User)
                 .WithMany()
                 .HasForeignKey(der => der.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<DownvoteEpisodeReview>()
@@ -446,14 +493,14 @@ namespace movielandia_.net_api.Data
                 .HasOne(dar => dar.Actor)
                 .WithMany(a => a.DownvoteActorReviews)
                 .HasForeignKey(dar => dar.ActorId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder
                 .Entity<DownvoteActorReview>()
                 .HasOne(dar => dar.ActorReview)
                 .WithMany(ar => ar.Downvotes)
                 .HasForeignKey(dar => dar.ActorReviewId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
                 .Entity<DownvoteActorReview>()
@@ -481,7 +528,7 @@ namespace movielandia_.net_api.Data
                 .HasOne(uar => uar.User)
                 .WithMany()
                 .HasForeignKey(uar => uar.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteMovieReview>()
@@ -498,6 +545,13 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<UpvoteMovieReview>()
+                .HasOne(umr => umr.User)
+                .WithMany()
+                .HasForeignKey(umr => umr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<DownvoteMovieReview>()
                 .HasOne(dmr => dmr.Movie)
                 .WithMany(m => m.DownvoteMovieReviews)
@@ -510,6 +564,13 @@ namespace movielandia_.net_api.Data
                 .WithMany(mr => mr.Downvotes)
                 .HasForeignKey(dmr => dmr.MovieReviewId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<DownvoteMovieReview>()
+                .HasOne(dmr => dmr.User)
+                .WithMany()
+                .HasForeignKey(dmr => dmr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteSerieReview>()
@@ -526,6 +587,13 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<UpvoteSerieReview>()
+                .HasOne(usr => usr.User)
+                .WithMany()
+                .HasForeignKey(usr => usr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<DownvoteSerieReview>()
                 .HasOne(dsr => dsr.Serie)
                 .WithMany(s => s.DownvoteSerieReviews)
@@ -538,6 +606,13 @@ namespace movielandia_.net_api.Data
                 .WithMany(sr => sr.Downvotes)
                 .HasForeignKey(dsr => dsr.SerieReviewId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<DownvoteSerieReview>()
+                .HasOne(dsr => dsr.User)
+                .WithMany()
+                .HasForeignKey(dsr => dsr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteSeasonReview>()
@@ -554,6 +629,13 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<UpvoteSeasonReview>()
+                .HasOne(usr => usr.User)
+                .WithMany()
+                .HasForeignKey(usr => usr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<DownvoteSeasonReview>()
                 .HasOne(dsr => dsr.Season)
                 .WithMany(s => s.DownvoteSeasonReviews)
@@ -566,6 +648,13 @@ namespace movielandia_.net_api.Data
                 .WithMany(sr => sr.Downvotes)
                 .HasForeignKey(dsr => dsr.SeasonReviewId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<DownvoteSeasonReview>()
+                .HasOne(dsr => dsr.User)
+                .WithMany()
+                .HasForeignKey(dsr => dsr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteEpisodeReview>()
@@ -582,6 +671,13 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<UpvoteEpisodeReview>()
+                .HasOne(uer => uer.User)
+                .WithMany()
+                .HasForeignKey(uer => uer.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<DownvoteEpisodeReview>()
                 .HasOne(der => der.Episode)
                 .WithMany(e => e.DownvoteEpisodeReviews)
@@ -594,6 +690,13 @@ namespace movielandia_.net_api.Data
                 .WithMany(er => er.Downvotes)
                 .HasForeignKey(der => der.EpisodeReviewId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<DownvoteEpisodeReview>()
+                .HasOne(der => der.User)
+                .WithMany()
+                .HasForeignKey(der => der.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteCrewReview>()
@@ -610,6 +713,13 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
+                .Entity<UpvoteCrewReview>()
+                .HasOne(ucr => ucr.User)
+                .WithMany()
+                .HasForeignKey(ucr => ucr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
                 .Entity<DownvoteCrewReview>()
                 .HasOne(dcr => dcr.Crew)
                 .WithMany(c => c.DownvoteCrewReviews)
@@ -623,6 +733,12 @@ namespace movielandia_.net_api.Data
                 .HasForeignKey(dcr => dcr.CrewReviewId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder
+                .Entity<DownvoteCrewReview>()
+                .HasOne(dcr => dcr.User)
+                .WithMany()
+                .HasForeignKey(dcr => dcr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
             base.OnModelCreating(modelBuilder);
         }
     }

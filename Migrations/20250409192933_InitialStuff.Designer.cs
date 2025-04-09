@@ -12,8 +12,8 @@ using movielandia_.net_api.Data;
 namespace movielandia_.net_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250409180439_UpdatCascadeAgain")]
-    partial class UpdatCascadeAgain
+    [Migration("20250409192933_InitialStuff")]
+    partial class InitialStuff
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -408,7 +408,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DownvoteCrewReviews");
+                    b.ToTable("DownvoteCrewReview");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteEpisodeReview", b =>
@@ -422,13 +422,7 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("EpisodeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EpisodeId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("EpisodeReviewId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EpisodeReviewId1")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -438,11 +432,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("EpisodeId");
 
-                    b.HasIndex("EpisodeId1");
-
                     b.HasIndex("EpisodeReviewId");
-
-                    b.HasIndex("EpisodeReviewId1");
 
                     b.HasIndex("UserId");
 
@@ -649,9 +639,6 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("SeasonId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SeasonId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -663,8 +650,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SeasonId");
-
-                    b.HasIndex("SeasonId1");
 
                     b.ToTable("Episodes");
                 });
@@ -699,9 +684,6 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EpisodeId");
@@ -709,8 +691,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("EpisodeId1");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("EpisodeReviews");
                 });
@@ -1290,9 +1270,6 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("SerieId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SerieId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1304,8 +1281,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SerieId");
-
-                    b.HasIndex("SerieId1");
 
                     b.ToTable("Seasons");
                 });
@@ -1507,7 +1482,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UpvoteCrewReviews");
+                    b.ToTable("UpvoteCrewReview");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteEpisodeReview", b =>
@@ -1521,13 +1496,7 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("EpisodeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EpisodeId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("EpisodeReviewId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EpisodeReviewId1")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -1537,11 +1506,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("EpisodeId");
 
-                    b.HasIndex("EpisodeId1");
-
                     b.HasIndex("EpisodeReviewId");
-
-                    b.HasIndex("EpisodeReviewId1");
 
                     b.HasIndex("UserId");
 
@@ -2267,7 +2232,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany("ActorReviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Actor");
@@ -2377,7 +2342,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany("CrewReviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Crew");
@@ -2420,7 +2385,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Actor");
@@ -2435,7 +2400,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
                         .WithMany("DownvoteCrewReviews")
                         .HasForeignKey("CrewId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.CrewReview", "CrewReview")
@@ -2447,7 +2411,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Crew");
@@ -2460,28 +2424,20 @@ namespace movielandia_.net_api.Migrations
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteEpisodeReview", b =>
                 {
                     b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
-                        .WithMany()
+                        .WithMany("DownvoteEpisodeReviews")
                         .HasForeignKey("EpisodeId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", null)
-                        .WithMany("DownvoteEpisodeReviews")
-                        .HasForeignKey("EpisodeId1");
-
                     b.HasOne("movielandia_.net_api.Models.Domain.EpisodeReview", "EpisodeReview")
-                        .WithMany()
+                        .WithMany("Downvotes")
                         .HasForeignKey("EpisodeReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.EpisodeReview", null)
-                        .WithMany("Downvotes")
-                        .HasForeignKey("EpisodeReviewId1");
-
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Episode");
@@ -2506,7 +2462,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
@@ -2565,7 +2521,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
                         .WithMany("DownvoteMovieReviews")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.MovieReview", "MovieReview")
@@ -2577,7 +2532,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Movie");
@@ -2592,7 +2547,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
                         .WithMany("DownvoteSeasonReviews")
                         .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.SeasonReview", "SeasonReview")
@@ -2604,7 +2558,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Season");
@@ -2619,7 +2573,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
                         .WithMany("DownvoteSerieReviews")
                         .HasForeignKey("SerieId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.SerieReview", "SerieReview")
@@ -2631,7 +2584,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Serie");
@@ -2644,14 +2597,10 @@ namespace movielandia_.net_api.Migrations
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Episode", b =>
                 {
                     b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
-                        .WithMany()
+                        .WithMany("Episodes")
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", null)
-                        .WithMany("Episodes")
-                        .HasForeignKey("SeasonId1");
 
                     b.Navigation("Season");
                 });
@@ -2669,14 +2618,10 @@ namespace movielandia_.net_api.Migrations
                         .HasForeignKey("EpisodeId1");
 
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", null)
                         .WithMany("EpisodeReviews")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Episode");
 
@@ -2715,7 +2660,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AnsweredBy");
@@ -2765,7 +2710,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
@@ -2815,7 +2760,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -2840,13 +2785,11 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.User", null)
@@ -2895,7 +2838,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany("MovieReviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Movie");
@@ -2906,14 +2849,10 @@ namespace movielandia_.net_api.Migrations
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Season", b =>
                 {
                     b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
-                        .WithMany()
+                        .WithMany("Seasons")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", null)
-                        .WithMany("Seasons")
-                        .HasForeignKey("SerieId1");
 
                     b.Navigation("Serie");
                 });
@@ -2933,7 +2872,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany("SeasonReviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Season");
@@ -2975,7 +2914,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany("SerieReviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Serie");
@@ -2999,7 +2938,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Actor");
@@ -3014,7 +2953,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
                         .WithMany("UpvoteCrewReviews")
                         .HasForeignKey("CrewId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.CrewReview", "CrewReview")
@@ -3026,7 +2964,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Crew");
@@ -3039,28 +2977,20 @@ namespace movielandia_.net_api.Migrations
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteEpisodeReview", b =>
                 {
                     b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
-                        .WithMany()
+                        .WithMany("UpvoteEpisodeReviews")
                         .HasForeignKey("EpisodeId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", null)
-                        .WithMany("UpvoteEpisodeReviews")
-                        .HasForeignKey("EpisodeId1");
-
                     b.HasOne("movielandia_.net_api.Models.Domain.EpisodeReview", "EpisodeReview")
-                        .WithMany()
+                        .WithMany("Upvotes")
                         .HasForeignKey("EpisodeReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.EpisodeReview", null)
-                        .WithMany("Upvotes")
-                        .HasForeignKey("EpisodeReviewId1");
-
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Episode");
@@ -3085,7 +3015,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
@@ -3144,7 +3074,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
                         .WithMany("UpvoteMovieReviews")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.MovieReview", "MovieReview")
@@ -3156,7 +3085,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Movie");
@@ -3171,7 +3100,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
                         .WithMany("UpvoteSeasonReviews")
                         .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.SeasonReview", "SeasonReview")
@@ -3183,7 +3111,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Season");
@@ -3198,7 +3126,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
                         .WithMany("UpvoteSerieReviews")
                         .HasForeignKey("SerieId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.Domain.SerieReview", "SerieReview")
@@ -3210,7 +3137,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Serie");
