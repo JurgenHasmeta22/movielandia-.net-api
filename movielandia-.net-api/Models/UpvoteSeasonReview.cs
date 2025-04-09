@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models.Domain
         public int UserId { get; set; }
         public int SeasonId { get; set; }
         public int SeasonReviewId { get; set; }
-        
+
         // Navigation properties
         public virtual required User User { get; set; }
         public virtual required Season Season { get; set; }

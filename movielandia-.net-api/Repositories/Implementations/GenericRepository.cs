@@ -9,7 +9,8 @@ using movielandia_.net_api.Repositories.Interfaces;
 
 namespace movielandia_.net_api.Repositories.Implementations
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T>
+        where T : class
     {
         protected readonly ApplicationDbContext _context;
         protected readonly DbSet<T> _dbSet;

@@ -23,8 +23,8 @@ namespace movielandia_.net_api.Models.Domain
 
         // Navigation properties
         public virtual User? ClosedBy { get; set; }
-        public required virtual ForumCategory Category { get; set; }
-        public required virtual User User { get; set; }
+        public virtual required ForumCategory Category { get; set; }
+        public virtual required User User { get; set; }
         public virtual ICollection<ForumPost> Posts { get; set; }
         public virtual ICollection<UserForumTopicFavorite> UsersWhoBookmarkedIt { get; set; }
         public virtual ICollection<UpvoteForumTopic> Upvotes { get; set; }

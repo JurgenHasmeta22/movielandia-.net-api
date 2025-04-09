@@ -12,7 +12,7 @@ namespace movielandia_.net_api.Models.Domain
         public DateTime? UpdatedAt { get; set; }
         public int UserId { get; set; }
         public int SeasonId { get; set; }
-        
+
         // Navigation properties
         public virtual User User { get; set; } = null!;
         public virtual Season Season { get; set; } = null!;

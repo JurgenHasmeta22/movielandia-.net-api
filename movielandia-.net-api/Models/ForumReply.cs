@@ -18,7 +18,7 @@ namespace movielandia_.net_api.Models.Domain
 
         // Navigation properties
         public required virtual ForumPost Post { get; set; }
-        public required virtual User User { get; set; }
+        public virtual required User User { get; set; }
         public virtual ICollection<UpvoteForumReply> Upvotes { get; set; }
         public virtual ICollection<DownvoteForumReply> Downvotes { get; set; }
         public virtual ICollection<ForumReplyHistory> History { get; set; }

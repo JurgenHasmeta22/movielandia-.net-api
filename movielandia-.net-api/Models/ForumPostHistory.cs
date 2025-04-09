@@ -11,9 +11,9 @@ namespace movielandia_.net_api.Models.Domain
         public required string Reason { get; set; }
         public int PostId { get; set; }
         public int EditedById { get; set; }
-        
+
         // Navigation properties
         public required virtual ForumPost Post { get; set; }
-        public required virtual User EditedBy { get; set; }
+        public virtual required User EditedBy { get; set; }
     }
 }

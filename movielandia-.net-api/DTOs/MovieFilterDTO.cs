@@ -7,26 +7,26 @@ namespace movielandia_.net_api.DTOs
         GreaterThan,
         LessThan,
         Equal,
-        Contains
+        Contains,
     }
 
     public class MovieFilterDTO
     {
         public string SortBy { get; set; } = "title";
         public string AscOrDesc { get; set; } = "asc";
-        
+
         [Range(1, 100)]
         public int PerPage { get; set; } = 12;
-        
+
         [Range(1, int.MaxValue)]
         public int Page { get; set; } = 1;
-        
+
         public required string Title { get; set; }
-        
+
         public required object FilterValue { get; set; }
         public required string FilterNameString { get; set; }
         public FilterOperator? FilterOperatorString { get; set; }
-        
+
         // User identification
         public int? UserId { get; set; }
     }
@@ -41,7 +41,7 @@ namespace movielandia_.net_api.DTOs
         public int? DownvotesPage { get; set; } = 1;
         public int? CastPage { get; set; } = 1;
         public int? CrewPage { get; set; } = 1;
-        
+
         // User identification
         public int? UserId { get; set; }
     }
@@ -50,12 +50,12 @@ namespace movielandia_.net_api.DTOs
     {
         [Required]
         public int MovieId { get; set; }
-        
+
         public int? UserId { get; set; }
-        
+
         [Range(1, int.MaxValue)]
         public int Page { get; set; } = 1;
-        
+
         [Range(1, 100)]
         public int PerPage { get; set; } = 6;
     }

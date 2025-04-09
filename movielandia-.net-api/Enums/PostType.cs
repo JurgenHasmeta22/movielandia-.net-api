@@ -6,6 +6,6 @@ namespace movielandia_.net_api.Enums
         Announcement,
         Sticky,
         Question,
-        Answered
+        Answered,
     }
 }

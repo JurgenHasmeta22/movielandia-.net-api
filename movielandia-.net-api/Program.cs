@@ -1,6 +1,6 @@
-using movielandia_.net_api.Extensions;
-using movielandia_.net_api.Data;
 using Microsoft.EntityFrameworkCore;
+using movielandia_.net_api.Data;
+using movielandia_.net_api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,8 @@ builder.Services.AddControllers();
 
 // Add DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 // Add movie services
 builder.Services.AddMovieInfrastructures();

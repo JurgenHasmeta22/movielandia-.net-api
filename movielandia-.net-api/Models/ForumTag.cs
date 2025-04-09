@@ -8,7 +8,7 @@ namespace movielandia_.net_api.Models.Domain
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
-        
+
         // Navigation properties
         public virtual ICollection<ForumTopic> Topics { get; set; }
 

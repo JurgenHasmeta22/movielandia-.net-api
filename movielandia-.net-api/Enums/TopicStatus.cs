@@ -4,6 +4,6 @@ namespace movielandia_.net_api.Enums
     {
         Open,
         Closed,
-        Archived
+        Archived,
     }
 }

@@ -12,7 +12,7 @@ namespace movielandia_.net_api.Models.Domain
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
         public int InboxId { get; set; }
-        
+
         // Navigation properties
         public virtual required User Receiver { get; set; }
         public virtual required User Sender { get; set; }
