@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using movielandia_.net_api.Models.Domain;
 using movielandia_.net_api.DTOs;
-namespace movielandia_.net_api.Services.Interfaces
+namespace movielandia_.net_api.Infrastructures.Interfaces
 {
-    public interface IMovieService
+    public interface IMovieInfrastructure
     {
         Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetMoviesWithFiltersAsync(MovieFilterDTO filter);
         Task<IEnumerable<MovieDTO>> GetMoviesForHomePageAsync();

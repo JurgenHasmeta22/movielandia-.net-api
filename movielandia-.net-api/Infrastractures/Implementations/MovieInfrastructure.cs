@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using movielandia_.net_api.Models.Domain;
 using movielandia_.net_api.DTOs;using movielandia_.net_api.Repositories.Interfaces;
-using movielandia_.net_api.Services.Interfaces;
+using movielandia_.net_api.Infrastructures.Interfaces;
 
-namespace movielandia_.net_api.Services.Implementations
+namespace movielandia_.net_api.Infrastructures.Implementations
 {
-    public class MovieService : IMovieService
+    public class MovieInfrastructure : IMovieInfrastructure
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IMemoryCache _cache;
         private static readonly TimeSpan CacheDuration = TimeSpan.FromDays(1);
 
-        public MovieService(IMovieRepository movieRepository, IMemoryCache cache)
+        public MovieInfrastructure(IMovieRepository movieRepository, IMemoryCache cache)
         {
             _movieRepository = movieRepository;
             _cache = cache;

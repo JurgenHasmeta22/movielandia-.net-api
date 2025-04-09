@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using movielandia_.net_api.DTOs;
-using movielandia_.net_api.Services.Interfaces;
+using movielandia_.net_api.Infrastructures.Interfaces;
 
 namespace movielandia_.net_api.Controllers
 {
@@ -12,11 +12,11 @@ namespace movielandia_.net_api.Controllers
     [Route("api/[controller]")]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieService _movieService;
+        private readonly IMovieInfrastructure _movieInfrastructure;
         
-        public MovieController(IMovieService movieService)
+        public MovieController(IMovieInfrastructure movieInfrastructure)
         {
-            _movieService = movieService;
+            _movieInfrastructure = movieInfrastructure;
         }
         
         /// <summary>
@@ -29,7 +29,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var (movies, totalCount) = await _movieService.GetMoviesWithFiltersAsync(filter);
+                var (movies, totalCount) = await _movieInfrastructure.GetMoviesWithFiltersAsync(filter);
                 Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
@@ -51,7 +51,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movies = await _movieService.GetMoviesForHomePageAsync();
+                var movies = await _movieInfrastructure.GetMoviesForHomePageAsync();
                 return Ok(movies);
             }
 
@@ -73,7 +73,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movie = await _movieService.GetMovieByIdAsync(id, parameters);
+                var movie = await _movieInfrastructure.GetMovieByIdAsync(id, parameters);
                 
                 if (movie == null)
                 {
@@ -101,7 +101,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movie = await _movieService.GetMovieByTitleAsync(title, parameters);
+                var movie = await _movieInfrastructure.GetMovieByTitleAsync(title, parameters);
                 
                 if (movie == null)
                 {
@@ -127,7 +127,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movies = await _movieService.GetLatestMoviesAsync(userId);
+                var movies = await _movieInfrastructure.GetLatestMoviesAsync(userId);
                 return Ok(movies);
             }
             
@@ -153,7 +153,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var (movies, totalCount) = await _movieService.GetRelatedMoviesAsync(id, userId, page, perPage);
+                var (movies, totalCount) = await _movieInfrastructure.GetRelatedMoviesAsync(id, userId, page, perPage);
                 
                 if (movies == null || totalCount == 0)
                 {
@@ -181,7 +181,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var count = await _movieService.GetMoviesTotalCountAsync();
+                var count = await _movieInfrastructure.GetMoviesTotalCountAsync();
                 return Ok(count);
             }
 
@@ -209,7 +209,7 @@ namespace movielandia_.net_api.Controllers
             
             try
             {
-                var (movies, totalCount) = await _movieService.SearchMoviesByTitleAsync(title, filter);
+                var (movies, totalCount) = await _movieInfrastructure.SearchMoviesByTitleAsync(title, filter);
                 Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
@@ -236,7 +236,7 @@ namespace movielandia_.net_api.Controllers
                     return BadRequest(new { message = "Movie data is required" });
                 }
                 
-                var createdMovie = await _movieService.CreateMovieAsync(movieDTO);
+                var createdMovie = await _movieInfrastructure.CreateMovieAsync(movieDTO);
                 return CreatedAtAction(nameof(GetMovieById), new { id = createdMovie.Id }, createdMovie);
             }
             catch (Exception ex)
@@ -263,7 +263,7 @@ namespace movielandia_.net_api.Controllers
                     return BadRequest(new { message = "Movie data is required" });
                 }
                 
-                var updatedMovie = await _movieService.UpdateMovieAsync(id, movieDTO);
+                var updatedMovie = await _movieInfrastructure.UpdateMovieAsync(id, movieDTO);
                 
                 if (updatedMovie == null)
                 {
@@ -290,7 +290,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var result = await _movieService.DeleteMovieAsync(id);
+                var result = await _movieInfrastructure.DeleteMovieAsync(id);
                 
                 if (!result)
                 {
