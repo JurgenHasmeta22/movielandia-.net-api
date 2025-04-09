@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using movielandia_.net_api.Models.DTOs;
+using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Services.Interfaces;
 
 namespace movielandia_.net_api.Controllers
@@ -30,11 +30,10 @@ namespace movielandia_.net_api.Controllers
             try
             {
                 var (movies, totalCount) = await _movieService.GetMoviesWithFiltersAsync(filter);
-                
-                Response.Headers.Add("X-Total-Count", totalCount.ToString());
-                
+                Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
+
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
@@ -55,6 +54,7 @@ namespace movielandia_.net_api.Controllers
                 var movies = await _movieService.GetMoviesForHomePageAsync();
                 return Ok(movies);
             }
+
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
@@ -82,6 +82,7 @@ namespace movielandia_.net_api.Controllers
                 
                 return Ok(movie);
             }
+
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
@@ -129,6 +130,7 @@ namespace movielandia_.net_api.Controllers
                 var movies = await _movieService.GetLatestMoviesAsync(userId);
                 return Ok(movies);
             }
+            
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
@@ -158,10 +160,10 @@ namespace movielandia_.net_api.Controllers
                     return NotFound(new { message = $"No related movies found for movie ID {id}" });
                 }
                 
-                Response.Headers.Add("X-Total-Count", totalCount.ToString());
-                
+                Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
+
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
@@ -182,6 +184,7 @@ namespace movielandia_.net_api.Controllers
                 var count = await _movieService.GetMoviesTotalCountAsync();
                 return Ok(count);
             }
+
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
@@ -207,9 +210,7 @@ namespace movielandia_.net_api.Controllers
             try
             {
                 var (movies, totalCount) = await _movieService.SearchMoviesByTitleAsync(title, filter);
-                
-                Response.Headers.Add("X-Total-Count", totalCount.ToString());
-                
+                Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
             catch (Exception ex)
@@ -236,7 +237,6 @@ namespace movielandia_.net_api.Controllers
                 }
                 
                 var createdMovie = await _movieService.CreateMovieAsync(movieDTO);
-                
                 return CreatedAtAction(nameof(GetMovieById), new { id = createdMovie.Id }, createdMovie);
             }
             catch (Exception ex)

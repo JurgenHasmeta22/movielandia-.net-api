@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using movielandia_.net_api.Models.Domain;
 
-namespace movielandia_.net_api.Models.DTOs
+namespace movielandia_.net_api.DTOs
 {
     public class MovieDetailDTO : MovieDTO
     {

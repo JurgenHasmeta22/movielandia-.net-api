@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using movielandia_.net_api.Models.Domain;
-using movielandia_.net_api.Models.DTOs;
-using movielandia_.net_api.Repositories.Interfaces;
+using movielandia_.net_api.DTOs;using movielandia_.net_api.Repositories.Interfaces;
 using movielandia_.net_api.Services.Interfaces;
 
 namespace movielandia_.net_api.Services.Implementations

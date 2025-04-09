@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using movielandia_.net_api.Models.Domain;
-using movielandia_.net_api.Models.DTOs;
-
+using movielandia_.net_api.DTOs;
 namespace movielandia_.net_api.Services.Interfaces
 {
     public interface IMovieService

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using movielandia_.net_api.Models.Domain;
 
-namespace movielandia_.net_api.Models.DTOs
+namespace movielandia_.net_api.DTOs
 {
     public class MovieDTO
     {

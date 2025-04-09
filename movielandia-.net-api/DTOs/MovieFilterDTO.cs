@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace movielandia_.net_api.Models.DTOs
+namespace movielandia_.net_api.DTOs
 {
     public enum FilterOperator
     {
