@@ -5,18 +5,18 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Infrastructures.AddControllers();
+builder.Services.AddControllers();
 
 // Add DbContext
-builder.Infrastructures.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add movie services
-builder.Infrastructures.AddMovieInfrastructures();
+builder.Services.AddMovieInfrastructures();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Infrastructures.AddEndpointsApiExplorer();
-builder.Infrastructures.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

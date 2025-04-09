@@ -65,7 +65,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
         public async Task<IEnumerable<MovieDTO>> GetMoviesForHomePageAsync()
         {
             // Try to get from cache
-            if (!_cache.TryGetValue("HomePageMovies", out List<MovieDTO> cachedMovies))
+            if (!_cache.TryGetValue("HomePageMovies", out List<MovieDTO>? cachedMovies))
             {
                 var movies = await _movieRepository.GetMoviesForHomePageAsync();
                 
@@ -89,7 +89,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
                 _cache.Set("HomePageMovies", cachedMovies, CacheDuration);
             }
             
-            return cachedMovies;
+            return cachedMovies ?? new List<MovieDTO>();
         }
 
         public async Task<MovieDetailDTO> GetMovieByIdAsync(int id, MovieQueryParameters parameters)
@@ -99,7 +99,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             
             if (movie == null)
             {
-                return null;
+                throw new KeyNotFoundException("Movie not found.");
             }
 
             // Map to detail DTO
@@ -373,7 +373,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
                 return false;
             }
             
-            await _movieRepository.DeleteAsync(movie);
+            await _movieRepository.DeleteAsync(movie.Id);
             
             // Invalidate related cache entries
             InvalidateMovieCache();

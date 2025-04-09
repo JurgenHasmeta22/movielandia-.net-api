@@ -8,7 +8,7 @@ namespace movielandia_.net_api.Extensions
 {
     public static class InfrastructureCollectionExtensions
     {
-        public static IInfrastructureCollection AddMovieInfrastructures(this IInfrastructureCollection services)
+        public static IServiceCollection AddMovieInfrastructures(this IServiceCollection services)
         {
             // Register repositories
             services.AddScoped<IMovieRepository, MovieRepository>();
