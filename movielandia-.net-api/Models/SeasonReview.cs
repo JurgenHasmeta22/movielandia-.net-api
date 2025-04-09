@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models.Domain
     public class SeasonReview
     {
         public int Id { get; set; }
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
         public float? Rating { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
@@ -14,8 +14,8 @@ namespace movielandia_.net_api.Models.Domain
         public int SeasonId { get; set; }
         
         // Navigation properties
-        public virtual User User { get; set; }
-        public virtual Season Season { get; set; }
+        public virtual User User { get; set; } = null!;
+        public virtual Season Season { get; set; } = null!;
         public virtual ICollection<UpvoteSeasonReview> Upvotes { get; set; }
         public virtual ICollection<DownvoteSeasonReview> Downvotes { get; set; }
 

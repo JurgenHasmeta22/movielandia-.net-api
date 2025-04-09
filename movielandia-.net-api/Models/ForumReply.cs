@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models.Domain
     public class ForumReply
     {
         public int Id { get; set; }
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
         public bool IsEdited { get; set; } = false;

@@ -14,6 +14,7 @@ namespace movielandia_.net_api.Models.Domain
 
         public Genre()
         {
+            Name = string.Empty;
             Movies = new HashSet<MovieGenre>();
             Series = new HashSet<SerieGenre>();
             UsersWhoBookmarkedIt = new HashSet<UserGenreFavorite>();

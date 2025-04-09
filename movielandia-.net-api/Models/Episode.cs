@@ -26,6 +26,11 @@ namespace movielandia_.net_api.Models.Domain
 
         public Episode()
         {
+            Title = string.Empty;
+            PhotoSrc = string.Empty;
+            PhotoSrcProd = string.Empty;
+            TrailerSrc = string.Empty;
+            Description = string.Empty;
             UsersWhoBookmarkedIt = new HashSet<UserEpisodeFavorite>();
             UsersWhoRatedIt = new HashSet<UserEpisodeRating>();
             Reviews = new HashSet<EpisodeReview>();

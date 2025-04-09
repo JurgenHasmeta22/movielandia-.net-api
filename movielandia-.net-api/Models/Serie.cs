@@ -27,6 +27,11 @@ namespace movielandia_.net_api.Models.Domain
 
         public Serie()
         {
+            Title = string.Empty;
+            PhotoSrc = string.Empty;
+            PhotoSrcProd = string.Empty;
+            TrailerSrc = string.Empty;
+            Description = string.Empty;
             Cast = new HashSet<CastSerie>();
             Crew = new HashSet<CrewSerie>();
             Seasons = new HashSet<Season>();

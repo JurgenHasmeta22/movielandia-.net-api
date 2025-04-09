@@ -27,6 +27,11 @@ namespace movielandia_.net_api.Models.Domain
 
         public Movie()
         {
+            Title = string.Empty;
+            PhotoSrc = string.Empty;
+            PhotoSrcProd = string.Empty;
+            TrailerSrc = string.Empty;
+            Description = string.Empty;
             Cast = new HashSet<CastMovie>();
             Crew = new HashSet<CrewMovie>();
             Genres = new HashSet<MovieGenre>();

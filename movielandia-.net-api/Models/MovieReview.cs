@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models.Domain
     public class MovieReview
     {
         public int Id { get; set; }
-        public string Content { get; set; }
+        public required string Content { get; set; }
         public float? Rating { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
@@ -14,8 +14,8 @@ namespace movielandia_.net_api.Models.Domain
         public int MovieId { get; set; }
         
         // Navigation properties
-        public virtual User User { get; set; }
-        public virtual Movie Movie { get; set; }
+        public required virtual User User { get; set; }
+        public required virtual Movie Movie { get; set; }
         public virtual ICollection<UpvoteMovieReview> Upvotes { get; set; }
         public virtual ICollection<DownvoteMovieReview> Downvotes { get; set; }
 

@@ -6,17 +6,17 @@ namespace movielandia_.net_api.Models.Domain
     public class Season
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string PhotoSrc { get; set; }
-        public string PhotoSrcProd { get; set; }
-        public string TrailerSrc { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string PhotoSrc { get; set; } = string.Empty;
+        public string PhotoSrcProd { get; set; } = string.Empty;
+        public string TrailerSrc { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public DateTime? DateAired { get; set; }
         public float RatingImdb { get; set; }
         public int SerieId { get; set; }
 
         // Navigation properties for relationships
-        public virtual Serie Serie { get; set; }
+        public virtual Serie Serie { get; set; } = null!;
         public virtual ICollection<Episode> Episodes { get; set; }
         public virtual ICollection<UserSeasonFavorite> UsersWhoBookmarkedIt { get; set; }
         public virtual ICollection<UserSeasonRating> UsersWhoRatedIt { get; set; }

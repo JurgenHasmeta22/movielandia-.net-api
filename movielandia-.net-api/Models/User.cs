@@ -44,6 +44,11 @@ namespace movielandia_.net_api.Models.Domain
 
         public User()
         {
+            UserName = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
+            Bio = string.Empty;
+            Avatar = new Avatar { PhotoSrc = string.Empty, User = this };
             FavMovies = new HashSet<UserMovieFavorite>();
             FavSeries = new HashSet<UserSerieFavorite>();
             FavGenres = new HashSet<UserGenreFavorite>();

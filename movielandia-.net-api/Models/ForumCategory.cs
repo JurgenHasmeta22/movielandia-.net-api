@@ -25,6 +25,9 @@ namespace movielandia_.net_api.Models.Domain
 
         public ForumCategory()
         {
+            Name = string.Empty;
+            Description = string.Empty;
+            Slug = string.Empty;
             Topics = new HashSet<ForumTopic>();
             Moderators = new HashSet<UserForumModerator>();
         }

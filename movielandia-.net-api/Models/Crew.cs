@@ -23,6 +23,12 @@ namespace movielandia_.net_api.Models.Domain
 
         public Crew()
         {
+            Fullname = string.Empty;
+            PhotoSrc = string.Empty;
+            Role = string.Empty;
+            PhotoSrcProd = string.Empty;
+            Description = string.Empty;
+            Debut = string.Empty;
             ProducedMovies = new HashSet<CrewMovie>();
             ProducedSeries = new HashSet<CrewSerie>();
             Reviews = new HashSet<CrewReview>();

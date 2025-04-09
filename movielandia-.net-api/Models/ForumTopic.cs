@@ -33,6 +33,9 @@ namespace movielandia_.net_api.Models.Domain
 
         public ForumTopic()
         {
+            Title = string.Empty;
+            Description = string.Empty;
+            Slug = string.Empty;
             Posts = new HashSet<ForumPost>();
             UsersWhoBookmarkedIt = new HashSet<UserForumTopicFavorite>();
             Upvotes = new HashSet<UpvoteForumTopic>();
