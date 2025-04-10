@@ -249,28 +249,28 @@ namespace movielandia_.net_api.Data
                 .HasOne(ufr => ufr.User)
                 .WithMany()
                 .HasForeignKey(ufr => ufr.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<DownvoteForumReply>()
                 .HasOne(dfr => dfr.User)
                 .WithMany()
                 .HasForeignKey(dfr => dfr.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteForumTopic>()
                 .HasOne(uft => uft.User)
                 .WithMany()
                 .HasForeignKey(uft => uft.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<DownvoteForumTopic>()
                 .HasOne(dft => dft.User)
                 .WithMany()
                 .HasForeignKey(dft => dft.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<UpvoteForumPost>()
@@ -1003,6 +1003,99 @@ namespace movielandia_.net_api.Data
                 .WithMany(fp => fp.History)
                 .HasForeignKey(fph => fph.PostId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure ForumReplyHistory relationships
+            modelBuilder.Entity<ForumReplyHistory>()
+                .HasOne(frh => frh.EditedBy)
+                .WithMany()
+                .HasForeignKey(frh => frh.EditedById)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ForumReplyHistory>()
+                .HasOne(frh => frh.Reply)
+                .WithMany(fr => fr.History)
+                .HasForeignKey(frh => frh.ReplyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure Forum voting relationships
+            modelBuilder.Entity<UpvoteForumPost>()
+                .HasOne(ufp => ufp.User)
+                .WithMany()
+                .HasForeignKey(ufp => ufp.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DownvoteForumPost>()
+                .HasOne(dfp => dfp.User)
+                .WithMany()
+                .HasForeignKey(dfp => dfp.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UpvoteForumReply>()
+                .HasOne(ufr => ufr.User)
+                .WithMany()
+                .HasForeignKey(ufr => ufr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DownvoteForumReply>()
+                .HasOne(dfr => dfr.User)
+                .WithMany()
+                .HasForeignKey(dfr => dfr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UpvoteForumTopic>()
+                .HasOne(uft => uft.User)
+                .WithMany()
+                .HasForeignKey(uft => uft.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DownvoteForumTopic>()
+                .HasOne(dft => dft.User)
+                .WithMany()
+                .HasForeignKey(dft => dft.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Configure main forum entity relationships
+            modelBuilder.Entity<ForumReply>()
+                .HasOne(fr => fr.User)
+                .WithMany(u => u.Replies)
+                .HasForeignKey(fr => fr.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ForumReply>()
+                .HasOne(fr => fr.Post)
+                .WithMany(fp => fp.Replies)
+                .HasForeignKey(fr => fr.PostId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ForumTopic>()
+                .HasOne(ft => ft.User)
+                .WithMany(u => u.Topics)
+                .HasForeignKey(ft => ft.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ForumTopic>()
+                .HasOne(ft => ft.ClosedBy)
+                .WithMany()
+                .HasForeignKey(ft => ft.ClosedById)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ForumPost>()
+                .HasOne(fp => fp.User)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(fp => fp.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ForumPost>()
+                .HasOne(fp => fp.AnsweredBy)
+                .WithMany(u => u.PostsAnswered)
+                .HasForeignKey(fp => fp.AnsweredById)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ForumPost>()
+                .HasOne(fp => fp.DeletedBy)
+                .WithMany(u => u.PostsDeleted)
+                .HasForeignKey(fp => fp.DeletedById)
+                .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -12,7 +12,7 @@ using movielandia_.net_api.Data;
 namespace movielandia_.net_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250410184646_InitTables")]
+    [Migration("20250410185026_InitTables")]
     partial class InitTables
     {
         /// <inheritdoc />
@@ -1075,9 +1075,6 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("EditCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ForumPostId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsEdited")
                         .HasColumnType("bit");
 
@@ -1096,18 +1093,11 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ForumPostId");
 
                     b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("ForumReply");
                 });
@@ -1124,9 +1114,6 @@ namespace movielandia_.net_api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EditedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ForumReplyId")
                         .HasColumnType("int");
 
                     b.Property<string>("NewContent")
@@ -1147,8 +1134,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EditedById");
-
-                    b.HasIndex("ForumReplyId");
 
                     b.HasIndex("ReplyId");
 
@@ -3431,7 +3416,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Reply");
@@ -3454,7 +3439,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Topic");
@@ -3637,7 +3622,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AnsweredBy");
@@ -3672,25 +3657,17 @@ namespace movielandia_.net_api.Migrations
 
             modelBuilder.Entity("movielandia_.net_api.Models.ForumReply", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.ForumPost", null)
-                        .WithMany("Replies")
-                        .HasForeignKey("ForumPostId");
-
                     b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
-                        .WithMany()
+                        .WithMany("Replies")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Replies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.HasOne("movielandia_.net_api.Models.User", null)
-                        .WithMany("Replies")
-                        .HasForeignKey("UserId1");
 
                     b.Navigation("Post");
 
@@ -3702,15 +3679,11 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.User", "EditedBy")
                         .WithMany()
                         .HasForeignKey("EditedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.ForumReply", null)
-                        .WithMany("History")
-                        .HasForeignKey("ForumReplyId");
-
                     b.HasOne("movielandia_.net_api.Models.ForumReply", "Reply")
-                        .WithMany()
+                        .WithMany("History")
                         .HasForeignKey("ReplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -3729,15 +3702,16 @@ namespace movielandia_.net_api.Migrations
                         .IsRequired();
 
                     b.HasOne("movielandia_.net_api.Models.User", "ClosedBy")
-                        .WithMany("Topics")
-                        .HasForeignKey("ClosedById");
+                        .WithMany()
+                        .HasForeignKey("ClosedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("movielandia_.net_api.Models.ForumCategory", null)
                         .WithMany("Topics")
                         .HasForeignKey("ForumCategoryId");
 
                     b.HasOne("movielandia_.net_api.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Topics")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -4191,7 +4165,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Reply");
@@ -4214,7 +4188,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Topic");

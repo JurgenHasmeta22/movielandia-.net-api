@@ -2130,8 +2130,7 @@ namespace movielandia_.net_api.Migrations
                         name: "FK_DownvoteForumReply_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -2151,8 +2150,7 @@ namespace movielandia_.net_api.Migrations
                         name: "FK_DownvoteForumTopic_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -2317,8 +2315,7 @@ namespace movielandia_.net_api.Migrations
                         name: "FK_ForumPost_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -2373,8 +2370,7 @@ namespace movielandia_.net_api.Migrations
                         name: "FK_UpvoteForumTopic_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -2539,18 +2535,11 @@ namespace movielandia_.net_api.Migrations
                     LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsModerated = table.Column<bool>(type: "bit", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ForumPostId = table.Column<int>(type: "int", nullable: true),
-                    UserId1 = table.Column<int>(type: "int", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ForumReply", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ForumReply_ForumPost_ForumPostId",
-                        column: x => x.ForumPostId,
-                        principalTable: "ForumPost",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ForumReply_ForumPost_PostId",
                         column: x => x.PostId,
@@ -2560,11 +2549,6 @@ namespace movielandia_.net_api.Migrations
                     table.ForeignKey(
                         name: "FK_ForumReply_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ForumReply_User_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "User",
                         principalColumn: "Id");
                 });
@@ -2611,17 +2595,11 @@ namespace movielandia_.net_api.Migrations
                     EditedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReplyId = table.Column<int>(type: "int", nullable: false),
-                    EditedById = table.Column<int>(type: "int", nullable: false),
-                    ForumReplyId = table.Column<int>(type: "int", nullable: true)
+                    EditedById = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ForumReplyHistory", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ForumReplyHistory_ForumReply_ForumReplyId",
-                        column: x => x.ForumReplyId,
-                        principalTable: "ForumReply",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ForumReplyHistory_ForumReply_ReplyId",
                         column: x => x.ReplyId,
@@ -2632,8 +2610,7 @@ namespace movielandia_.net_api.Migrations
                         name: "FK_ForumReplyHistory_User_EditedById",
                         column: x => x.EditedById,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -2664,8 +2641,7 @@ namespace movielandia_.net_api.Migrations
                         name: "FK_UpvoteForumReply_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -2985,11 +2961,6 @@ namespace movielandia_.net_api.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumReply_ForumPostId",
-                table: "ForumReply",
-                column: "ForumPostId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ForumReply_PostId",
                 table: "ForumReply",
                 column: "PostId");
@@ -3000,19 +2971,9 @@ namespace movielandia_.net_api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumReply_UserId1",
-                table: "ForumReply",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ForumReplyHistory_EditedById",
                 table: "ForumReplyHistory",
                 column: "EditedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ForumReplyHistory_ForumReplyId",
-                table: "ForumReplyHistory",
-                column: "ForumReplyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ForumReplyHistory_ReplyId",
