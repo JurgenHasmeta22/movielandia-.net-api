@@ -1,4 +1,4 @@
-namespace movielandia_.net_api.Models.Domain
+namespace movielandia_.net_api.Models
 {
     public class UserActorFavorite
     {

@@ -53,6 +53,40 @@ namespace movielandia_.net_api.Data
         public DbSet<UpvoteActorReview> UpvoteActorReview { get; set; }
         public DbSet<DownvoteActorReview> DownvoteActorReview { get; set; }
 
+        // Forum System Extended
+        public DbSet<ForumUserStats> ForumUserStats { get; set; }
+        public DbSet<ForumLogHistory> ForumLogHistory { get; set; }
+
+        // Lists System
+        public DbSet<List> List { get; set; }
+        public DbSet<ListMovie> ListMovie { get; set; }
+        public DbSet<ListSerie> ListSerie { get; set; }
+        public DbSet<ListSeason> ListSeason { get; set; }
+        public DbSet<ListEpisode> ListEpisode { get; set; }
+        public DbSet<ListActor> ListActor { get; set; }
+        public DbSet<ListCrew> ListCrew { get; set; }
+
+        // Notifications
+        public DbSet<Notification> Notification { get; set; }
+        public DbSet<NotificationUser> NotificationUser { get; set; }
+
+        // Social Features
+        public DbSet<UserFollow> UserFollow { get; set; }
+        public DbSet<UserBlock> UserBlock { get; set; }
+        public DbSet<UserNotificationSettings> UserNotificationSettings { get; set; }
+        public DbSet<UserContact> UserContact { get; set; }
+        public DbSet<UserActivity> UserActivity { get; set; }
+
+        // Moderation & User Status
+        public DbSet<UserMute> UserMute { get; set; }
+        public DbSet<UserReport> UserReport { get; set; }
+        public DbSet<UserRank> UserRank { get; set; }
+        public DbSet<UserBadge> UserBadge { get; set; }
+
+        // Content Management
+        public DbSet<ContentHistory> ContentHistory { get; set; }
+        public DbSet<ContentChangeLog> ContentChangeLog { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure singular table names
@@ -100,6 +134,30 @@ namespace movielandia_.net_api.Data
             modelBuilder.Entity<DownvoteEpisodeReview>().ToTable("DownvoteEpisodeReview");
             modelBuilder.Entity<UpvoteActorReview>().ToTable("UpvoteActorReview");
             modelBuilder.Entity<DownvoteActorReview>().ToTable("DownvoteActorReview");
+
+            // Configure new tables
+            modelBuilder.Entity<ForumUserStats>().ToTable("ForumUserStats");
+            modelBuilder.Entity<ForumLogHistory>().ToTable("ForumLogHistory");
+            modelBuilder.Entity<List>().ToTable("List");
+            modelBuilder.Entity<ListMovie>().ToTable("ListMovie");
+            modelBuilder.Entity<ListSerie>().ToTable("ListSerie");
+            modelBuilder.Entity<ListSeason>().ToTable("ListSeason");
+            modelBuilder.Entity<ListEpisode>().ToTable("ListEpisode");
+            modelBuilder.Entity<ListActor>().ToTable("ListActor");
+            modelBuilder.Entity<ListCrew>().ToTable("ListCrew");
+            modelBuilder.Entity<Notification>().ToTable("Notification");
+            modelBuilder.Entity<NotificationUser>().ToTable("NotificationUser");
+            modelBuilder.Entity<UserFollow>().ToTable("UserFollow");
+            modelBuilder.Entity<UserBlock>().ToTable("UserBlock");
+            modelBuilder.Entity<UserNotificationSettings>().ToTable("UserNotificationSettings");
+            modelBuilder.Entity<UserContact>().ToTable("UserContact");
+            modelBuilder.Entity<UserActivity>().ToTable("UserActivity");
+            modelBuilder.Entity<UserMute>().ToTable("UserMute");
+            modelBuilder.Entity<UserReport>().ToTable("UserReport");
+            modelBuilder.Entity<UserRank>().ToTable("UserRank");
+            modelBuilder.Entity<UserBadge>().ToTable("UserBadge");
+            modelBuilder.Entity<ContentHistory>().ToTable("ContentHistory");
+            modelBuilder.Entity<ContentChangeLog>().ToTable("ContentChangeLog");
 
             modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
 
@@ -785,6 +843,85 @@ namespace movielandia_.net_api.Data
                 .WithMany()
                 .HasForeignKey(dcr => dcr.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            // Configure relationships for new entities
+            modelBuilder
+                .Entity<ForumUserStats>()
+                .HasOne(fus => fus.User)
+                .WithOne()
+                .HasForeignKey<ForumUserStats>(fus => fus.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<List>()
+                .HasOne(l => l.User)
+                .WithMany()
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<NotificationUser>()
+                .HasOne(nu => nu.Notification)
+                .WithMany(n => n.NotificationUsers)
+                .HasForeignKey(nu => nu.NotificationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<UserFollow>()
+                .HasOne(uf => uf.Follower)
+                .WithMany()
+                .HasForeignKey(uf => uf.FollowerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<UserFollow>()
+                .HasOne(uf => uf.Following)
+                .WithMany()
+                .HasForeignKey(uf => uf.FollowingId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<UserBlock>()
+                .HasOne(ub => ub.Blocker)
+                .WithMany()
+                .HasForeignKey(ub => ub.BlockerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<UserBlock>()
+                .HasOne(ub => ub.Blocked)
+                .WithMany()
+                .HasForeignKey(ub => ub.BlockedId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<UserMute>()
+                .HasOne(um => um.MutedUser)
+                .WithMany()
+                .HasForeignKey(um => um.MutedUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<UserMute>()
+                .HasOne(um => um.Moderator)
+                .WithMany()
+                .HasForeignKey(um => um.ModeratorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<UserBadge>()
+                .HasOne(ub => ub.User)
+                .WithMany()
+                .HasForeignKey(ub => ub.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<UserBadge>()
+                .HasOne(ub => ub.Rank)
+                .WithMany(r => r.UserBadges)
+                .HasForeignKey(ub => ub.RankId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
     }
