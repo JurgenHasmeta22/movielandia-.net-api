@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using movielandia_.net_api.Data;
 using movielandia_.net_api.DTOs;
-using movielandia_.net_api.Models.Domain;
+using movielandia_.net_api.Models;
 using movielandia_.net_api.Repositories.Interfaces;
 
 namespace movielandia_.net_api.Repositories.Implementations

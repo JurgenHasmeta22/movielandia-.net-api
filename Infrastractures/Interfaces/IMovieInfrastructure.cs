@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using movielandia_.net_api.DTOs;
-using movielandia_.net_api.Models.Domain;
+using movielandia_.net_api.Models;
 
 namespace movielandia_.net_api.Infrastructures.Interfaces
 {

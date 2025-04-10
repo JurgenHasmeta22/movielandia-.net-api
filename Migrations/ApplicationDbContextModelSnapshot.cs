@@ -37,7 +37,61 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("ForumTagForumTopic");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Actor", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Account", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AccessToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ExpiresAt")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderAccountId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Scope")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionState")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TokenType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Account");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Actor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +124,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Actor", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ActorReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +165,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("ActorReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Attachment", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Attachment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +213,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Attachment");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Avatar", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Avatar", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -182,7 +236,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Avatar", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CastMovie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CastMovie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,7 +259,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("CastMovie", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CastSerie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CastSerie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +282,95 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("CastSerie", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Crew", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ContentChangeLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ChangedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EntityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ContentChangeLog", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ContentHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Changes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EntityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ContentHistory", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Crew", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -265,7 +407,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Crew", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewMovie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewMovie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -288,7 +430,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("CrewMovie", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,7 +471,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("CrewReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewSerie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewSerie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -352,7 +494,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("CrewSerie", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteActorReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -380,7 +522,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteActorReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteCrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteCrewReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -408,7 +550,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteCrewReview");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteEpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteEpisodeReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -436,7 +578,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteEpisodeReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteForumPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -464,7 +606,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteForumPost");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteForumReply", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -492,7 +634,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteForumReply");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteForumTopic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -520,7 +662,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteForumTopic");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteMovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteMovieReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -548,7 +690,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteMovieReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteSeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteSeasonReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -576,7 +718,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteSeasonReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteSerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteSerieReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -604,7 +746,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("DownvoteSerieReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Episode", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Episode", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -651,7 +793,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Episode", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.EpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.EpisodeReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -692,7 +834,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("EpisodeReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumCategory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -738,14 +880,64 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LastPostId")
-                        .IsUnique()
-                        .HasFilter("[LastPostId] IS NOT NULL");
+                    b.HasIndex("LastPostId");
 
                     b.ToTable("ForumCategory");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumLogHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TopicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("TopicId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ForumLogHistory", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -775,7 +967,7 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("EditCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ForumTopicId")
+                    b.Property<int?>("ForumCategoryId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsAnswer")
@@ -815,7 +1007,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("DeletedById");
 
-                    b.HasIndex("ForumTopicId");
+                    b.HasIndex("ForumCategoryId");
 
                     b.HasIndex("TopicId");
 
@@ -824,7 +1016,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("ForumPost");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumPostHistory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumPostHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -836,9 +1028,6 @@ namespace movielandia_.net_api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EditedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ForumPostId")
                         .HasColumnType("int");
 
                     b.Property<string>("NewContent")
@@ -860,14 +1049,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("EditedById");
 
-                    b.HasIndex("ForumPostId");
-
                     b.HasIndex("PostId");
 
                     b.ToTable("ForumPostHistory");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumReply", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -906,6 +1093,9 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ForumPostId");
@@ -914,10 +1104,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("ForumReply");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumReplyHistory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumReplyHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -960,7 +1152,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("ForumReplyHistory");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumTag", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -985,7 +1177,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("ForumTag");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumTopic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1051,7 +1243,51 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("ForumTopic");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Genre", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumUserStats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Reputation")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicsViewed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPosts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalReplies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalTopics")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId1")
+                        .IsUnique()
+                        .HasFilter("[UserId1] IS NOT NULL");
+
+                    b.ToTable("ForumUserStats", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1068,7 +1304,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Genre", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Inbox", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Inbox", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1081,7 +1317,227 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Inbox");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Message", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.List", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("List", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListActor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("ListId");
+
+                    b.ToTable("ListActor", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListCrew", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CrewId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CrewId");
+
+                    b.HasIndex("ListId");
+
+                    b.ToTable("ListCrew", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListEpisode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EpisodeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EpisodeId");
+
+                    b.HasIndex("ListId");
+
+                    b.ToTable("ListEpisode", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListMovie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("ListMovie", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListSeason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListId");
+
+                    b.HasIndex("SeasonId");
+
+                    b.ToTable("ListSeason", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListSerie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SerieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListId");
+
+                    b.HasIndex("SerieId");
+
+                    b.ToTable("ListSerie", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1132,7 +1588,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Message");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Movie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1174,7 +1630,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Movie", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieGenre", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.MovieGenre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1197,7 +1653,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("MovieGenre", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.MovieReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1238,7 +1694,71 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("MovieReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Season", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsGlobal")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notification", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.NotificationUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReadAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("NotificationUser", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Season", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1282,7 +1802,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Season", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SeasonReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1323,7 +1843,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("SeasonReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Serie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Serie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1362,7 +1882,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("Serie", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieGenre", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SerieGenre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1385,7 +1905,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("SerieGenre", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SerieReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1426,7 +1946,29 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("SerieReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Session", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SessionToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Session");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteActorReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1454,7 +1996,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteActorReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteCrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteCrewReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1482,7 +2024,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteCrewReview");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteEpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteEpisodeReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1510,7 +2052,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteEpisodeReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteForumPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1538,7 +2080,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteForumPost");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteForumReply", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1566,7 +2108,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteForumReply");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteForumTopic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1594,7 +2136,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteForumTopic");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteMovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteMovieReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1622,7 +2164,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteMovieReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteSeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteSeasonReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1650,7 +2192,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteSeasonReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteSerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteSerieReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1678,7 +2220,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UpvoteSerieReview", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.User", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1742,7 +2284,47 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("User", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserActorFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EntityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Metadata")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserActivity", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserActorFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1765,7 +2347,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserActorFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserActorRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserActorRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1791,7 +2373,117 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserActorRating", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserCrewFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserBadge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AwardedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RankId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RankId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserBadge", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserBlock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("BlockedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("BlockedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlockerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlockedId");
+
+                    b.HasIndex("BlockerId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserBlock", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserContact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("VerifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserContact", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserCrewFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1814,7 +2506,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserCrewFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserCrewRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserCrewRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1840,7 +2532,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserCrewRating", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserEpisodeFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserEpisodeFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1873,7 +2565,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserEpisodeFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserEpisodeRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserEpisodeRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1909,7 +2601,43 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserEpisodeRating", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumModerator", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserFollow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FollowedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FollowerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowingId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowerId");
+
+                    b.HasIndex("FollowingId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserFollow", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserForumModerator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1929,6 +2657,9 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -1937,10 +2668,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("UserForumModerator");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumTopicFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserForumTopicFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1957,6 +2690,9 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ForumTopicId");
@@ -1965,10 +2701,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("UserForumTopicFavorite");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumTopicWatch", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserForumTopicWatch", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1988,6 +2726,9 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ForumTopicId");
@@ -1996,10 +2737,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("UserForumTopicWatch");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserGenreFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserGenreFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2022,7 +2765,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserGenreFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserInbox", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserInbox", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2039,6 +2782,9 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("InboxId");
@@ -2047,10 +2793,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("UserInbox");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserMovieFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserMovieFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2074,7 +2822,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserMovieFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserMovieRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserMovieRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2100,7 +2848,172 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserMovieRating", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSeasonFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserMute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ModeratorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("MutedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MutedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModeratorId");
+
+                    b.HasIndex("MutedUserId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserMute", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserNotificationSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("EmailNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FollowerNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ForumNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("MessageNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PushNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ReviewNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserNotificationSettings", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserRank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MinPoints")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRank", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModeratorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReportedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReporterId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ResolvedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModeratorId");
+
+                    b.HasIndex("ReportedUserId");
+
+                    b.HasIndex("ReporterId");
+
+                    b.ToTable("UserReport", (string)null);
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSeasonFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2123,7 +3036,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserSeasonFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSeasonRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSeasonRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2149,7 +3062,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserSeasonRating", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSerieFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSerieFavorite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2173,7 +3086,7 @@ namespace movielandia_.net_api.Migrations
                     b.ToTable("UserSerieFavorite", (string)null);
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSerieRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSerieRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2201,32 +3114,43 @@ namespace movielandia_.net_api.Migrations
 
             modelBuilder.Entity("ForumTagForumTopic", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTag", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumTag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", null)
                         .WithMany()
                         .HasForeignKey("TopicsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Account", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("Accounts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ActorReview", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany()
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", null)
+                    b.HasOne("movielandia_.net_api.Models.Actor", null)
                         .WithMany("Reviews")
                         .HasForeignKey("ActorId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("ActorReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2237,15 +3161,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Attachment", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Attachment", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", "Post")
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
                         .WithMany("Attachments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2256,26 +3180,26 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Avatar", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Avatar", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithOne("Avatar")
-                        .HasForeignKey("movielandia_.net_api.Models.Domain.Avatar", "UserId")
+                        .HasForeignKey("movielandia_.net_api.Models.Avatar", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CastMovie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CastMovie", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("StarredMovies")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("Cast")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2286,15 +3210,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CastSerie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CastSerie", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("StarredSeries")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("Cast")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2305,15 +3229,37 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Serie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewMovie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ContentChangeLog", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("ContentChangeLogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ContentHistory", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("ContentHistories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewMovie", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany("ProducedMovies")
                         .HasForeignKey("CrewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("Crew")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2324,19 +3270,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany()
                         .HasForeignKey("CrewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", null)
+                    b.HasOne("movielandia_.net_api.Models.Crew", null)
                         .WithMany("Reviews")
                         .HasForeignKey("CrewId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("CrewReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2347,15 +3293,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewSerie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewSerie", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany("ProducedSeries")
                         .HasForeignKey("CrewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("Crew")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2366,20 +3312,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Serie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteActorReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("DownvoteActorReviews")
                         .HasForeignKey("ActorId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ActorReview", "ActorReview")
+                    b.HasOne("movielandia_.net_api.Models.ActorReview", "ActorReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("ActorReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2392,20 +3338,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteCrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteCrewReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany("DownvoteCrewReviews")
                         .HasForeignKey("CrewId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.CrewReview", "CrewReview")
+                    b.HasOne("movielandia_.net_api.Models.CrewReview", "CrewReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("CrewReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2418,20 +3364,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteEpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteEpisodeReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
+                    b.HasOne("movielandia_.net_api.Models.Episode", "Episode")
                         .WithMany("DownvoteEpisodeReviews")
                         .HasForeignKey("EpisodeId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.EpisodeReview", "EpisodeReview")
+                    b.HasOne("movielandia_.net_api.Models.EpisodeReview", "EpisodeReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("EpisodeReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2444,19 +3390,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteForumPost", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", null)
                         .WithMany("Downvotes")
                         .HasForeignKey("ForumPostId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", "Post")
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2467,19 +3413,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteForumReply", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumReply", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumReply", null)
                         .WithMany("Downvotes")
                         .HasForeignKey("ForumReplyId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumReply", "Reply")
+                    b.HasOne("movielandia_.net_api.Models.ForumReply", "Reply")
                         .WithMany()
                         .HasForeignKey("ReplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2490,19 +3436,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteForumTopic", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", null)
                         .WithMany("Downvotes")
                         .HasForeignKey("ForumTopicId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", "Topic")
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", "Topic")
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2513,20 +3459,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteMovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteMovieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("DownvoteMovieReviews")
                         .HasForeignKey("MovieId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.MovieReview", "MovieReview")
+                    b.HasOne("movielandia_.net_api.Models.MovieReview", "MovieReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("MovieReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2539,20 +3485,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteSeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteSeasonReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
                         .WithMany("DownvoteSeasonReviews")
                         .HasForeignKey("SeasonId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.SeasonReview", "SeasonReview")
+                    b.HasOne("movielandia_.net_api.Models.SeasonReview", "SeasonReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("SeasonReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2565,20 +3511,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteSerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.DownvoteSerieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("DownvoteSerieReviews")
                         .HasForeignKey("SerieId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.SerieReview", "SerieReview")
+                    b.HasOne("movielandia_.net_api.Models.SerieReview", "SerieReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("SerieReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2591,9 +3537,9 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Episode", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Episode", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
                         .WithMany("Episodes")
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2602,19 +3548,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Season");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.EpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.EpisodeReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
+                    b.HasOne("movielandia_.net_api.Models.Episode", "Episode")
                         .WithMany()
                         .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", null)
+                    b.HasOne("movielandia_.net_api.Models.Episode", null)
                         .WithMany("Reviews")
                         .HasForeignKey("EpisodeId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("EpisodeReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2625,64 +3571,93 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumCategory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumCategory", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", "LastPost")
-                        .WithOne("LastPostCategory")
-                        .HasForeignKey("movielandia_.net_api.Models.Domain.ForumCategory", "LastPostId");
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "LastPost")
+                        .WithMany()
+                        .HasForeignKey("LastPostId");
 
                     b.Navigation("LastPost");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumLogHistory", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "AnsweredBy")
+                    b.HasOne("movielandia_.net_api.Models.ForumCategory", "Category")
                         .WithMany()
-                        .HasForeignKey("AnsweredById");
+                        .HasForeignKey("CategoryId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "DeletedBy")
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
                         .WithMany()
-                        .HasForeignKey("DeletedById");
+                        .HasForeignKey("PostId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("ForumTopicId");
-
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", "Topic")
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
+                        .HasForeignKey("TopicId");
+
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Navigation("Category");
 
-                    b.Navigation("AnsweredBy");
-
-                    b.Navigation("DeletedBy");
+                    b.Navigation("Post");
 
                     b.Navigation("Topic");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumPostHistory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumPost", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "EditedBy")
+                    b.HasOne("movielandia_.net_api.Models.User", "AnsweredBy")
+                        .WithMany("PostsAnswered")
+                        .HasForeignKey("AnsweredById")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("movielandia_.net_api.Models.User", "DeletedBy")
+                        .WithMany("PostsDeleted")
+                        .HasForeignKey("DeletedById")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("movielandia_.net_api.Models.ForumCategory", "LastPostCategory")
                         .WithMany()
-                        .HasForeignKey("EditedById")
+                        .HasForeignKey("ForumCategoryId");
+
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", "Topic")
+                        .WithMany("Posts")
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", null)
-                        .WithMany("History")
-                        .HasForeignKey("ForumPostId");
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", "Post")
+                    b.Navigation("AnsweredBy");
+
+                    b.Navigation("DeletedBy");
+
+                    b.Navigation("LastPostCategory");
+
+                    b.Navigation("Topic");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumPostHistory", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "EditedBy")
                         .WithMany()
+                        .HasForeignKey("EditedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
+                        .WithMany("History")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2692,42 +3667,46 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumReply", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", null)
                         .WithMany("Replies")
                         .HasForeignKey("ForumPostId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", "Post")
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("Replies")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Post");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumReplyHistory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumReplyHistory", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "EditedBy")
+                    b.HasOne("movielandia_.net_api.Models.User", "EditedBy")
                         .WithMany()
                         .HasForeignKey("EditedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumReply", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumReply", null)
                         .WithMany("History")
                         .HasForeignKey("ForumReplyId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumReply", "Reply")
+                    b.HasOne("movielandia_.net_api.Models.ForumReply", "Reply")
                         .WithMany()
                         .HasForeignKey("ReplyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2738,23 +3717,23 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Reply");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumTopic", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumCategory", "Category")
+                    b.HasOne("movielandia_.net_api.Models.ForumCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "ClosedBy")
-                        .WithMany()
+                    b.HasOne("movielandia_.net_api.Models.User", "ClosedBy")
+                        .WithMany("Topics")
                         .HasForeignKey("ClosedById");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumCategory", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumCategory", null)
                         .WithMany("Topics")
                         .HasForeignKey("ForumCategoryId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2767,29 +3746,173 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Message", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumUserStats", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Inbox", "Inbox")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithOne()
+                        .HasForeignKey("movielandia_.net_api.Models.ForumUserStats", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithOne("ForumStats")
+                        .HasForeignKey("movielandia_.net_api.Models.ForumUserStats", "UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.List", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("Lists")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListActor", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.List", "List")
+                        .WithMany("Actors")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("List");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListCrew", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
+                        .WithMany()
+                        .HasForeignKey("CrewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.List", "List")
+                        .WithMany("Crew")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Crew");
+
+                    b.Navigation("List");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListEpisode", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Episode", "Episode")
+                        .WithMany()
+                        .HasForeignKey("EpisodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.List", "List")
+                        .WithMany("Episodes")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Episode");
+
+                    b.Navigation("List");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListMovie", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.List", "List")
+                        .WithMany("Movies")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("List");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListSeason", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.List", "List")
+                        .WithMany("Seasons")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
+                        .WithMany()
+                        .HasForeignKey("SeasonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("List");
+
+                    b.Navigation("Season");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.ListSerie", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.List", "List")
+                        .WithMany("Series")
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
+                        .WithMany()
+                        .HasForeignKey("SerieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("List");
+
+                    b.Navigation("Serie");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Message", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Inbox", "Inbox")
                         .WithMany()
                         .HasForeignKey("InboxId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Inbox", null)
+                    b.HasOne("movielandia_.net_api.Models.Inbox", null)
                         .WithMany("Messages")
                         .HasForeignKey("InboxId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "Receiver")
+                    b.HasOne("movielandia_.net_api.Models.User", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "Sender")
+                    b.HasOne("movielandia_.net_api.Models.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", null)
+                    b.HasOne("movielandia_.net_api.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -2801,15 +3924,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieGenre", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.MovieGenre", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Genre", "Genre")
+                    b.HasOne("movielandia_.net_api.Models.Genre", "Genre")
                         .WithMany("Movies")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("Genres")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2820,19 +3943,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.MovieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", null)
+                    b.HasOne("movielandia_.net_api.Models.Movie", null)
                         .WithMany("Reviews")
                         .HasForeignKey("MovieId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("MovieReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2843,9 +3966,28 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Season", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.NotificationUser", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Notification", "Notification")
+                        .WithMany("NotificationUsers")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Notification");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Season", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("Seasons")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2854,19 +3996,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Serie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SeasonReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
                         .WithMany()
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", null)
+                    b.HasOne("movielandia_.net_api.Models.Season", null)
                         .WithMany("Reviews")
                         .HasForeignKey("SeasonId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("SeasonReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2877,15 +4019,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieGenre", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SerieGenre", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Genre", "Genre")
+                    b.HasOne("movielandia_.net_api.Models.Genre", "Genre")
                         .WithMany("Series")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("Genres")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2896,19 +4038,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Serie");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SerieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany()
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", null)
+                    b.HasOne("movielandia_.net_api.Models.Serie", null)
                         .WithMany("Reviews")
                         .HasForeignKey("SerieId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("SerieReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2919,20 +4061,31 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Session", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("Sessions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteActorReview", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("UpvoteActorReviews")
                         .HasForeignKey("ActorId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ActorReview", "ActorReview")
+                    b.HasOne("movielandia_.net_api.Models.ActorReview", "ActorReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("ActorReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2945,20 +4098,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteCrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteCrewReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany("UpvoteCrewReviews")
                         .HasForeignKey("CrewId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.CrewReview", "CrewReview")
+                    b.HasOne("movielandia_.net_api.Models.CrewReview", "CrewReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("CrewReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2971,20 +4124,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteEpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteEpisodeReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
+                    b.HasOne("movielandia_.net_api.Models.Episode", "Episode")
                         .WithMany("UpvoteEpisodeReviews")
                         .HasForeignKey("EpisodeId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.EpisodeReview", "EpisodeReview")
+                    b.HasOne("movielandia_.net_api.Models.EpisodeReview", "EpisodeReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("EpisodeReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2997,19 +4150,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteForumPost", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", null)
                         .WithMany("Upvotes")
                         .HasForeignKey("ForumPostId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumPost", "Post")
+                    b.HasOne("movielandia_.net_api.Models.ForumPost", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3020,19 +4173,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteForumReply", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumReply", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumReply", null)
                         .WithMany("Upvotes")
                         .HasForeignKey("ForumReplyId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumReply", "Reply")
+                    b.HasOne("movielandia_.net_api.Models.ForumReply", "Reply")
                         .WithMany()
                         .HasForeignKey("ReplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3043,19 +4196,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteForumTopic", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", null)
                         .WithMany("Upvotes")
                         .HasForeignKey("ForumTopicId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", "Topic")
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", "Topic")
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3066,20 +4219,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteMovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteMovieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("UpvoteMovieReviews")
                         .HasForeignKey("MovieId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.MovieReview", "MovieReview")
+                    b.HasOne("movielandia_.net_api.Models.MovieReview", "MovieReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("MovieReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3092,20 +4245,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteSeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteSeasonReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
                         .WithMany("UpvoteSeasonReviews")
                         .HasForeignKey("SeasonId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.SeasonReview", "SeasonReview")
+                    b.HasOne("movielandia_.net_api.Models.SeasonReview", "SeasonReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("SeasonReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3118,20 +4271,20 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteSerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UpvoteSerieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("UpvoteSerieReviews")
                         .HasForeignKey("SerieId")
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.SerieReview", "SerieReview")
+                    b.HasOne("movielandia_.net_api.Models.SerieReview", "SerieReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("SerieReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -3144,15 +4297,26 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserActorFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserActivity", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("Activities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserActorFavorite", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("FavActors")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3163,15 +4327,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserActorRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserActorRating", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Actor", "Actor")
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("UsersWhoRatedIt")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("RatingsInActor")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3182,15 +4346,76 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserCrewFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserBadge", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.UserRank", "Rank")
+                        .WithMany("UserBadges")
+                        .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("Badges")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Rank");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserBlock", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "Blocked")
+                        .WithMany()
+                        .HasForeignKey("BlockedId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "Blocker")
+                        .WithMany()
+                        .HasForeignKey("BlockerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("BlockedByUsers")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("BlockedUsers")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Blocked");
+
+                    b.Navigation("Blocker");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserContact", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany("Contacts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserCrewFavorite", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("CrewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("FavCrew")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3201,15 +4426,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserCrewRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserCrewRating", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Crew", "Crew")
+                    b.HasOne("movielandia_.net_api.Models.Crew", "Crew")
                         .WithMany("UsersWhoRatedIt")
                         .HasForeignKey("CrewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("RatingsInCrew")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3220,25 +4445,25 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserEpisodeFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserEpisodeFavorite", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
+                    b.HasOne("movielandia_.net_api.Models.Episode", "Episode")
                         .WithMany()
                         .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", null)
+                    b.HasOne("movielandia_.net_api.Models.Episode", null)
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("EpisodeId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", null)
+                    b.HasOne("movielandia_.net_api.Models.User", null)
                         .WithMany("FavEpisodes")
                         .HasForeignKey("UserId1");
 
@@ -3247,25 +4472,25 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserEpisodeRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserEpisodeRating", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", "Episode")
+                    b.HasOne("movielandia_.net_api.Models.Episode", "Episode")
                         .WithMany()
                         .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Episode", null)
+                    b.HasOne("movielandia_.net_api.Models.Episode", null)
                         .WithMany("UsersWhoRatedIt")
                         .HasForeignKey("EpisodeId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", null)
+                    b.HasOne("movielandia_.net_api.Models.User", null)
                         .WithMany("RatingsInEpisode")
                         .HasForeignKey("UserId1");
 
@@ -3274,84 +4499,123 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumModerator", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserFollow", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumCategory", "Category")
+                    b.HasOne("movielandia_.net_api.Models.User", "Follower")
+                        .WithMany()
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "Following")
+                        .WithMany()
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("Followers")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("Following")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("Following");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserForumModerator", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.ForumCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumCategory", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumCategory", null)
                         .WithMany("Moderators")
                         .HasForeignKey("ForumCategoryId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("ModeratedCategories")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Category");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumTopicFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserForumTopicFavorite", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", null)
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("ForumTopicId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", "Topic")
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", "Topic")
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("FavTopics")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Topic");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumTopicWatch", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserForumTopicWatch", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", null)
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", null)
                         .WithMany("Watchers")
                         .HasForeignKey("ForumTopicId");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.ForumTopic", "Topic")
+                    b.HasOne("movielandia_.net_api.Models.ForumTopic", "Topic")
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("WatchedTopics")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Topic");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserGenreFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserGenreFavorite", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Genre", "Genre")
+                    b.HasOne("movielandia_.net_api.Models.Genre", "Genre")
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("FavGenres")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3362,38 +4626,42 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserInbox", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserInbox", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Inbox", "Inbox")
+                    b.HasOne("movielandia_.net_api.Models.Inbox", "Inbox")
                         .WithMany()
                         .HasForeignKey("InboxId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.Inbox", null)
+                    b.HasOne("movielandia_.net_api.Models.Inbox", null)
                         .WithMany("Participants")
                         .HasForeignKey("InboxId1");
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("Inboxes")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Inbox");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserMovieFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserMovieFavorite", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("FavMovies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3404,15 +4672,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserMovieRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserMovieRating", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Movie", "Movie")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("UsersWhoRatedIt")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("RatingsInMovie")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3423,15 +4691,79 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSeasonFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserMute", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
+                    b.HasOne("movielandia_.net_api.Models.User", "Moderator")
+                        .WithMany()
+                        .HasForeignKey("ModeratorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "MutedUser")
+                        .WithMany()
+                        .HasForeignKey("MutedUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("MutedByModerators")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("movielandia_.net_api.Models.User", null)
+                        .WithMany("MutedUsers")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Moderator");
+
+                    b.Navigation("MutedUser");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserNotificationSettings", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithOne("NotificationSettings")
+                        .HasForeignKey("movielandia_.net_api.Models.UserNotificationSettings", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserReport", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.User", "Moderator")
+                        .WithMany("ReportsModerated")
+                        .HasForeignKey("ModeratorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("movielandia_.net_api.Models.User", "ReportedUser")
+                        .WithMany("ReportsReceived")
+                        .HasForeignKey("ReportedUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "Reporter")
+                        .WithMany("ReportsSubmitted")
+                        .HasForeignKey("ReporterId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Moderator");
+
+                    b.Navigation("ReportedUser");
+
+                    b.Navigation("Reporter");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSeasonFavorite", b =>
+                {
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("FavSeasons")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3442,15 +4774,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSeasonRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSeasonRating", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Season", "Season")
+                    b.HasOne("movielandia_.net_api.Models.Season", "Season")
                         .WithMany("UsersWhoRatedIt")
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("RatingsInSeason")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3461,15 +4793,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSerieFavorite", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSerieFavorite", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("UsersWhoBookmarkedIt")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("FavSeries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3480,15 +4812,15 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSerieRating", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.UserSerieRating", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Domain.Serie", "Serie")
+                    b.HasOne("movielandia_.net_api.Models.Serie", "Serie")
                         .WithMany("UsersWhoRatedIt")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Domain.User", "User")
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("RatingsInSerie")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3499,7 +4831,7 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Actor", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Actor", b =>
                 {
                     b.Navigation("DownvoteActorReviews");
 
@@ -3516,14 +4848,14 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoRatedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ActorReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ActorReview", b =>
                 {
                     b.Navigation("Downvotes");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Crew", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Crew", b =>
                 {
                     b.Navigation("DownvoteCrewReviews");
 
@@ -3540,14 +4872,14 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoRatedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.CrewReview", b =>
                 {
                     b.Navigation("Downvotes");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Episode", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Episode", b =>
                 {
                     b.Navigation("DownvoteEpisodeReviews");
 
@@ -3560,21 +4892,21 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoRatedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.EpisodeReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.EpisodeReview", b =>
                 {
                     b.Navigation("Downvotes");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumCategory", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumCategory", b =>
                 {
                     b.Navigation("Moderators");
 
                     b.Navigation("Topics");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumPost", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumPost", b =>
                 {
                     b.Navigation("Attachments");
 
@@ -3582,15 +4914,12 @@ namespace movielandia_.net_api.Migrations
 
                     b.Navigation("History");
 
-                    b.Navigation("LastPostCategory")
-                        .IsRequired();
-
                     b.Navigation("Replies");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumReply", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumReply", b =>
                 {
                     b.Navigation("Downvotes");
 
@@ -3599,7 +4928,7 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumTopic", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.ForumTopic", b =>
                 {
                     b.Navigation("Downvotes");
 
@@ -3612,7 +4941,7 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("Watchers");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Genre", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Genre", b =>
                 {
                     b.Navigation("Movies");
 
@@ -3621,14 +4950,29 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoBookmarkedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Inbox", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Inbox", b =>
                 {
                     b.Navigation("Messages");
 
                     b.Navigation("Participants");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Movie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.List", b =>
+                {
+                    b.Navigation("Actors");
+
+                    b.Navigation("Crew");
+
+                    b.Navigation("Episodes");
+
+                    b.Navigation("Movies");
+
+                    b.Navigation("Seasons");
+
+                    b.Navigation("Series");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Movie", b =>
                 {
                     b.Navigation("Cast");
 
@@ -3647,14 +4991,19 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoRatedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.MovieReview", b =>
                 {
                     b.Navigation("Downvotes");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Season", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Notification", b =>
+                {
+                    b.Navigation("NotificationUsers");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.Season", b =>
                 {
                     b.Navigation("DownvoteSeasonReviews");
 
@@ -3669,14 +5018,14 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoRatedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SeasonReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SeasonReview", b =>
                 {
                     b.Navigation("Downvotes");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.Serie", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.Serie", b =>
                 {
                     b.Navigation("Cast");
 
@@ -3697,19 +5046,34 @@ namespace movielandia_.net_api.Migrations
                     b.Navigation("UsersWhoRatedIt");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieReview", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.SerieReview", b =>
                 {
                     b.Navigation("Downvotes");
 
                     b.Navigation("Upvotes");
                 });
 
-            modelBuilder.Entity("movielandia_.net_api.Models.Domain.User", b =>
+            modelBuilder.Entity("movielandia_.net_api.Models.User", b =>
                 {
+                    b.Navigation("Accounts");
+
+                    b.Navigation("Activities");
+
                     b.Navigation("ActorReviews");
 
-                    b.Navigation("Avatar")
-                        .IsRequired();
+                    b.Navigation("Avatar");
+
+                    b.Navigation("Badges");
+
+                    b.Navigation("BlockedByUsers");
+
+                    b.Navigation("BlockedUsers");
+
+                    b.Navigation("Contacts");
+
+                    b.Navigation("ContentChangeLogs");
+
+                    b.Navigation("ContentHistories");
 
                     b.Navigation("CrewReviews");
 
@@ -3729,7 +5093,35 @@ namespace movielandia_.net_api.Migrations
 
                     b.Navigation("FavSeries");
 
+                    b.Navigation("FavTopics");
+
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
+
+                    b.Navigation("ForumStats");
+
+                    b.Navigation("Inboxes");
+
+                    b.Navigation("Lists");
+
+                    b.Navigation("ModeratedCategories");
+
                     b.Navigation("MovieReviews");
+
+                    b.Navigation("MutedByModerators");
+
+                    b.Navigation("MutedUsers");
+
+                    b.Navigation("NotificationSettings");
+
+                    b.Navigation("Notifications");
+
+                    b.Navigation("Posts");
+
+                    b.Navigation("PostsAnswered");
+
+                    b.Navigation("PostsDeleted");
 
                     b.Navigation("RatingsInActor");
 
@@ -3743,9 +5135,28 @@ namespace movielandia_.net_api.Migrations
 
                     b.Navigation("RatingsInSerie");
 
+                    b.Navigation("Replies");
+
+                    b.Navigation("ReportsModerated");
+
+                    b.Navigation("ReportsReceived");
+
+                    b.Navigation("ReportsSubmitted");
+
                     b.Navigation("SeasonReviews");
 
                     b.Navigation("SerieReviews");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Topics");
+
+                    b.Navigation("WatchedTopics");
+                });
+
+            modelBuilder.Entity("movielandia_.net_api.Models.UserRank", b =>
+                {
+                    b.Navigation("UserBadges");
                 });
 #pragma warning restore 612, 618
         }

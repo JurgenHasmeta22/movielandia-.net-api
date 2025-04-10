@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using movielandia_.net_api.Models.Domain;
+using movielandia_.net_api.Models;
 
 namespace movielandia_.net_api.DTOs
 {
