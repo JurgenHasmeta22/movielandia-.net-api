@@ -939,52 +939,60 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Configure ForumPost relationships
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.AnsweredBy)
                 .WithMany(u => u.PostsAnswered)
                 .HasForeignKey(fp => fp.AnsweredById)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.DeletedBy)
                 .WithMany(u => u.PostsDeleted)
                 .HasForeignKey(fp => fp.DeletedById)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.User)
                 .WithMany(u => u.Posts)
                 .HasForeignKey(fp => fp.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.Topic)
                 .WithMany(t => t.Posts)
                 .HasForeignKey(fp => fp.TopicId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.LastPostCategory)
                 .WithMany()
                 .HasForeignKey("ForumCategoryId")
                 .IsRequired(false);
 
             // Configure UserReport relationships
-            modelBuilder.Entity<UserReport>()
+            modelBuilder
+                .Entity<UserReport>()
                 .HasOne(ur => ur.Reporter)
                 .WithMany(u => u.ReportsSubmitted)
                 .HasForeignKey(ur => ur.ReporterId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<UserReport>()
+            modelBuilder
+                .Entity<UserReport>()
                 .HasOne(ur => ur.ReportedUser)
                 .WithMany(u => u.ReportsReceived)
                 .HasForeignKey(ur => ur.ReportedUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<UserReport>()
+            modelBuilder
+                .Entity<UserReport>()
                 .HasOne(ur => ur.Moderator)
                 .WithMany(u => u.ReportsModerated)
                 .HasForeignKey(ur => ur.ModeratorId)
@@ -992,112 +1000,132 @@ namespace movielandia_.net_api.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
             // Configure ForumPostHistory relationships
-            modelBuilder.Entity<ForumPostHistory>()
+            modelBuilder
+                .Entity<ForumPostHistory>()
                 .HasOne(fph => fph.EditedBy)
                 .WithMany()
                 .HasForeignKey(fph => fph.EditedById)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumPostHistory>()
+            modelBuilder
+                .Entity<ForumPostHistory>()
                 .HasOne(fph => fph.Post)
                 .WithMany(fp => fp.History)
                 .HasForeignKey(fph => fph.PostId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Configure ForumReplyHistory relationships
-            modelBuilder.Entity<ForumReplyHistory>()
+            modelBuilder
+                .Entity<ForumReplyHistory>()
                 .HasOne(frh => frh.EditedBy)
                 .WithMany()
                 .HasForeignKey(frh => frh.EditedById)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumReplyHistory>()
+            modelBuilder
+                .Entity<ForumReplyHistory>()
                 .HasOne(frh => frh.Reply)
                 .WithMany(fr => fr.History)
                 .HasForeignKey(frh => frh.ReplyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Configure Forum voting relationships
-            modelBuilder.Entity<UpvoteForumPost>()
+            modelBuilder
+                .Entity<UpvoteForumPost>()
                 .HasOne(ufp => ufp.User)
                 .WithMany()
                 .HasForeignKey(ufp => ufp.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<DownvoteForumPost>()
+            modelBuilder
+                .Entity<DownvoteForumPost>()
                 .HasOne(dfp => dfp.User)
                 .WithMany()
                 .HasForeignKey(dfp => dfp.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<UpvoteForumReply>()
+            modelBuilder
+                .Entity<UpvoteForumReply>()
                 .HasOne(ufr => ufr.User)
                 .WithMany()
                 .HasForeignKey(ufr => ufr.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<DownvoteForumReply>()
+            modelBuilder
+                .Entity<DownvoteForumReply>()
                 .HasOne(dfr => dfr.User)
                 .WithMany()
                 .HasForeignKey(dfr => dfr.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<UpvoteForumTopic>()
+            modelBuilder
+                .Entity<UpvoteForumTopic>()
                 .HasOne(uft => uft.User)
                 .WithMany()
                 .HasForeignKey(uft => uft.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<DownvoteForumTopic>()
+            modelBuilder
+                .Entity<DownvoteForumTopic>()
                 .HasOne(dft => dft.User)
                 .WithMany()
                 .HasForeignKey(dft => dft.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             // Configure main forum entity relationships
-            modelBuilder.Entity<ForumReply>()
+            modelBuilder
+                .Entity<ForumReply>()
                 .HasOne(fr => fr.User)
                 .WithMany(u => u.Replies)
                 .HasForeignKey(fr => fr.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumReply>()
+            modelBuilder
+                .Entity<ForumReply>()
                 .HasOne(fr => fr.Post)
                 .WithMany(fp => fp.Replies)
                 .HasForeignKey(fr => fr.PostId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ForumTopic>()
+            modelBuilder
+                .Entity<ForumTopic>()
                 .HasOne(ft => ft.User)
                 .WithMany(u => u.Topics)
                 .HasForeignKey(ft => ft.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumTopic>()
+            modelBuilder
+                .Entity<ForumTopic>()
                 .HasOne(ft => ft.ClosedBy)
                 .WithMany()
                 .HasForeignKey(ft => ft.ClosedById)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.User)
                 .WithMany(u => u.Posts)
                 .HasForeignKey(fp => fp.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.AnsweredBy)
                 .WithMany(u => u.PostsAnswered)
                 .HasForeignKey(fp => fp.AnsweredById)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ForumPost>()
+            modelBuilder
+                .Entity<ForumPost>()
                 .HasOne(fp => fp.DeletedBy)
                 .WithMany(u => u.PostsDeleted)
                 .HasForeignKey(fp => fp.DeletedById)
                 .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
+
+            // Apply configurations from Seeds folder
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
     }
 }

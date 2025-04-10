@@ -110,21 +110,21 @@ namespace movielandia_.net_api.Models
             FavEpisodes = new HashSet<UserEpisodeFavorite>();
             FavActors = new HashSet<UserActorFavorite>();
             FavCrew = new HashSet<UserCrewFavorite>();
-            
+
             RatingsInMovie = new HashSet<UserMovieRating>();
             RatingsInSerie = new HashSet<UserSerieRating>();
             RatingsInSeason = new HashSet<UserSeasonRating>();
             RatingsInEpisode = new HashSet<UserEpisodeRating>();
             RatingsInActor = new HashSet<UserActorRating>();
             RatingsInCrew = new HashSet<UserCrewRating>();
-            
+
             MovieReviews = new HashSet<MovieReview>();
             SerieReviews = new HashSet<SerieReview>();
             SeasonReviews = new HashSet<SeasonReview>();
             EpisodeReviews = new HashSet<EpisodeReview>();
             ActorReviews = new HashSet<ActorReview>();
             CrewReviews = new HashSet<CrewReview>();
-            
+
             Topics = new HashSet<ForumTopic>();
             Posts = new HashSet<ForumPost>();
             PostsAnswered = new HashSet<ForumPost>();
@@ -133,11 +133,11 @@ namespace movielandia_.net_api.Models
             FavTopics = new HashSet<UserForumTopicFavorite>();
             WatchedTopics = new HashSet<UserForumTopicWatch>();
             ModeratedCategories = new HashSet<UserForumModerator>();
-            
+
             Lists = new HashSet<List>();
             ContentHistories = new HashSet<ContentHistory>();
             ContentChangeLogs = new HashSet<ContentChangeLog>();
-            
+
             Followers = new HashSet<UserFollow>();
             Following = new HashSet<UserFollow>();
             BlockedUsers = new HashSet<UserBlock>();
@@ -146,13 +146,13 @@ namespace movielandia_.net_api.Models
             MutedByModerators = new HashSet<UserMute>();
             Contacts = new HashSet<UserContact>();
             Activities = new HashSet<UserActivity>();
-            
+
             Notifications = new HashSet<NotificationUser>();
             Inboxes = new HashSet<UserInbox>();
-            
+
             Accounts = new HashSet<Account>();
             Sessions = new HashSet<Session>();
-            
+
             ReportsSubmitted = new HashSet<UserReport>();
             ReportsReceived = new HashSet<UserReport>();
             ReportsModerated = new HashSet<UserReport>();
