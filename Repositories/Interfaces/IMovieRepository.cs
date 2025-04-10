@@ -27,11 +27,9 @@ namespace movielandia_.net_api.Repositories.Interfaces
             MovieFilterDTO filter
         );
 
-        // Check if movie is bookmarked and reviewed by user
         Task<bool> IsMovieBookmarkedByUserAsync(int movieId, int userId);
         Task<bool> IsMovieReviewedByUserAsync(int movieId, int userId);
 
-        // Calculate ratings
         Task<(float AverageRating, int TotalReviews)> CalculateMovieRatingAsync(int movieId);
         Task<Dictionary<int, (float AverageRating, int TotalReviews)>> GetMovieRatingsAsync(
             IEnumerable<int> movieIds

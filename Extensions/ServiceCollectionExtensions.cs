@@ -1,10 +1,10 @@
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using movielandia_.net_api.Infrastructures.Implementations;
 using movielandia_.net_api.Infrastructures.Interfaces;
+using movielandia_.net_api.Mappings;
 using movielandia_.net_api.Repositories.Implementations;
 using movielandia_.net_api.Repositories.Interfaces;
-using movielandia_.net_api.Mappings;
-using System.Reflection;
 
 namespace movielandia_.net_api.Extensions
 {

@@ -67,7 +67,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors");
+                    b.ToTable("Actor", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.ActorReview", b =>
@@ -108,7 +108,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ActorReviews");
+                    b.ToTable("ActorReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Attachment", b =>
@@ -179,7 +179,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Avatars");
+                    b.ToTable("Avatar", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.CastMovie", b =>
@@ -202,7 +202,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("CastMovies");
+                    b.ToTable("CastMovie", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.CastSerie", b =>
@@ -225,7 +225,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("SerieId");
 
-                    b.ToTable("CastSeries");
+                    b.ToTable("CastSerie", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Crew", b =>
@@ -262,7 +262,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Crews");
+                    b.ToTable("Crew", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewMovie", b =>
@@ -285,7 +285,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("CrewMovies");
+                    b.ToTable("CrewMovie", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewReview", b =>
@@ -326,7 +326,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CrewReviews");
+                    b.ToTable("CrewReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.CrewSerie", b =>
@@ -349,7 +349,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("SerieId");
 
-                    b.ToTable("CrewSeries");
+                    b.ToTable("CrewSerie", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteActorReview", b =>
@@ -377,7 +377,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DownvoteActorReviews");
+                    b.ToTable("DownvoteActorReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteCrewReview", b =>
@@ -433,7 +433,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DownvoteEpisodeReviews");
+                    b.ToTable("DownvoteEpisodeReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteForumPost", b =>
@@ -545,7 +545,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DownvoteMovieReviews");
+                    b.ToTable("DownvoteMovieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteSeasonReview", b =>
@@ -573,7 +573,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DownvoteSeasonReviews");
+                    b.ToTable("DownvoteSeasonReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.DownvoteSerieReview", b =>
@@ -601,7 +601,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DownvoteSerieReviews");
+                    b.ToTable("DownvoteSerieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Episode", b =>
@@ -648,7 +648,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("SeasonId");
 
-                    b.ToTable("Episodes");
+                    b.ToTable("Episode", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.EpisodeReview", b =>
@@ -689,7 +689,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EpisodeReviews");
+                    b.ToTable("EpisodeReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.ForumCategory", b =>
@@ -1065,7 +1065,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genre", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Inbox", b =>
@@ -1171,7 +1171,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movie", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieGenre", b =>
@@ -1194,7 +1194,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("MovieGenres");
+                    b.ToTable("MovieGenre", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.MovieReview", b =>
@@ -1235,7 +1235,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("MovieReviews");
+                    b.ToTable("MovieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Season", b =>
@@ -1279,7 +1279,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("SerieId");
 
-                    b.ToTable("Seasons");
+                    b.ToTable("Season", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.SeasonReview", b =>
@@ -1320,7 +1320,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SeasonReviews");
+                    b.ToTable("SeasonReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.Serie", b =>
@@ -1359,7 +1359,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Series");
+                    b.ToTable("Serie", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieGenre", b =>
@@ -1382,7 +1382,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("SerieId");
 
-                    b.ToTable("SerieGenres");
+                    b.ToTable("SerieGenre", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.SerieReview", b =>
@@ -1423,7 +1423,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SerieReviews");
+                    b.ToTable("SerieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteActorReview", b =>
@@ -1451,7 +1451,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UpvoteActorReviews");
+                    b.ToTable("UpvoteActorReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteCrewReview", b =>
@@ -1507,7 +1507,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UpvoteEpisodeReviews");
+                    b.ToTable("UpvoteEpisodeReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteForumPost", b =>
@@ -1619,7 +1619,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UpvoteMovieReviews");
+                    b.ToTable("UpvoteMovieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteSeasonReview", b =>
@@ -1647,7 +1647,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UpvoteSeasonReviews");
+                    b.ToTable("UpvoteSeasonReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UpvoteSerieReview", b =>
@@ -1675,7 +1675,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UpvoteSerieReviews");
+                    b.ToTable("UpvoteSerieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.User", b =>
@@ -1739,7 +1739,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserActorFavorite", b =>
@@ -1762,7 +1762,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserActorFavorites");
+                    b.ToTable("UserActorFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserActorRating", b =>
@@ -1788,7 +1788,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserActorRatings");
+                    b.ToTable("UserActorRating", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserCrewFavorite", b =>
@@ -1811,7 +1811,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserCrewFavorites");
+                    b.ToTable("UserCrewFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserCrewRating", b =>
@@ -1837,7 +1837,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserCrewRatings");
+                    b.ToTable("UserCrewRating", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserEpisodeFavorite", b =>
@@ -1870,7 +1870,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("UserEpisodeFavorites");
+                    b.ToTable("UserEpisodeFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserEpisodeRating", b =>
@@ -1906,7 +1906,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("UserEpisodeRatings");
+                    b.ToTable("UserEpisodeRating", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserForumModerator", b =>
@@ -2019,7 +2019,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserGenreFavorites");
+                    b.ToTable("UserGenreFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserInbox", b =>
@@ -2071,7 +2071,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("UserId", "MovieId")
                         .IsUnique();
 
-                    b.ToTable("UserMovieFavorites");
+                    b.ToTable("UserMovieFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserMovieRating", b =>
@@ -2097,7 +2097,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserMovieRatings");
+                    b.ToTable("UserMovieRating", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSeasonFavorite", b =>
@@ -2120,7 +2120,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSeasonFavorites");
+                    b.ToTable("UserSeasonFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSeasonRating", b =>
@@ -2146,7 +2146,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSeasonRatings");
+                    b.ToTable("UserSeasonRating", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSerieFavorite", b =>
@@ -2170,7 +2170,7 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("UserId", "SerieId")
                         .IsUnique();
 
-                    b.ToTable("UserSerieFavorites");
+                    b.ToTable("UserSerieFavorite", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Domain.UserSerieRating", b =>
@@ -2196,7 +2196,7 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSerieRatings");
+                    b.ToTable("UserSerieRating", (string)null);
                 });
 
             modelBuilder.Entity("ForumTagForumTopic", b =>

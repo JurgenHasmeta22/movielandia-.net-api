@@ -8,53 +8,99 @@ namespace movielandia_.net_api.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Avatar> Avatars { get; set; }
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Serie> Series { get; set; }
-        public DbSet<Season> Seasons { get; set; }
-        public DbSet<Episode> Episodes { get; set; }
-        public DbSet<Actor> Actors { get; set; }
-        public DbSet<Crew> Crews { get; set; }
-        public DbSet<Genre> Genres { get; set; }
-        public DbSet<MovieGenre> MovieGenres { get; set; }
-        public DbSet<SerieGenre> SerieGenres { get; set; }
-        public DbSet<CastMovie> CastMovies { get; set; }
-        public DbSet<CastSerie> CastSeries { get; set; }
-        public DbSet<CrewMovie> CrewMovies { get; set; }
-        public DbSet<CrewSerie> CrewSeries { get; set; }
-        public DbSet<MovieReview> MovieReviews { get; set; }
-        public DbSet<SerieReview> SerieReviews { get; set; }
-        public DbSet<SeasonReview> SeasonReviews { get; set; }
-        public DbSet<EpisodeReview> EpisodeReviews { get; set; }
-        public DbSet<ActorReview> ActorReviews { get; set; }
-        public DbSet<CrewReview> CrewReviews { get; set; }
-        public DbSet<UserMovieFavorite> UserMovieFavorites { get; set; }
-        public DbSet<UserSerieFavorite> UserSerieFavorites { get; set; }
-        public DbSet<UserSeasonFavorite> UserSeasonFavorites { get; set; }
-        public DbSet<UserEpisodeFavorite> UserEpisodeFavorites { get; set; }
-        public DbSet<UserActorFavorite> UserActorFavorites { get; set; }
-        public DbSet<UserCrewFavorite> UserCrewFavorites { get; set; }
-        public DbSet<UserGenreFavorite> UserGenreFavorites { get; set; }
-        public DbSet<UserMovieRating> UserMovieRatings { get; set; }
-        public DbSet<UserSerieRating> UserSerieRatings { get; set; }
-        public DbSet<UserSeasonRating> UserSeasonRatings { get; set; }
-        public DbSet<UserEpisodeRating> UserEpisodeRatings { get; set; }
-        public DbSet<UserActorRating> UserActorRatings { get; set; }
-        public DbSet<UserCrewRating> UserCrewRatings { get; set; }
-        public DbSet<UpvoteMovieReview> UpvoteMovieReviews { get; set; }
-        public DbSet<DownvoteMovieReview> DownvoteMovieReviews { get; set; }
-        public DbSet<UpvoteSerieReview> UpvoteSerieReviews { get; set; }
-        public DbSet<DownvoteSerieReview> DownvoteSerieReviews { get; set; }
-        public DbSet<UpvoteSeasonReview> UpvoteSeasonReviews { get; set; }
-        public DbSet<DownvoteSeasonReview> DownvoteSeasonReviews { get; set; }
-        public DbSet<UpvoteEpisodeReview> UpvoteEpisodeReviews { get; set; }
-        public DbSet<DownvoteEpisodeReview> DownvoteEpisodeReviews { get; set; }
-        public DbSet<UpvoteActorReview> UpvoteActorReviews { get; set; }
-        public DbSet<DownvoteActorReview> DownvoteActorReviews { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Avatar> Avatar { get; set; }
+        public DbSet<Movie> Movie { get; set; }
+        public DbSet<Serie> Serie { get; set; }
+        public DbSet<Season> Season { get; set; }
+        public DbSet<Episode> Episode { get; set; }
+        public DbSet<Actor> Actor { get; set; }
+        public DbSet<Crew> Crew { get; set; }
+        public DbSet<Genre> Genre { get; set; }
+        public DbSet<MovieGenre> MovieGenre { get; set; }
+        public DbSet<SerieGenre> SerieGenre { get; set; }
+        public DbSet<CastMovie> CastMovie { get; set; }
+        public DbSet<CastSerie> CastSerie { get; set; }
+        public DbSet<CrewMovie> CrewMovie { get; set; }
+        public DbSet<CrewSerie> CrewSerie { get; set; }
+        public DbSet<MovieReview> MovieReview { get; set; }
+        public DbSet<SerieReview> SerieReview { get; set; }
+        public DbSet<SeasonReview> SeasonReview { get; set; }
+        public DbSet<EpisodeReview> EpisodeReview { get; set; }
+        public DbSet<ActorReview> ActorReview { get; set; }
+        public DbSet<CrewReview> CrewReview { get; set; }
+        public DbSet<UserMovieFavorite> UserMovieFavorite { get; set; }
+        public DbSet<UserSerieFavorite> UserSerieFavorite { get; set; }
+        public DbSet<UserSeasonFavorite> UserSeasonFavorite { get; set; }
+        public DbSet<UserEpisodeFavorite> UserEpisodeFavorite { get; set; }
+        public DbSet<UserActorFavorite> UserActorFavorite { get; set; }
+        public DbSet<UserCrewFavorite> UserCrewFavorite { get; set; }
+        public DbSet<UserGenreFavorite> UserGenreFavorite { get; set; }
+        public DbSet<UserMovieRating> UserMovieRating { get; set; }
+        public DbSet<UserSerieRating> UserSerieRating { get; set; }
+        public DbSet<UserSeasonRating> UserSeasonRating { get; set; }
+        public DbSet<UserEpisodeRating> UserEpisodeRating { get; set; }
+        public DbSet<UserActorRating> UserActorRating { get; set; }
+        public DbSet<UserCrewRating> UserCrewRating { get; set; }
+        public DbSet<UpvoteMovieReview> UpvoteMovieReview { get; set; }
+        public DbSet<DownvoteMovieReview> DownvoteMovieReview { get; set; }
+        public DbSet<UpvoteSerieReview> UpvoteSerieReview { get; set; }
+        public DbSet<DownvoteSerieReview> DownvoteSerieReview { get; set; }
+        public DbSet<UpvoteSeasonReview> UpvoteSeasonReview { get; set; }
+        public DbSet<DownvoteSeasonReview> DownvoteSeasonReview { get; set; }
+        public DbSet<UpvoteEpisodeReview> UpvoteEpisodeReview { get; set; }
+        public DbSet<DownvoteEpisodeReview> DownvoteEpisodeReview { get; set; }
+        public DbSet<UpvoteActorReview> UpvoteActorReview { get; set; }
+        public DbSet<DownvoteActorReview> DownvoteActorReview { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure singular table names
+            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Avatar>().ToTable("Avatar");
+            modelBuilder.Entity<Movie>().ToTable("Movie");
+            modelBuilder.Entity<Serie>().ToTable("Serie");
+            modelBuilder.Entity<Season>().ToTable("Season");
+            modelBuilder.Entity<Episode>().ToTable("Episode");
+            modelBuilder.Entity<Actor>().ToTable("Actor");
+            modelBuilder.Entity<Crew>().ToTable("Crew");
+            modelBuilder.Entity<Genre>().ToTable("Genre");
+            modelBuilder.Entity<MovieGenre>().ToTable("MovieGenre");
+            modelBuilder.Entity<SerieGenre>().ToTable("SerieGenre");
+            modelBuilder.Entity<CastMovie>().ToTable("CastMovie");
+            modelBuilder.Entity<CastSerie>().ToTable("CastSerie");
+            modelBuilder.Entity<CrewMovie>().ToTable("CrewMovie");
+            modelBuilder.Entity<CrewSerie>().ToTable("CrewSerie");
+            modelBuilder.Entity<MovieReview>().ToTable("MovieReview");
+            modelBuilder.Entity<SerieReview>().ToTable("SerieReview");
+            modelBuilder.Entity<SeasonReview>().ToTable("SeasonReview");
+            modelBuilder.Entity<EpisodeReview>().ToTable("EpisodeReview");
+            modelBuilder.Entity<ActorReview>().ToTable("ActorReview");
+            modelBuilder.Entity<CrewReview>().ToTable("CrewReview");
+            modelBuilder.Entity<UserMovieFavorite>().ToTable("UserMovieFavorite");
+            modelBuilder.Entity<UserSerieFavorite>().ToTable("UserSerieFavorite");
+            modelBuilder.Entity<UserSeasonFavorite>().ToTable("UserSeasonFavorite");
+            modelBuilder.Entity<UserEpisodeFavorite>().ToTable("UserEpisodeFavorite");
+            modelBuilder.Entity<UserActorFavorite>().ToTable("UserActorFavorite");
+            modelBuilder.Entity<UserCrewFavorite>().ToTable("UserCrewFavorite");
+            modelBuilder.Entity<UserGenreFavorite>().ToTable("UserGenreFavorite");
+            modelBuilder.Entity<UserMovieRating>().ToTable("UserMovieRating");
+            modelBuilder.Entity<UserSerieRating>().ToTable("UserSerieRating");
+            modelBuilder.Entity<UserSeasonRating>().ToTable("UserSeasonRating");
+            modelBuilder.Entity<UserEpisodeRating>().ToTable("UserEpisodeRating");
+            modelBuilder.Entity<UserActorRating>().ToTable("UserActorRating");
+            modelBuilder.Entity<UserCrewRating>().ToTable("UserCrewRating");
+            modelBuilder.Entity<UpvoteMovieReview>().ToTable("UpvoteMovieReview");
+            modelBuilder.Entity<DownvoteMovieReview>().ToTable("DownvoteMovieReview");
+            modelBuilder.Entity<UpvoteSerieReview>().ToTable("UpvoteSerieReview");
+            modelBuilder.Entity<DownvoteSerieReview>().ToTable("DownvoteSerieReview");
+            modelBuilder.Entity<UpvoteSeasonReview>().ToTable("UpvoteSeasonReview");
+            modelBuilder.Entity<DownvoteSeasonReview>().ToTable("DownvoteSeasonReview");
+            modelBuilder.Entity<UpvoteEpisodeReview>().ToTable("UpvoteEpisodeReview");
+            modelBuilder.Entity<DownvoteEpisodeReview>().ToTable("DownvoteEpisodeReview");
+            modelBuilder.Entity<UpvoteActorReview>().ToTable("UpvoteActorReview");
+            modelBuilder.Entity<DownvoteActorReview>().ToTable("DownvoteActorReview");
+
             modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
 
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();

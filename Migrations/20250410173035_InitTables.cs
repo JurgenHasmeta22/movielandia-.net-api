@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace movielandia_.net_api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialStuff : Migration
+    public partial class InitTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actors",
+                name: "Actor",
                 columns: table => new
                 {
                     Id = table
@@ -26,12 +26,12 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actors", x => x.Id);
+                    table.PrimaryKey("PK_Actor", x => x.Id);
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "Crews",
+                name: "Crew",
                 columns: table => new
                 {
                     Id = table
@@ -46,7 +46,7 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Crews", x => x.Id);
+                    table.PrimaryKey("PK_Crew", x => x.Id);
                 }
             );
 
@@ -68,7 +68,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "Genres",
+                name: "Genre",
                 columns: table => new
                 {
                     Id = table
@@ -78,7 +78,7 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genres", x => x.Id);
+                    table.PrimaryKey("PK_Genre", x => x.Id);
                 }
             );
 
@@ -97,7 +97,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "Movies",
+                name: "Movie",
                 columns: table => new
                 {
                     Id = table
@@ -114,12 +114,12 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.PrimaryKey("PK_Movie", x => x.Id);
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "Series",
+                name: "Serie",
                 columns: table => new
                 {
                     Id = table
@@ -135,12 +135,12 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Series", x => x.Id);
+                    table.PrimaryKey("PK_Serie", x => x.Id);
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     Id = table
@@ -162,12 +162,12 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "CastMovies",
+                name: "CastMovie",
                 columns: table => new
                 {
                     Id = table
@@ -178,18 +178,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CastMovies", x => x.Id);
+                    table.PrimaryKey("PK_CastMovie", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CastMovies_Actors_ActorId",
+                        name: "FK_CastMovie_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_CastMovies_Movies_MovieId",
+                        name: "FK_CastMovie_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -197,7 +197,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "CrewMovies",
+                name: "CrewMovie",
                 columns: table => new
                 {
                     Id = table
@@ -208,18 +208,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CrewMovies", x => x.Id);
+                    table.PrimaryKey("PK_CrewMovie", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CrewMovies_Crews_CrewId",
+                        name: "FK_CrewMovie_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_CrewMovies_Movies_MovieId",
+                        name: "FK_CrewMovie_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -227,7 +227,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "MovieGenres",
+                name: "MovieGenre",
                 columns: table => new
                 {
                     Id = table
@@ -238,18 +238,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieGenres", x => x.Id);
+                    table.PrimaryKey("PK_MovieGenre", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MovieGenres_Genres_GenreId",
+                        name: "FK_MovieGenre_Genre_GenreId",
                         column: x => x.GenreId,
-                        principalTable: "Genres",
+                        principalTable: "Genre",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_MovieGenres_Movies_MovieId",
+                        name: "FK_MovieGenre_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -257,7 +257,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "CastSeries",
+                name: "CastSerie",
                 columns: table => new
                 {
                     Id = table
@@ -268,18 +268,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CastSeries", x => x.Id);
+                    table.PrimaryKey("PK_CastSerie", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CastSeries_Actors_ActorId",
+                        name: "FK_CastSerie_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_CastSeries_Series_SerieId",
+                        name: "FK_CastSerie_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -287,7 +287,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "CrewSeries",
+                name: "CrewSerie",
                 columns: table => new
                 {
                     Id = table
@@ -298,18 +298,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CrewSeries", x => x.Id);
+                    table.PrimaryKey("PK_CrewSerie", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CrewSeries_Crews_CrewId",
+                        name: "FK_CrewSerie_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_CrewSeries_Series_SerieId",
+                        name: "FK_CrewSerie_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -317,7 +317,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "Seasons",
+                name: "Season",
                 columns: table => new
                 {
                     Id = table
@@ -334,11 +334,11 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seasons", x => x.Id);
+                    table.PrimaryKey("PK_Season", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Seasons_Series_SerieId",
+                        name: "FK_Season_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -346,7 +346,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "SerieGenres",
+                name: "SerieGenre",
                 columns: table => new
                 {
                     Id = table
@@ -357,18 +357,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SerieGenres", x => x.Id);
+                    table.PrimaryKey("PK_SerieGenre", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SerieGenres_Genres_GenreId",
+                        name: "FK_SerieGenre_Genre_GenreId",
                         column: x => x.GenreId,
-                        principalTable: "Genres",
+                        principalTable: "Genre",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_SerieGenres_Series_SerieId",
+                        name: "FK_SerieGenre_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -376,7 +376,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "ActorReviews",
+                name: "ActorReview",
                 columns: table => new
                 {
                     Id = table
@@ -392,31 +392,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActorReviews", x => x.Id);
+                    table.PrimaryKey("PK_ActorReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActorReviews_Actors_ActorId",
+                        name: "FK_ActorReview_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_ActorReviews_Actors_ActorId1",
+                        name: "FK_ActorReview_Actor_ActorId1",
                         column: x => x.ActorId1,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_ActorReviews_Users_UserId",
+                        name: "FK_ActorReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "Avatars",
+                name: "Avatar",
                 columns: table => new
                 {
                     Id = table
@@ -427,11 +427,11 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Avatars", x => x.Id);
+                    table.PrimaryKey("PK_Avatar", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Avatars_Users_UserId",
+                        name: "FK_Avatar_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -439,7 +439,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "CrewReviews",
+                name: "CrewReview",
                 columns: table => new
                 {
                     Id = table
@@ -455,24 +455,24 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CrewReviews", x => x.Id);
+                    table.PrimaryKey("PK_CrewReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CrewReviews_Crews_CrewId",
+                        name: "FK_CrewReview_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_CrewReviews_Crews_CrewId1",
+                        name: "FK_CrewReview_Crew_CrewId1",
                         column: x => x.CrewId1,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_CrewReviews_Users_UserId",
+                        name: "FK_CrewReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -512,21 +512,21 @@ namespace movielandia_.net_api.Migrations
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_Message_Users_ReceiverId",
+                        name: "FK_Message_User_ReceiverId",
                         column: x => x.ReceiverId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_Message_Users_SenderId",
+                        name: "FK_Message_User_SenderId",
                         column: x => x.SenderId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_Message_Users_UserId",
+                        name: "FK_Message_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -534,7 +534,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "MovieReviews",
+                name: "MovieReview",
                 columns: table => new
                 {
                     Id = table
@@ -550,31 +550,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieReviews", x => x.Id);
+                    table.PrimaryKey("PK_MovieReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MovieReviews_Movies_MovieId",
+                        name: "FK_MovieReview_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_MovieReviews_Movies_MovieId1",
+                        name: "FK_MovieReview_Movie_MovieId1",
                         column: x => x.MovieId1,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_MovieReviews_Users_UserId",
+                        name: "FK_MovieReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "SerieReviews",
+                name: "SerieReview",
                 columns: table => new
                 {
                     Id = table
@@ -590,31 +590,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SerieReviews", x => x.Id);
+                    table.PrimaryKey("PK_SerieReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SerieReviews_Series_SerieId",
+                        name: "FK_SerieReview_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_SerieReviews_Series_SerieId1",
+                        name: "FK_SerieReview_Serie_SerieId1",
                         column: x => x.SerieId1,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_SerieReviews_Users_UserId",
+                        name: "FK_SerieReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UserActorFavorites",
+                name: "UserActorFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -625,18 +625,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserActorFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserActorFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserActorFavorites_Actors_ActorId",
+                        name: "FK_UserActorFavorite_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserActorFavorites_Users_UserId",
+                        name: "FK_UserActorFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -644,7 +644,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserActorRatings",
+                name: "UserActorRating",
                 columns: table => new
                 {
                     Id = table
@@ -656,18 +656,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserActorRatings", x => x.Id);
+                    table.PrimaryKey("PK_UserActorRating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserActorRatings_Actors_ActorId",
+                        name: "FK_UserActorRating_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserActorRatings_Users_UserId",
+                        name: "FK_UserActorRating_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -675,7 +675,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserCrewFavorites",
+                name: "UserCrewFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -686,18 +686,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCrewFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserCrewFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserCrewFavorites_Crews_CrewId",
+                        name: "FK_UserCrewFavorite_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserCrewFavorites_Users_UserId",
+                        name: "FK_UserCrewFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -705,7 +705,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserCrewRatings",
+                name: "UserCrewRating",
                 columns: table => new
                 {
                     Id = table
@@ -717,18 +717,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCrewRatings", x => x.Id);
+                    table.PrimaryKey("PK_UserCrewRating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserCrewRatings_Crews_CrewId",
+                        name: "FK_UserCrewRating_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserCrewRatings_Users_UserId",
+                        name: "FK_UserCrewRating_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -736,7 +736,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserGenreFavorites",
+                name: "UserGenreFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -747,18 +747,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserGenreFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserGenreFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserGenreFavorites_Genres_GenreId",
+                        name: "FK_UserGenreFavorite_Genre_GenreId",
                         column: x => x.GenreId,
-                        principalTable: "Genres",
+                        principalTable: "Genre",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserGenreFavorites_Users_UserId",
+                        name: "FK_UserGenreFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -793,9 +793,9 @@ namespace movielandia_.net_api.Migrations
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UserInbox_Users_UserId",
+                        name: "FK_UserInbox_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -803,7 +803,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserMovieFavorites",
+                name: "UserMovieFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -814,18 +814,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserMovieFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserMovieFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserMovieFavorites_Movies_MovieId",
+                        name: "FK_UserMovieFavorite_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserMovieFavorites_Users_UserId",
+                        name: "FK_UserMovieFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -833,7 +833,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserMovieRatings",
+                name: "UserMovieRating",
                 columns: table => new
                 {
                     Id = table
@@ -845,18 +845,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserMovieRatings", x => x.Id);
+                    table.PrimaryKey("PK_UserMovieRating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserMovieRatings_Movies_MovieId",
+                        name: "FK_UserMovieRating_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserMovieRatings_Users_UserId",
+                        name: "FK_UserMovieRating_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -864,7 +864,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserSerieFavorites",
+                name: "UserSerieFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -875,18 +875,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSerieFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserSerieFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSerieFavorites_Series_SerieId",
+                        name: "FK_UserSerieFavorite_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserSerieFavorites_Users_UserId",
+                        name: "FK_UserSerieFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -894,7 +894,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserSerieRatings",
+                name: "UserSerieRating",
                 columns: table => new
                 {
                     Id = table
@@ -906,18 +906,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSerieRatings", x => x.Id);
+                    table.PrimaryKey("PK_UserSerieRating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSerieRatings_Series_SerieId",
+                        name: "FK_UserSerieRating_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserSerieRatings_Users_UserId",
+                        name: "FK_UserSerieRating_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -925,7 +925,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "Episodes",
+                name: "Episode",
                 columns: table => new
                 {
                     Id = table
@@ -943,11 +943,11 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Episodes", x => x.Id);
+                    table.PrimaryKey("PK_Episode", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Episodes_Seasons_SeasonId",
+                        name: "FK_Episode_Season_SeasonId",
                         column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -955,7 +955,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "SeasonReviews",
+                name: "SeasonReview",
                 columns: table => new
                 {
                     Id = table
@@ -971,31 +971,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SeasonReviews", x => x.Id);
+                    table.PrimaryKey("PK_SeasonReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SeasonReviews_Seasons_SeasonId",
+                        name: "FK_SeasonReview_Season_SeasonId",
                         column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_SeasonReviews_Seasons_SeasonId1",
+                        name: "FK_SeasonReview_Season_SeasonId1",
                         column: x => x.SeasonId1,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_SeasonReviews_Users_UserId",
+                        name: "FK_SeasonReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UserSeasonFavorites",
+                name: "UserSeasonFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -1006,18 +1006,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSeasonFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserSeasonFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSeasonFavorites_Seasons_SeasonId",
+                        name: "FK_UserSeasonFavorite_Season_SeasonId",
                         column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserSeasonFavorites_Users_UserId",
+                        name: "FK_UserSeasonFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1025,7 +1025,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "UserSeasonRatings",
+                name: "UserSeasonRating",
                 columns: table => new
                 {
                     Id = table
@@ -1037,18 +1037,18 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSeasonRatings", x => x.Id);
+                    table.PrimaryKey("PK_UserSeasonRating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSeasonRatings_Seasons_SeasonId",
+                        name: "FK_UserSeasonRating_Season_SeasonId",
                         column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserSeasonRatings_Users_UserId",
+                        name: "FK_UserSeasonRating_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1056,7 +1056,7 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "DownvoteActorReviews",
+                name: "DownvoteActorReview",
                 columns: table => new
                 {
                     Id = table
@@ -1068,31 +1068,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DownvoteActorReviews", x => x.Id);
+                    table.PrimaryKey("PK_DownvoteActorReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteActorReviews_ActorReviews_ActorReviewId",
+                        name: "FK_DownvoteActorReview_ActorReview_ActorReviewId",
                         column: x => x.ActorReviewId,
-                        principalTable: "ActorReviews",
+                        principalTable: "ActorReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteActorReviews_Actors_ActorId",
+                        name: "FK_DownvoteActorReview_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteActorReviews_Users_UserId",
+                        name: "FK_DownvoteActorReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UpvoteActorReviews",
+                name: "UpvoteActorReview",
                 columns: table => new
                 {
                     Id = table
@@ -1104,24 +1104,24 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpvoteActorReviews", x => x.Id);
+                    table.PrimaryKey("PK_UpvoteActorReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UpvoteActorReviews_ActorReviews_ActorReviewId",
+                        name: "FK_UpvoteActorReview_ActorReview_ActorReviewId",
                         column: x => x.ActorReviewId,
-                        principalTable: "ActorReviews",
+                        principalTable: "ActorReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteActorReviews_Actors_ActorId",
+                        name: "FK_UpvoteActorReview_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actors",
+                        principalTable: "Actor",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteActorReviews_Users_UserId",
+                        name: "FK_UpvoteActorReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -1142,22 +1142,22 @@ namespace movielandia_.net_api.Migrations
                 {
                     table.PrimaryKey("PK_DownvoteCrewReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteCrewReview_CrewReviews_CrewReviewId",
+                        name: "FK_DownvoteCrewReview_CrewReview_CrewReviewId",
                         column: x => x.CrewReviewId,
-                        principalTable: "CrewReviews",
+                        principalTable: "CrewReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteCrewReview_Crews_CrewId",
+                        name: "FK_DownvoteCrewReview_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteCrewReview_Users_UserId",
+                        name: "FK_DownvoteCrewReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -1178,29 +1178,29 @@ namespace movielandia_.net_api.Migrations
                 {
                     table.PrimaryKey("PK_UpvoteCrewReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UpvoteCrewReview_CrewReviews_CrewReviewId",
+                        name: "FK_UpvoteCrewReview_CrewReview_CrewReviewId",
                         column: x => x.CrewReviewId,
-                        principalTable: "CrewReviews",
+                        principalTable: "CrewReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteCrewReview_Crews_CrewId",
+                        name: "FK_UpvoteCrewReview_Crew_CrewId",
                         column: x => x.CrewId,
-                        principalTable: "Crews",
+                        principalTable: "Crew",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteCrewReview_Users_UserId",
+                        name: "FK_UpvoteCrewReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "DownvoteMovieReviews",
+                name: "DownvoteMovieReview",
                 columns: table => new
                 {
                     Id = table
@@ -1212,31 +1212,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DownvoteMovieReviews", x => x.Id);
+                    table.PrimaryKey("PK_DownvoteMovieReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteMovieReviews_MovieReviews_MovieReviewId",
+                        name: "FK_DownvoteMovieReview_MovieReview_MovieReviewId",
                         column: x => x.MovieReviewId,
-                        principalTable: "MovieReviews",
+                        principalTable: "MovieReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteMovieReviews_Movies_MovieId",
+                        name: "FK_DownvoteMovieReview_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteMovieReviews_Users_UserId",
+                        name: "FK_DownvoteMovieReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UpvoteMovieReviews",
+                name: "UpvoteMovieReview",
                 columns: table => new
                 {
                     Id = table
@@ -1248,31 +1248,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpvoteMovieReviews", x => x.Id);
+                    table.PrimaryKey("PK_UpvoteMovieReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UpvoteMovieReviews_MovieReviews_MovieReviewId",
+                        name: "FK_UpvoteMovieReview_MovieReview_MovieReviewId",
                         column: x => x.MovieReviewId,
-                        principalTable: "MovieReviews",
+                        principalTable: "MovieReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteMovieReviews_Movies_MovieId",
+                        name: "FK_UpvoteMovieReview_Movie_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Movie",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteMovieReviews_Users_UserId",
+                        name: "FK_UpvoteMovieReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "DownvoteSerieReviews",
+                name: "DownvoteSerieReview",
                 columns: table => new
                 {
                     Id = table
@@ -1284,31 +1284,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DownvoteSerieReviews", x => x.Id);
+                    table.PrimaryKey("PK_DownvoteSerieReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteSerieReviews_SerieReviews_SerieReviewId",
+                        name: "FK_DownvoteSerieReview_SerieReview_SerieReviewId",
                         column: x => x.SerieReviewId,
-                        principalTable: "SerieReviews",
+                        principalTable: "SerieReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteSerieReviews_Series_SerieId",
+                        name: "FK_DownvoteSerieReview_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteSerieReviews_Users_UserId",
+                        name: "FK_DownvoteSerieReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UpvoteSerieReviews",
+                name: "UpvoteSerieReview",
                 columns: table => new
                 {
                     Id = table
@@ -1320,31 +1320,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpvoteSerieReviews", x => x.Id);
+                    table.PrimaryKey("PK_UpvoteSerieReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UpvoteSerieReviews_SerieReviews_SerieReviewId",
+                        name: "FK_UpvoteSerieReview_SerieReview_SerieReviewId",
                         column: x => x.SerieReviewId,
-                        principalTable: "SerieReviews",
+                        principalTable: "SerieReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteSerieReviews_Series_SerieId",
+                        name: "FK_UpvoteSerieReview_Serie_SerieId",
                         column: x => x.SerieId,
-                        principalTable: "Series",
+                        principalTable: "Serie",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteSerieReviews_Users_UserId",
+                        name: "FK_UpvoteSerieReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "EpisodeReviews",
+                name: "EpisodeReview",
                 columns: table => new
                 {
                     Id = table
@@ -1360,31 +1360,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EpisodeReviews", x => x.Id);
+                    table.PrimaryKey("PK_EpisodeReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EpisodeReviews_Episodes_EpisodeId",
+                        name: "FK_EpisodeReview_Episode_EpisodeId",
                         column: x => x.EpisodeId,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_EpisodeReviews_Episodes_EpisodeId1",
+                        name: "FK_EpisodeReview_Episode_EpisodeId1",
                         column: x => x.EpisodeId1,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_EpisodeReviews_Users_UserId",
+                        name: "FK_EpisodeReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UserEpisodeFavorites",
+                name: "UserEpisodeFavorite",
                 columns: table => new
                 {
                     Id = table
@@ -1397,38 +1397,38 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserEpisodeFavorites", x => x.Id);
+                    table.PrimaryKey("PK_UserEpisodeFavorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserEpisodeFavorites_Episodes_EpisodeId",
+                        name: "FK_UserEpisodeFavorite_Episode_EpisodeId",
                         column: x => x.EpisodeId,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserEpisodeFavorites_Episodes_EpisodeId1",
+                        name: "FK_UserEpisodeFavorite_Episode_EpisodeId1",
                         column: x => x.EpisodeId1,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UserEpisodeFavorites_Users_UserId",
+                        name: "FK_UserEpisodeFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserEpisodeFavorites_Users_UserId1",
+                        name: "FK_UserEpisodeFavorite_User_UserId1",
                         column: x => x.UserId1,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UserEpisodeRatings",
+                name: "UserEpisodeRating",
                 columns: table => new
                 {
                     Id = table
@@ -1442,38 +1442,38 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserEpisodeRatings", x => x.Id);
+                    table.PrimaryKey("PK_UserEpisodeRating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserEpisodeRatings_Episodes_EpisodeId",
+                        name: "FK_UserEpisodeRating_Episode_EpisodeId",
                         column: x => x.EpisodeId,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserEpisodeRatings_Episodes_EpisodeId1",
+                        name: "FK_UserEpisodeRating_Episode_EpisodeId1",
                         column: x => x.EpisodeId1,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UserEpisodeRatings_Users_UserId",
+                        name: "FK_UserEpisodeRating_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserEpisodeRatings_Users_UserId1",
+                        name: "FK_UserEpisodeRating_User_UserId1",
                         column: x => x.UserId1,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "DownvoteSeasonReviews",
+                name: "DownvoteSeasonReview",
                 columns: table => new
                 {
                     Id = table
@@ -1485,31 +1485,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DownvoteSeasonReviews", x => x.Id);
+                    table.PrimaryKey("PK_DownvoteSeasonReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteSeasonReviews_SeasonReviews_SeasonReviewId",
+                        name: "FK_DownvoteSeasonReview_SeasonReview_SeasonReviewId",
                         column: x => x.SeasonReviewId,
-                        principalTable: "SeasonReviews",
+                        principalTable: "SeasonReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteSeasonReviews_Seasons_SeasonId",
+                        name: "FK_DownvoteSeasonReview_Season_SeasonId",
                         column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteSeasonReviews_Users_UserId",
+                        name: "FK_DownvoteSeasonReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UpvoteSeasonReviews",
+                name: "UpvoteSeasonReview",
                 columns: table => new
                 {
                     Id = table
@@ -1521,31 +1521,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpvoteSeasonReviews", x => x.Id);
+                    table.PrimaryKey("PK_UpvoteSeasonReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UpvoteSeasonReviews_SeasonReviews_SeasonReviewId",
+                        name: "FK_UpvoteSeasonReview_SeasonReview_SeasonReviewId",
                         column: x => x.SeasonReviewId,
-                        principalTable: "SeasonReviews",
+                        principalTable: "SeasonReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteSeasonReviews_Seasons_SeasonId",
+                        name: "FK_UpvoteSeasonReview_Season_SeasonId",
                         column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        principalTable: "Season",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteSeasonReviews_Users_UserId",
+                        name: "FK_UpvoteSeasonReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "DownvoteEpisodeReviews",
+                name: "DownvoteEpisodeReview",
                 columns: table => new
                 {
                     Id = table
@@ -1557,31 +1557,31 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DownvoteEpisodeReviews", x => x.Id);
+                    table.PrimaryKey("PK_DownvoteEpisodeReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteEpisodeReviews_EpisodeReviews_EpisodeReviewId",
+                        name: "FK_DownvoteEpisodeReview_EpisodeReview_EpisodeReviewId",
                         column: x => x.EpisodeReviewId,
-                        principalTable: "EpisodeReviews",
+                        principalTable: "EpisodeReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteEpisodeReviews_Episodes_EpisodeId",
+                        name: "FK_DownvoteEpisodeReview_Episode_EpisodeId",
                         column: x => x.EpisodeId,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_DownvoteEpisodeReviews_Users_UserId",
+                        name: "FK_DownvoteEpisodeReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
             );
 
             migrationBuilder.CreateTable(
-                name: "UpvoteEpisodeReviews",
+                name: "UpvoteEpisodeReview",
                 columns: table => new
                 {
                     Id = table
@@ -1593,24 +1593,24 @@ namespace movielandia_.net_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UpvoteEpisodeReviews", x => x.Id);
+                    table.PrimaryKey("PK_UpvoteEpisodeReview", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UpvoteEpisodeReviews_EpisodeReviews_EpisodeReviewId",
+                        name: "FK_UpvoteEpisodeReview_EpisodeReview_EpisodeReviewId",
                         column: x => x.EpisodeReviewId,
-                        principalTable: "EpisodeReviews",
+                        principalTable: "EpisodeReview",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteEpisodeReviews_Episodes_EpisodeId",
+                        name: "FK_UpvoteEpisodeReview_Episode_EpisodeId",
                         column: x => x.EpisodeId,
-                        principalTable: "Episodes",
+                        principalTable: "Episode",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteEpisodeReviews_Users_UserId",
+                        name: "FK_UpvoteEpisodeReview_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -1637,9 +1637,9 @@ namespace movielandia_.net_api.Migrations
                 {
                     table.PrimaryKey("PK_Attachment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attachment_Users_UserId",
+                        name: "FK_Attachment_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1661,9 +1661,9 @@ namespace movielandia_.net_api.Migrations
                 {
                     table.PrimaryKey("PK_DownvoteForumPost", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteForumPost_Users_UserId",
+                        name: "FK_DownvoteForumPost_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -1684,9 +1684,9 @@ namespace movielandia_.net_api.Migrations
                 {
                     table.PrimaryKey("PK_DownvoteForumReply", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteForumReply_Users_UserId",
+                        name: "FK_DownvoteForumReply_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1708,9 +1708,9 @@ namespace movielandia_.net_api.Migrations
                 {
                     table.PrimaryKey("PK_DownvoteForumTopic", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownvoteForumTopic_Users_UserId",
+                        name: "FK_DownvoteForumTopic_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1781,15 +1781,15 @@ namespace movielandia_.net_api.Migrations
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_ForumTopic_Users_ClosedById",
+                        name: "FK_ForumTopic_User_ClosedById",
                         column: x => x.ClosedById,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_ForumTopic_Users_UserId",
+                        name: "FK_ForumTopic_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -1824,9 +1824,9 @@ namespace movielandia_.net_api.Migrations
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_UserForumModerator_Users_UserId",
+                        name: "FK_UserForumModerator_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1876,21 +1876,21 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_ForumPost_Users_AnsweredById",
+                        name: "FK_ForumPost_User_AnsweredById",
                         column: x => x.AnsweredById,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_ForumPost_Users_DeletedById",
+                        name: "FK_ForumPost_User_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                     table.ForeignKey(
-                        name: "FK_ForumPost_Users_UserId",
+                        name: "FK_ForumPost_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -1951,9 +1951,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteForumTopic_Users_UserId",
+                        name: "FK_UpvoteForumTopic_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -1988,9 +1988,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserForumTopicFavorite_Users_UserId",
+                        name: "FK_UserForumTopicFavorite_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -2026,9 +2026,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UserForumTopicWatch_Users_UserId",
+                        name: "FK_UserForumTopicWatch_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -2067,9 +2067,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_ForumPostHistory_Users_EditedById",
+                        name: "FK_ForumPostHistory_User_EditedById",
                         column: x => x.EditedById,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -2111,9 +2111,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_ForumReply_Users_UserId",
+                        name: "FK_ForumReply_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -2147,9 +2147,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteForumPost_Users_UserId",
+                        name: "FK_UpvoteForumPost_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id"
                     );
                 }
@@ -2187,9 +2187,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_ForumReplyHistory_Users_EditedById",
+                        name: "FK_ForumReplyHistory_User_EditedById",
                         column: x => x.EditedById,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -2224,9 +2224,9 @@ namespace movielandia_.net_api.Migrations
                         onDelete: ReferentialAction.Cascade
                     );
                     table.ForeignKey(
-                        name: "FK_UpvoteForumReply_Users_UserId",
+                        name: "FK_UpvoteForumReply_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -2234,20 +2234,20 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActorReviews_ActorId",
-                table: "ActorReviews",
+                name: "IX_ActorReview_ActorId",
+                table: "ActorReview",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActorReviews_ActorId1",
-                table: "ActorReviews",
+                name: "IX_ActorReview_ActorId1",
+                table: "ActorReview",
                 column: "ActorId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActorReviews_UserId",
-                table: "ActorReviews",
+                name: "IX_ActorReview_UserId",
+                table: "ActorReview",
                 column: "UserId"
             );
 
@@ -2264,93 +2264,93 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_Avatars_UserId",
-                table: "Avatars",
+                name: "IX_Avatar_UserId",
+                table: "Avatar",
                 column: "UserId",
                 unique: true
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CastMovies_ActorId",
-                table: "CastMovies",
+                name: "IX_CastMovie_ActorId",
+                table: "CastMovie",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CastMovies_MovieId",
-                table: "CastMovies",
+                name: "IX_CastMovie_MovieId",
+                table: "CastMovie",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CastSeries_ActorId",
-                table: "CastSeries",
+                name: "IX_CastSerie_ActorId",
+                table: "CastSerie",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CastSeries_SerieId",
-                table: "CastSeries",
+                name: "IX_CastSerie_SerieId",
+                table: "CastSerie",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewMovies_CrewId",
-                table: "CrewMovies",
+                name: "IX_CrewMovie_CrewId",
+                table: "CrewMovie",
                 column: "CrewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewMovies_MovieId",
-                table: "CrewMovies",
+                name: "IX_CrewMovie_MovieId",
+                table: "CrewMovie",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewReviews_CrewId",
-                table: "CrewReviews",
+                name: "IX_CrewReview_CrewId",
+                table: "CrewReview",
                 column: "CrewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewReviews_CrewId1",
-                table: "CrewReviews",
+                name: "IX_CrewReview_CrewId1",
+                table: "CrewReview",
                 column: "CrewId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewReviews_UserId",
-                table: "CrewReviews",
+                name: "IX_CrewReview_UserId",
+                table: "CrewReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewSeries_CrewId",
-                table: "CrewSeries",
+                name: "IX_CrewSerie_CrewId",
+                table: "CrewSerie",
                 column: "CrewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrewSeries_SerieId",
-                table: "CrewSeries",
+                name: "IX_CrewSerie_SerieId",
+                table: "CrewSerie",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteActorReviews_ActorId",
-                table: "DownvoteActorReviews",
+                name: "IX_DownvoteActorReview_ActorId",
+                table: "DownvoteActorReview",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteActorReviews_ActorReviewId",
-                table: "DownvoteActorReviews",
+                name: "IX_DownvoteActorReview_ActorReviewId",
+                table: "DownvoteActorReview",
                 column: "ActorReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteActorReviews_UserId",
-                table: "DownvoteActorReviews",
+                name: "IX_DownvoteActorReview_UserId",
+                table: "DownvoteActorReview",
                 column: "UserId"
             );
 
@@ -2373,20 +2373,20 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteEpisodeReviews_EpisodeId",
-                table: "DownvoteEpisodeReviews",
+                name: "IX_DownvoteEpisodeReview_EpisodeId",
+                table: "DownvoteEpisodeReview",
                 column: "EpisodeId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteEpisodeReviews_EpisodeReviewId",
-                table: "DownvoteEpisodeReviews",
+                name: "IX_DownvoteEpisodeReview_EpisodeReviewId",
+                table: "DownvoteEpisodeReview",
                 column: "EpisodeReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteEpisodeReviews_UserId",
-                table: "DownvoteEpisodeReviews",
+                name: "IX_DownvoteEpisodeReview_UserId",
+                table: "DownvoteEpisodeReview",
                 column: "UserId"
             );
 
@@ -2445,81 +2445,81 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteMovieReviews_MovieId",
-                table: "DownvoteMovieReviews",
+                name: "IX_DownvoteMovieReview_MovieId",
+                table: "DownvoteMovieReview",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteMovieReviews_MovieReviewId",
-                table: "DownvoteMovieReviews",
+                name: "IX_DownvoteMovieReview_MovieReviewId",
+                table: "DownvoteMovieReview",
                 column: "MovieReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteMovieReviews_UserId",
-                table: "DownvoteMovieReviews",
+                name: "IX_DownvoteMovieReview_UserId",
+                table: "DownvoteMovieReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteSeasonReviews_SeasonId",
-                table: "DownvoteSeasonReviews",
+                name: "IX_DownvoteSeasonReview_SeasonId",
+                table: "DownvoteSeasonReview",
                 column: "SeasonId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteSeasonReviews_SeasonReviewId",
-                table: "DownvoteSeasonReviews",
+                name: "IX_DownvoteSeasonReview_SeasonReviewId",
+                table: "DownvoteSeasonReview",
                 column: "SeasonReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteSeasonReviews_UserId",
-                table: "DownvoteSeasonReviews",
+                name: "IX_DownvoteSeasonReview_UserId",
+                table: "DownvoteSeasonReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteSerieReviews_SerieId",
-                table: "DownvoteSerieReviews",
+                name: "IX_DownvoteSerieReview_SerieId",
+                table: "DownvoteSerieReview",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteSerieReviews_SerieReviewId",
-                table: "DownvoteSerieReviews",
+                name: "IX_DownvoteSerieReview_SerieReviewId",
+                table: "DownvoteSerieReview",
                 column: "SerieReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownvoteSerieReviews_UserId",
-                table: "DownvoteSerieReviews",
+                name: "IX_DownvoteSerieReview_UserId",
+                table: "DownvoteSerieReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_EpisodeReviews_EpisodeId",
-                table: "EpisodeReviews",
+                name: "IX_Episode_SeasonId",
+                table: "Episode",
+                column: "SeasonId"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EpisodeReview_EpisodeId",
+                table: "EpisodeReview",
                 column: "EpisodeId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_EpisodeReviews_EpisodeId1",
-                table: "EpisodeReviews",
+                name: "IX_EpisodeReview_EpisodeId1",
+                table: "EpisodeReview",
                 column: "EpisodeId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_EpisodeReviews_UserId",
-                table: "EpisodeReviews",
+                name: "IX_EpisodeReview_UserId",
+                table: "EpisodeReview",
                 column: "UserId"
-            );
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Episodes_SeasonId",
-                table: "Episodes",
-                column: "SeasonId"
             );
 
             migrationBuilder.CreateIndex(
@@ -2675,104 +2675,104 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieGenres_GenreId",
-                table: "MovieGenres",
+                name: "IX_MovieGenre_GenreId",
+                table: "MovieGenre",
                 column: "GenreId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieGenres_MovieId",
-                table: "MovieGenres",
+                name: "IX_MovieGenre_MovieId",
+                table: "MovieGenre",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieReviews_MovieId",
-                table: "MovieReviews",
+                name: "IX_MovieReview_MovieId",
+                table: "MovieReview",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieReviews_MovieId1",
-                table: "MovieReviews",
+                name: "IX_MovieReview_MovieId1",
+                table: "MovieReview",
                 column: "MovieId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieReviews_UserId",
-                table: "MovieReviews",
+                name: "IX_MovieReview_UserId",
+                table: "MovieReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeasonReviews_SeasonId",
-                table: "SeasonReviews",
+                name: "IX_Season_SerieId",
+                table: "Season",
+                column: "SerieId"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SeasonReview_SeasonId",
+                table: "SeasonReview",
                 column: "SeasonId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeasonReviews_SeasonId1",
-                table: "SeasonReviews",
+                name: "IX_SeasonReview_SeasonId1",
+                table: "SeasonReview",
                 column: "SeasonId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeasonReviews_UserId",
-                table: "SeasonReviews",
+                name: "IX_SeasonReview_UserId",
+                table: "SeasonReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seasons_SerieId",
-                table: "Seasons",
-                column: "SerieId"
-            );
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SerieGenres_GenreId",
-                table: "SerieGenres",
+                name: "IX_SerieGenre_GenreId",
+                table: "SerieGenre",
                 column: "GenreId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SerieGenres_SerieId",
-                table: "SerieGenres",
+                name: "IX_SerieGenre_SerieId",
+                table: "SerieGenre",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SerieReviews_SerieId",
-                table: "SerieReviews",
+                name: "IX_SerieReview_SerieId",
+                table: "SerieReview",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SerieReviews_SerieId1",
-                table: "SerieReviews",
+                name: "IX_SerieReview_SerieId1",
+                table: "SerieReview",
                 column: "SerieId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_SerieReviews_UserId",
-                table: "SerieReviews",
+                name: "IX_SerieReview_UserId",
+                table: "SerieReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteActorReviews_ActorId",
-                table: "UpvoteActorReviews",
+                name: "IX_UpvoteActorReview_ActorId",
+                table: "UpvoteActorReview",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteActorReviews_ActorReviewId",
-                table: "UpvoteActorReviews",
+                name: "IX_UpvoteActorReview_ActorReviewId",
+                table: "UpvoteActorReview",
                 column: "ActorReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteActorReviews_UserId",
-                table: "UpvoteActorReviews",
+                name: "IX_UpvoteActorReview_UserId",
+                table: "UpvoteActorReview",
                 column: "UserId"
             );
 
@@ -2795,20 +2795,20 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteEpisodeReviews_EpisodeId",
-                table: "UpvoteEpisodeReviews",
+                name: "IX_UpvoteEpisodeReview_EpisodeId",
+                table: "UpvoteEpisodeReview",
                 column: "EpisodeId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteEpisodeReviews_EpisodeReviewId",
-                table: "UpvoteEpisodeReviews",
+                name: "IX_UpvoteEpisodeReview_EpisodeReviewId",
+                table: "UpvoteEpisodeReview",
                 column: "EpisodeReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteEpisodeReviews_UserId",
-                table: "UpvoteEpisodeReviews",
+                name: "IX_UpvoteEpisodeReview_UserId",
+                table: "UpvoteEpisodeReview",
                 column: "UserId"
             );
 
@@ -2867,152 +2867,166 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteMovieReviews_MovieId",
-                table: "UpvoteMovieReviews",
+                name: "IX_UpvoteMovieReview_MovieId",
+                table: "UpvoteMovieReview",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteMovieReviews_MovieReviewId",
-                table: "UpvoteMovieReviews",
+                name: "IX_UpvoteMovieReview_MovieReviewId",
+                table: "UpvoteMovieReview",
                 column: "MovieReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteMovieReviews_UserId",
-                table: "UpvoteMovieReviews",
+                name: "IX_UpvoteMovieReview_UserId",
+                table: "UpvoteMovieReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteSeasonReviews_SeasonId",
-                table: "UpvoteSeasonReviews",
+                name: "IX_UpvoteSeasonReview_SeasonId",
+                table: "UpvoteSeasonReview",
                 column: "SeasonId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteSeasonReviews_SeasonReviewId",
-                table: "UpvoteSeasonReviews",
+                name: "IX_UpvoteSeasonReview_SeasonReviewId",
+                table: "UpvoteSeasonReview",
                 column: "SeasonReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteSeasonReviews_UserId",
-                table: "UpvoteSeasonReviews",
+                name: "IX_UpvoteSeasonReview_UserId",
+                table: "UpvoteSeasonReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteSerieReviews_SerieId",
-                table: "UpvoteSerieReviews",
+                name: "IX_UpvoteSerieReview_SerieId",
+                table: "UpvoteSerieReview",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteSerieReviews_SerieReviewId",
-                table: "UpvoteSerieReviews",
+                name: "IX_UpvoteSerieReview_SerieReviewId",
+                table: "UpvoteSerieReview",
                 column: "SerieReviewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UpvoteSerieReviews_UserId",
-                table: "UpvoteSerieReviews",
+                name: "IX_UpvoteSerieReview_UserId",
+                table: "UpvoteSerieReview",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserActorFavorites_ActorId",
-                table: "UserActorFavorites",
+                name: "IX_User_Email",
+                table: "User",
+                column: "Email",
+                unique: true
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_UserName",
+                table: "User",
+                column: "UserName",
+                unique: true
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActorFavorite_ActorId",
+                table: "UserActorFavorite",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserActorFavorites_UserId",
-                table: "UserActorFavorites",
+                name: "IX_UserActorFavorite_UserId",
+                table: "UserActorFavorite",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserActorRatings_ActorId",
-                table: "UserActorRatings",
+                name: "IX_UserActorRating_ActorId",
+                table: "UserActorRating",
                 column: "ActorId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserActorRatings_UserId",
-                table: "UserActorRatings",
+                name: "IX_UserActorRating_UserId",
+                table: "UserActorRating",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCrewFavorites_CrewId",
-                table: "UserCrewFavorites",
+                name: "IX_UserCrewFavorite_CrewId",
+                table: "UserCrewFavorite",
                 column: "CrewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCrewFavorites_UserId",
-                table: "UserCrewFavorites",
+                name: "IX_UserCrewFavorite_UserId",
+                table: "UserCrewFavorite",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCrewRatings_CrewId",
-                table: "UserCrewRatings",
+                name: "IX_UserCrewRating_CrewId",
+                table: "UserCrewRating",
                 column: "CrewId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCrewRatings_UserId",
-                table: "UserCrewRatings",
+                name: "IX_UserCrewRating_UserId",
+                table: "UserCrewRating",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeFavorites_EpisodeId",
-                table: "UserEpisodeFavorites",
+                name: "IX_UserEpisodeFavorite_EpisodeId",
+                table: "UserEpisodeFavorite",
                 column: "EpisodeId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeFavorites_EpisodeId1",
-                table: "UserEpisodeFavorites",
+                name: "IX_UserEpisodeFavorite_EpisodeId1",
+                table: "UserEpisodeFavorite",
                 column: "EpisodeId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeFavorites_UserId",
-                table: "UserEpisodeFavorites",
+                name: "IX_UserEpisodeFavorite_UserId",
+                table: "UserEpisodeFavorite",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeFavorites_UserId1",
-                table: "UserEpisodeFavorites",
+                name: "IX_UserEpisodeFavorite_UserId1",
+                table: "UserEpisodeFavorite",
                 column: "UserId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeRatings_EpisodeId",
-                table: "UserEpisodeRatings",
+                name: "IX_UserEpisodeRating_EpisodeId",
+                table: "UserEpisodeRating",
                 column: "EpisodeId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeRatings_EpisodeId1",
-                table: "UserEpisodeRatings",
+                name: "IX_UserEpisodeRating_EpisodeId1",
+                table: "UserEpisodeRating",
                 column: "EpisodeId1"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeRatings_UserId",
-                table: "UserEpisodeRatings",
+                name: "IX_UserEpisodeRating_UserId",
+                table: "UserEpisodeRating",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEpisodeRatings_UserId1",
-                table: "UserEpisodeRatings",
+                name: "IX_UserEpisodeRating_UserId1",
+                table: "UserEpisodeRating",
                 column: "UserId1"
             );
 
@@ -3071,14 +3085,14 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGenreFavorites_GenreId",
-                table: "UserGenreFavorites",
+                name: "IX_UserGenreFavorite_GenreId",
+                table: "UserGenreFavorite",
                 column: "GenreId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGenreFavorites_UserId",
-                table: "UserGenreFavorites",
+                name: "IX_UserGenreFavorite_UserId",
+                table: "UserGenreFavorite",
                 column: "UserId"
             );
 
@@ -3101,90 +3115,76 @@ namespace movielandia_.net_api.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMovieFavorites_MovieId",
-                table: "UserMovieFavorites",
+                name: "IX_UserMovieFavorite_MovieId",
+                table: "UserMovieFavorite",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMovieFavorites_UserId_MovieId",
-                table: "UserMovieFavorites",
+                name: "IX_UserMovieFavorite_UserId_MovieId",
+                table: "UserMovieFavorite",
                 columns: new[] { "UserId", "MovieId" },
                 unique: true
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMovieRatings_MovieId",
-                table: "UserMovieRatings",
+                name: "IX_UserMovieRating_MovieId",
+                table: "UserMovieRating",
                 column: "MovieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMovieRatings_UserId",
-                table: "UserMovieRatings",
+                name: "IX_UserMovieRating_UserId",
+                table: "UserMovieRating",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
-                column: "Email",
-                unique: true
-            );
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_UserName",
-                table: "Users",
-                column: "UserName",
-                unique: true
-            );
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserSeasonFavorites_SeasonId",
-                table: "UserSeasonFavorites",
+                name: "IX_UserSeasonFavorite_SeasonId",
+                table: "UserSeasonFavorite",
                 column: "SeasonId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSeasonFavorites_UserId",
-                table: "UserSeasonFavorites",
+                name: "IX_UserSeasonFavorite_UserId",
+                table: "UserSeasonFavorite",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSeasonRatings_SeasonId",
-                table: "UserSeasonRatings",
+                name: "IX_UserSeasonRating_SeasonId",
+                table: "UserSeasonRating",
                 column: "SeasonId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSeasonRatings_UserId",
-                table: "UserSeasonRatings",
+                name: "IX_UserSeasonRating_UserId",
+                table: "UserSeasonRating",
                 column: "UserId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSerieFavorites_SerieId",
-                table: "UserSerieFavorites",
+                name: "IX_UserSerieFavorite_SerieId",
+                table: "UserSerieFavorite",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSerieFavorites_UserId_SerieId",
-                table: "UserSerieFavorites",
+                name: "IX_UserSerieFavorite_UserId_SerieId",
+                table: "UserSerieFavorite",
                 columns: new[] { "UserId", "SerieId" },
                 unique: true
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSerieRatings_SerieId",
-                table: "UserSerieRatings",
+                name: "IX_UserSerieRating_SerieId",
+                table: "UserSerieRating",
                 column: "SerieId"
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSerieRatings_UserId",
-                table: "UserSerieRatings",
+                name: "IX_UserSerieRating_UserId",
+                table: "UserSerieRating",
                 column: "UserId"
             );
 
@@ -3261,26 +3261,23 @@ namespace movielandia_.net_api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ForumPost_Users_AnsweredById",
+                name: "FK_ForumPost_User_AnsweredById",
                 table: "ForumPost"
             );
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ForumPost_Users_DeletedById",
+                name: "FK_ForumPost_User_DeletedById",
                 table: "ForumPost"
             );
 
-            migrationBuilder.DropForeignKey(name: "FK_ForumPost_Users_UserId", table: "ForumPost");
+            migrationBuilder.DropForeignKey(name: "FK_ForumPost_User_UserId", table: "ForumPost");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ForumTopic_Users_ClosedById",
+                name: "FK_ForumTopic_User_ClosedById",
                 table: "ForumTopic"
             );
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_ForumTopic_Users_UserId",
-                table: "ForumTopic"
-            );
+            migrationBuilder.DropForeignKey(name: "FK_ForumTopic_User_UserId", table: "ForumTopic");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_ForumCategory_ForumPost_LastPostId",
@@ -3289,21 +3286,21 @@ namespace movielandia_.net_api.Migrations
 
             migrationBuilder.DropTable(name: "Attachment");
 
-            migrationBuilder.DropTable(name: "Avatars");
+            migrationBuilder.DropTable(name: "Avatar");
 
-            migrationBuilder.DropTable(name: "CastMovies");
+            migrationBuilder.DropTable(name: "CastMovie");
 
-            migrationBuilder.DropTable(name: "CastSeries");
+            migrationBuilder.DropTable(name: "CastSerie");
 
-            migrationBuilder.DropTable(name: "CrewMovies");
+            migrationBuilder.DropTable(name: "CrewMovie");
 
-            migrationBuilder.DropTable(name: "CrewSeries");
+            migrationBuilder.DropTable(name: "CrewSerie");
 
-            migrationBuilder.DropTable(name: "DownvoteActorReviews");
+            migrationBuilder.DropTable(name: "DownvoteActorReview");
 
             migrationBuilder.DropTable(name: "DownvoteCrewReview");
 
-            migrationBuilder.DropTable(name: "DownvoteEpisodeReviews");
+            migrationBuilder.DropTable(name: "DownvoteEpisodeReview");
 
             migrationBuilder.DropTable(name: "DownvoteForumPost");
 
@@ -3311,11 +3308,11 @@ namespace movielandia_.net_api.Migrations
 
             migrationBuilder.DropTable(name: "DownvoteForumTopic");
 
-            migrationBuilder.DropTable(name: "DownvoteMovieReviews");
+            migrationBuilder.DropTable(name: "DownvoteMovieReview");
 
-            migrationBuilder.DropTable(name: "DownvoteSeasonReviews");
+            migrationBuilder.DropTable(name: "DownvoteSeasonReview");
 
-            migrationBuilder.DropTable(name: "DownvoteSerieReviews");
+            migrationBuilder.DropTable(name: "DownvoteSerieReview");
 
             migrationBuilder.DropTable(name: "ForumPostHistory");
 
@@ -3325,15 +3322,15 @@ namespace movielandia_.net_api.Migrations
 
             migrationBuilder.DropTable(name: "Message");
 
-            migrationBuilder.DropTable(name: "MovieGenres");
+            migrationBuilder.DropTable(name: "MovieGenre");
 
-            migrationBuilder.DropTable(name: "SerieGenres");
+            migrationBuilder.DropTable(name: "SerieGenre");
 
-            migrationBuilder.DropTable(name: "UpvoteActorReviews");
+            migrationBuilder.DropTable(name: "UpvoteActorReview");
 
             migrationBuilder.DropTable(name: "UpvoteCrewReview");
 
-            migrationBuilder.DropTable(name: "UpvoteEpisodeReviews");
+            migrationBuilder.DropTable(name: "UpvoteEpisodeReview");
 
             migrationBuilder.DropTable(name: "UpvoteForumPost");
 
@@ -3341,23 +3338,23 @@ namespace movielandia_.net_api.Migrations
 
             migrationBuilder.DropTable(name: "UpvoteForumTopic");
 
-            migrationBuilder.DropTable(name: "UpvoteMovieReviews");
+            migrationBuilder.DropTable(name: "UpvoteMovieReview");
 
-            migrationBuilder.DropTable(name: "UpvoteSeasonReviews");
+            migrationBuilder.DropTable(name: "UpvoteSeasonReview");
 
-            migrationBuilder.DropTable(name: "UpvoteSerieReviews");
+            migrationBuilder.DropTable(name: "UpvoteSerieReview");
 
-            migrationBuilder.DropTable(name: "UserActorFavorites");
+            migrationBuilder.DropTable(name: "UserActorFavorite");
 
-            migrationBuilder.DropTable(name: "UserActorRatings");
+            migrationBuilder.DropTable(name: "UserActorRating");
 
-            migrationBuilder.DropTable(name: "UserCrewFavorites");
+            migrationBuilder.DropTable(name: "UserCrewFavorite");
 
-            migrationBuilder.DropTable(name: "UserCrewRatings");
+            migrationBuilder.DropTable(name: "UserCrewRating");
 
-            migrationBuilder.DropTable(name: "UserEpisodeFavorites");
+            migrationBuilder.DropTable(name: "UserEpisodeFavorite");
 
-            migrationBuilder.DropTable(name: "UserEpisodeRatings");
+            migrationBuilder.DropTable(name: "UserEpisodeRating");
 
             migrationBuilder.DropTable(name: "UserForumModerator");
 
@@ -3365,55 +3362,55 @@ namespace movielandia_.net_api.Migrations
 
             migrationBuilder.DropTable(name: "UserForumTopicWatch");
 
-            migrationBuilder.DropTable(name: "UserGenreFavorites");
+            migrationBuilder.DropTable(name: "UserGenreFavorite");
 
             migrationBuilder.DropTable(name: "UserInbox");
 
-            migrationBuilder.DropTable(name: "UserMovieFavorites");
+            migrationBuilder.DropTable(name: "UserMovieFavorite");
 
-            migrationBuilder.DropTable(name: "UserMovieRatings");
+            migrationBuilder.DropTable(name: "UserMovieRating");
 
-            migrationBuilder.DropTable(name: "UserSeasonFavorites");
+            migrationBuilder.DropTable(name: "UserSeasonFavorite");
 
-            migrationBuilder.DropTable(name: "UserSeasonRatings");
+            migrationBuilder.DropTable(name: "UserSeasonRating");
 
-            migrationBuilder.DropTable(name: "UserSerieFavorites");
+            migrationBuilder.DropTable(name: "UserSerieFavorite");
 
-            migrationBuilder.DropTable(name: "UserSerieRatings");
+            migrationBuilder.DropTable(name: "UserSerieRating");
 
             migrationBuilder.DropTable(name: "ForumTag");
 
-            migrationBuilder.DropTable(name: "ActorReviews");
+            migrationBuilder.DropTable(name: "ActorReview");
 
-            migrationBuilder.DropTable(name: "CrewReviews");
+            migrationBuilder.DropTable(name: "CrewReview");
 
-            migrationBuilder.DropTable(name: "EpisodeReviews");
+            migrationBuilder.DropTable(name: "EpisodeReview");
 
             migrationBuilder.DropTable(name: "ForumReply");
 
-            migrationBuilder.DropTable(name: "MovieReviews");
+            migrationBuilder.DropTable(name: "MovieReview");
 
-            migrationBuilder.DropTable(name: "SeasonReviews");
+            migrationBuilder.DropTable(name: "SeasonReview");
 
-            migrationBuilder.DropTable(name: "SerieReviews");
+            migrationBuilder.DropTable(name: "SerieReview");
 
-            migrationBuilder.DropTable(name: "Genres");
+            migrationBuilder.DropTable(name: "Genre");
 
             migrationBuilder.DropTable(name: "Inbox");
 
-            migrationBuilder.DropTable(name: "Actors");
+            migrationBuilder.DropTable(name: "Actor");
 
-            migrationBuilder.DropTable(name: "Crews");
+            migrationBuilder.DropTable(name: "Crew");
 
-            migrationBuilder.DropTable(name: "Episodes");
+            migrationBuilder.DropTable(name: "Episode");
 
-            migrationBuilder.DropTable(name: "Movies");
+            migrationBuilder.DropTable(name: "Movie");
 
-            migrationBuilder.DropTable(name: "Seasons");
+            migrationBuilder.DropTable(name: "Season");
 
-            migrationBuilder.DropTable(name: "Series");
+            migrationBuilder.DropTable(name: "Serie");
 
-            migrationBuilder.DropTable(name: "Users");
+            migrationBuilder.DropTable(name: "User");
 
             migrationBuilder.DropTable(name: "ForumPost");
 

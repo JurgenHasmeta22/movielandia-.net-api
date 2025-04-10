@@ -22,21 +22,20 @@ namespace movielandia_.net_api.Repositories.Implementations
 
         public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
         {
-            return await _context.Movies.ToListAsync();
+            return await _context.Movie.ToListAsync();
         }
 
         public async Task<IEnumerable<Movie>> GetMoviesForHomePageAsync()
         {
-            return await _context.Movies.OrderByDescending(m => m.DateAired).Take(30).ToListAsync();
+            return await _context.Movie.OrderByDescending(m => m.DateAired).Take(30).ToListAsync();
         }
 
         public async Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
             MovieFilterDTO filter
         )
         {
-            var query = _context.Movies.AsQueryable();
+            var query = _context.Movie.AsQueryable();
 
-            // Apply filters
             if (!string.IsNullOrWhiteSpace(filter.Title))
             {
                 query = query.Where(m => m.Title.Contains(filter.Title));
@@ -49,6 +48,7 @@ namespace movielandia_.net_api.Repositories.Implementations
             )
             {
                 var property = typeof(Movie).GetProperty(filter.FilterNameString);
+
                 if (property != null)
                 {
                     object filterValue = Convert.ChangeType(
@@ -66,6 +66,7 @@ namespace movielandia_.net_api.Repositories.Implementations
                                         .Contains(filterValue.ToString())
                                 );
                             }
+
                             break;
                         case FilterOperator.Equal:
                             query = query.Where(m =>
@@ -73,7 +74,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                             );
                             break;
                         case FilterOperator.GreaterThan:
-                            // This is a simplification - would need proper handling of various types
                             if (property.PropertyType == typeof(int))
                             {
                                 int value = Convert.ToInt32(filterValue);
@@ -84,10 +84,12 @@ namespace movielandia_.net_api.Repositories.Implementations
                             else if (property.PropertyType == typeof(float))
                             {
                                 float value = Convert.ToSingle(filterValue);
+
                                 query = query.Where(m =>
                                     EF.Property<float>(m, filter.FilterNameString) > value
                                 );
                             }
+
                             break;
                         case FilterOperator.LessThan:
                             if (property.PropertyType == typeof(int))
@@ -100,6 +102,7 @@ namespace movielandia_.net_api.Repositories.Implementations
                             else if (property.PropertyType == typeof(float))
                             {
                                 float value = Convert.ToSingle(filterValue);
+
                                 query = query.Where(m =>
                                     EF.Property<float>(m, filter.FilterNameString) < value
                                 );
@@ -109,10 +112,10 @@ namespace movielandia_.net_api.Repositories.Implementations
                 }
             }
 
-            // Apply sorting
             if (!string.IsNullOrWhiteSpace(filter.SortBy))
             {
                 var property = typeof(Movie).GetProperty(filter.SortBy);
+
                 if (property != null)
                 {
                     string direction = filter.AscOrDesc?.ToLower() ?? "asc";
@@ -132,7 +135,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                 }
                 else
                 {
-                    // Default to ordering by title if property not found
                     query =
                         filter.AscOrDesc?.ToLower() == "desc"
                             ? query.OrderByDescending(m => m.Title)
@@ -141,14 +143,11 @@ namespace movielandia_.net_api.Repositories.Implementations
             }
             else
             {
-                // Default ordering
                 query = query.OrderBy(m => m.Title);
             }
 
-            // Count total before pagination
             int totalCount = await query.CountAsync();
 
-            // Apply pagination
             var movies = await query
                 .Skip((filter.Page - 1) * filter.PerPage)
                 .Take(filter.PerPage)
@@ -165,12 +164,11 @@ namespace movielandia_.net_api.Repositories.Implementations
             var skip = (parameters.ReviewsPage ?? 0) * 5;
             var take = 5;
 
-            // Determine review ordering
             var reviewOrderBy = parameters.ReviewsSortBy ?? "CreatedAt";
             var reviewOrderDir = parameters.ReviewsAscOrDesc?.ToLower() ?? "desc";
 
             var movie = await _context
-                .Movies.Include(m => m.Genres)
+                .Movie.Include(m => m.Genres)
                 .ThenInclude(mg => mg.Genre)
                 .Include(m =>
                     m.Cast.OrderBy(c => c.Id).Skip((parameters.CastPage ?? 0) * 5).Take(5)
@@ -190,12 +188,10 @@ namespace movielandia_.net_api.Repositories.Implementations
                 .ThenInclude(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            // Apply ordering and pagination to reviews after fetching
             if (movie != null)
             {
                 var reviewsQuery = movie.Reviews.AsQueryable();
 
-                // Apply sorting to the reviews
                 if (reviewOrderBy.Equals("CreatedAt", StringComparison.OrdinalIgnoreCase))
                 {
                     reviewsQuery =
@@ -211,7 +207,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                             : reviewsQuery.OrderByDescending(r => r.Rating);
                 }
 
-                // Apply pagination
                 movie.Reviews = reviewsQuery.Skip(skip).Take(take).ToList();
             }
 
@@ -223,18 +218,14 @@ namespace movielandia_.net_api.Repositories.Implementations
             MovieQueryParameters parameters
         )
         {
-            // Process title if needed (e.g., replace hyphens with spaces)
             var processedTitle = title.Replace("-", " ");
-
             var skip = (parameters.ReviewsPage ?? 0) * 5;
             var take = 5;
-
-            // Determine review ordering
             var reviewOrderBy = parameters.ReviewsSortBy ?? "CreatedAt";
             var reviewOrderDir = parameters.ReviewsAscOrDesc?.ToLower() ?? "desc";
 
             var movie = await _context
-                .Movies.Include(m => m.Genres)
+                .Movie.Include(m => m.Genres)
                 .ThenInclude(mg => mg.Genre)
                 .Include(m => m.Cast)
                 .ThenInclude(cm => cm.Actor)
@@ -250,12 +241,10 @@ namespace movielandia_.net_api.Repositories.Implementations
                 .ThenInclude(d => d.User)
                 .FirstOrDefaultAsync(m => m.Title == processedTitle);
 
-            // Apply ordering and pagination to reviews after fetching
             if (movie != null)
             {
                 var reviewsQuery = movie.Reviews.AsQueryable();
 
-                // Apply sorting to the reviews
                 if (reviewOrderBy.Equals("CreatedAt", StringComparison.OrdinalIgnoreCase))
                 {
                     reviewsQuery =
@@ -271,7 +260,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                             : reviewsQuery.OrderByDescending(r => r.Rating);
                 }
 
-                // Apply pagination
                 movie.Reviews = reviewsQuery.Skip(skip).Take(take).ToList();
             }
 
@@ -284,7 +272,7 @@ namespace movielandia_.net_api.Repositories.Implementations
         )
         {
             return await _context
-                .Movies.OrderByDescending(m => m.DateAired)
+                .Movie.OrderByDescending(m => m.DateAired)
                 .Take(count)
                 .ToListAsync();
         }
@@ -296,9 +284,8 @@ namespace movielandia_.net_api.Repositories.Implementations
             int perPage
         )
         {
-            // Find the movie
             var movie = await _context
-                .Movies.Include(m => m.Genres)
+                .Movie.Include(m => m.Genres)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (movie == null)
@@ -306,7 +293,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                 return (new List<Movie>(), 0);
             }
 
-            // Get genre IDs for the movie
             var genreIds = movie.Genres.Select(mg => mg.GenreId).ToList();
 
             if (!genreIds.Any())
@@ -314,9 +300,8 @@ namespace movielandia_.net_api.Repositories.Implementations
                 return (new List<Movie>(), 0);
             }
 
-            // Find movies with the same genres, excluding the current movie
             var relatedMovieIds = await _context
-                .MovieGenres.Where(mg => genreIds.Contains(mg.GenreId) && mg.MovieId != id)
+                .MovieGenre.Where(mg => genreIds.Contains(mg.GenreId) && mg.MovieId != id)
                 .Select(mg => mg.MovieId)
                 .Distinct()
                 .ToListAsync();
@@ -326,15 +311,12 @@ namespace movielandia_.net_api.Repositories.Implementations
                 return (new List<Movie>(), 0);
             }
 
-            // Count total for pagination
             var totalCount = relatedMovieIds.Count;
-
-            // Get paginated movies
             var skip = (page - 1) * perPage;
             var pagedIds = relatedMovieIds.Skip(skip).Take(perPage).ToList();
 
             var relatedMovies = await _context
-                .Movies.Where(m => pagedIds.Contains(m.Id))
+                .Movie.Where(m => pagedIds.Contains(m.Id))
                 .ToListAsync();
 
             return (relatedMovies, totalCount);
@@ -342,7 +324,7 @@ namespace movielandia_.net_api.Repositories.Implementations
 
         public async Task<int> GetMoviesTotalCountAsync()
         {
-            return await _context.Movies.CountAsync();
+            return await _context.Movie.CountAsync();
         }
 
         public async Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesByTitleAsync(
@@ -350,12 +332,12 @@ namespace movielandia_.net_api.Repositories.Implementations
             MovieFilterDTO filter
         )
         {
-            var query = _context.Movies.Where(m => m.Title.Contains(title));
+            var query = _context.Movie.Where(m => m.Title.Contains(title));
 
-            // Apply sorting
             if (!string.IsNullOrWhiteSpace(filter.SortBy))
             {
                 var property = typeof(Movie).GetProperty(filter.SortBy);
+
                 if (property != null)
                 {
                     string direction = filter.AscOrDesc?.ToLower() ?? "asc";
@@ -375,7 +357,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                 }
                 else
                 {
-                    // Default to ordering by title
                     query =
                         filter.AscOrDesc?.ToLower() == "desc"
                             ? query.OrderByDescending(m => m.Title)
@@ -384,7 +365,6 @@ namespace movielandia_.net_api.Repositories.Implementations
             }
             else
             {
-                // Default ordering
                 query = query.OrderBy(m => m.Title);
             }
 
@@ -398,14 +378,14 @@ namespace movielandia_.net_api.Repositories.Implementations
 
         public async Task<bool> IsMovieBookmarkedByUserAsync(int movieId, int userId)
         {
-            return await _context.UserMovieFavorites.AnyAsync(f =>
+            return await _context.UserMovieFavorite.AnyAsync(f =>
                 f.MovieId == movieId && f.UserId == userId
             );
         }
 
         public async Task<bool> IsMovieReviewedByUserAsync(int movieId, int userId)
         {
-            return await _context.MovieReviews.AnyAsync(r =>
+            return await _context.MovieReview.AnyAsync(r =>
                 r.MovieId == movieId && r.UserId == userId
             );
         }
@@ -415,7 +395,7 @@ namespace movielandia_.net_api.Repositories.Implementations
         )
         {
             var reviews = await _context
-                .MovieReviews.Where(r => r.MovieId == movieId && r.Rating.HasValue)
+                .MovieReview.Where(r => r.MovieId == movieId && r.Rating.HasValue)
                 .ToListAsync();
 
             int totalReviews = reviews.Count;
@@ -437,9 +417,8 @@ namespace movielandia_.net_api.Repositories.Implementations
         {
             var result = new Dictionary<int, (float AverageRating, int TotalReviews)>();
 
-            // Group reviews by movieId and calculate average rating and count
             var ratings = await _context
-                .MovieReviews.Where(r => movieIds.Contains(r.MovieId) && r.Rating.HasValue)
+                .MovieReview.Where(r => movieIds.Contains(r.MovieId) && r.Rating.HasValue)
                 .GroupBy(r => r.MovieId)
                 .Select(g => new
                 {
@@ -454,7 +433,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                 result[rating.MovieId] = ((float)rating.AverageRating, rating.TotalReviews);
             }
 
-            // Add entries with zero ratings for any movie IDs not in the result
             foreach (var movieId in movieIds)
             {
                 if (!result.ContainsKey(movieId))
@@ -466,7 +444,6 @@ namespace movielandia_.net_api.Repositories.Implementations
             return result;
         }
 
-        // Helper method to create lambda expressions for dynamic sorting
         private static System.Linq.Expressions.Expression<Func<T, object>> GetLambdaExpression<T>(
             string propertyName
         )
