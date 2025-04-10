@@ -1,6 +1,0 @@
-@movielandia_.net_api_HostAddress = http://localhost:5082
-
-GET {{movielandia_.net_api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
