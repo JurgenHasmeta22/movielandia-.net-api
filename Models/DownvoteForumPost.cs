@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models
         public int UserId { get; set; }
         public int PostId { get; set; }
 
-        // Navigation properties
+        // Collections
         public required virtual User User { get; set; }
         public virtual required ForumPost Post { get; set; }
     }

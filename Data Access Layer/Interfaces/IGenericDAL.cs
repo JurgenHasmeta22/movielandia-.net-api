@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace movielandia_.net_api.Repositories.Interfaces
+namespace movielandia_.net_api.DAL.Interfaces
 {
     public interface IGenericDAL<T>
         where T : class

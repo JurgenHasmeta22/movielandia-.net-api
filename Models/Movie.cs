@@ -12,7 +12,7 @@ namespace movielandia_.net_api.Models
         public DateTime? DateAired { get; set; }
         public string Description { get; set; }
 
-        // Navigation properties for relationships
+        // Collections for relationships
         public virtual ICollection<CastMovie> Cast { get; set; }
         public virtual ICollection<CrewMovie> Crew { get; set; }
         public virtual ICollection<MovieGenre> Genres { get; set; }

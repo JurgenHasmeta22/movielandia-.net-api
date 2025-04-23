@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Caching.Memory;
 using movielandia_.net_api.BLLs.Interfaces;
+using movielandia_.net_api.DAL.Interfaces;
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Models;
-using movielandia_.net_api.Repositories.Interfaces;
 
 namespace movielandia_.net_api.BLLs.Implementations
 {

@@ -15,7 +15,7 @@ namespace movielandia_.net_api.Models
         public DateTime? LastPostAt { get; set; }
         public int? LastPostId { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual ForumPost? LastPost { get; set; }
         public virtual ICollection<ForumTopic> Topics { get; set; }
         public virtual ICollection<UserForumModerator> Moderators { get; set; }

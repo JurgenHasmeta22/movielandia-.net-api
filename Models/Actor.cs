@@ -11,7 +11,7 @@ namespace movielandia_.net_api.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual ICollection<CastMovie> Movies { get; set; }
         public virtual ICollection<ActorReview> Reviews { get; set; }
         public virtual ICollection<UserActorFavorite> UsersWhoBookmarkedIt { get; set; }

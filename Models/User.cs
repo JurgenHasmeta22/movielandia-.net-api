@@ -19,7 +19,7 @@ namespace movielandia_.net_api.Models
         public bool CanResetPassword { get; set; } = false;
         public bool Subscribed { get; set; } = false;
 
-        // Navigation properties for relationships
+        // Collections for relationships
         // Profile
         public virtual Avatar? Avatar { get; set; }
 

@@ -15,7 +15,7 @@ namespace movielandia_.net_api.Models
         public int UserId { get; set; }
         public required string ProviderAccountId { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual required User User { get; set; }
     }
 }

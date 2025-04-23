@@ -19,7 +19,7 @@ namespace movielandia_.net_api.Models
         public int CategoryId { get; set; }
         public int UserId { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual User? ClosedBy { get; set; }
         public virtual required ForumCategory Category { get; set; }
         public virtual required User User { get; set; }

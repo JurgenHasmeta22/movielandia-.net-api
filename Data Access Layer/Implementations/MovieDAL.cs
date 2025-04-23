@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using movielandia_.net_api.DAL.Interfaces;
 using movielandia_.net_api.Data;
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Models;
-using movielandia_.net_api.Repositories.Interfaces;
 
-namespace movielandia_.net_api.Repositories.Implementations
+namespace movielandia_.net_api.DAL.Implementations
 {
     public class MovieDAL : GenericDAL<Movie>, IMovieDAL
     {

@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models
         public int UserId { get; set; }
         public int InboxId { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual required User User { get; set; }
         public virtual required Inbox Inbox { get; set; }
     }

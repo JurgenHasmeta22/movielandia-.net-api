@@ -1,7 +1,7 @@
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Models;
 
-namespace movielandia_.net_api.Repositories.Interfaces
+namespace movielandia_.net_api.DAL.Interfaces
 {
     public interface IMovieDAL : IGenericDAL<Movie>
     {

@@ -5,7 +5,7 @@ namespace movielandia_.net_api.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        // Navigation properties for relationships
+        // Collections for relationships
         public virtual ICollection<MovieGenre> Movies { get; set; }
         public virtual ICollection<SerieGenre> Series { get; set; }
         public virtual ICollection<UserGenreFavorite> UsersWhoBookmarkedIt { get; set; }

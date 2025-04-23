@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using movielandia_.net_api.DAL.Interfaces;
 using movielandia_.net_api.Data;
-using movielandia_.net_api.Repositories.Interfaces;
 
-namespace movielandia_.net_api.Repositories.Implementations
+namespace movielandia_.net_api.DAL.Implementations
 {
     public class GenericDAL<T> : IGenericDAL<T>
         where T : class
@@ -47,7 +47,7 @@ namespace movielandia_.net_api.Repositories.Implementations
         public virtual async Task<bool> DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
-            
+
             if (entity == null)
             {
                 return false;

@@ -10,7 +10,7 @@ namespace movielandia_.net_api.Models
         public int UserId { get; set; }
         public int SeasonId { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual User User { get; set; } = null!;
         public virtual Season Season { get; set; } = null!;
         public virtual ICollection<UpvoteSeasonReview> Upvotes { get; set; }

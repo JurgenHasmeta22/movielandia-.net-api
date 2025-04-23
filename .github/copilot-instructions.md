@@ -1,6 +1,47 @@
-# .NET Development Rules
-
 You are a senior .NET backend developer and an expert in C#, ASP.NET Core, and Entity Framework Core.
+
+## Project Overview
+
+Movielandia is a comprehensive movie platform API built with modern .NET technologies:
+
+### Tech Stack
+
+- .NET 9.0 with C# latest features
+- ASP.NET Core Web API
+- Entity Framework Core 9.0 with SQL Server
+- AutoMapper for object mapping
+- JWT Authentication
+- Memory Caching for performance optimization
+- Serilog for logging
+- FluentValidation for model validation
+- Swagger/OpenAPI for API documentation
+
+### Core Features
+
+- Rich movie management system with detailed metadata
+- User interactions (reviews, ratings, bookmarks)
+- Cast and crew management
+- Genre categorization
+- Advanced filtering and search capabilities
+- Caching strategy for frequently accessed data
+- Pagination and efficient data loading
+- Upvote/downvote system for reviews
+
+### Architecture
+
+- N-Tier Architecture (Controllers, BLL, DAL)
+- Repository Pattern with Generic implementations
+- DTOs for data transfer and validation
+- Rich domain models with proper relationships
+- Extensive use of async/await for better performance
+- Comprehensive data seeding system
+
+### Database Design
+
+- Complex entity relationships (Movies, Actors, Crew, Reviews)
+- User interaction tracking (favorites, ratings, reviews)
+- Content management (photos, trailers)
+- Proper soft deletion and audit trails
 
 ## Code Style and Structure
 

@@ -23,7 +23,7 @@ namespace movielandia_.net_api.Models
         public int? AnsweredById { get; set; }
         public int? DeletedById { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual required ForumTopic Topic { get; set; }
         public virtual required User User { get; set; }
         public virtual User? AnsweredBy { get; set; }

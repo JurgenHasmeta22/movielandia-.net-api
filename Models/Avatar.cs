@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models
         public required string PhotoSrc { get; set; }
         public int UserId { get; set; }
 
-        // Navigation properties
+        // Collections
         public required virtual User User { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace movielandia_.net_api.Models
         public int MovieId { get; set; }
         public int CrewId { get; set; }
 
-        // Navigation properties
+        // Collections
         public required virtual Movie Movie { get; set; }
         public virtual required Crew Crew { get; set; }
     }

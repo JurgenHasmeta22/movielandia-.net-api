@@ -11,7 +11,7 @@ namespace movielandia_.net_api.Models
         public DateTime? DateAired { get; set; }
         public float RatingImdb { get; set; }
 
-        // Navigation properties for relationships
+        // Collections for relationships
         public virtual ICollection<CastSerie> Cast { get; set; }
         public virtual ICollection<CrewSerie> Crew { get; set; }
         public virtual ICollection<Season> Seasons { get; set; }

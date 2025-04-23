@@ -4,7 +4,7 @@ namespace movielandia_.net_api.Models
     {
         public int Id { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual ICollection<UserInbox> Participants { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
 

@@ -12,7 +12,7 @@ namespace movielandia_.net_api.Models
         public float RatingImdb { get; set; }
         public int SerieId { get; set; }
 
-        // Navigation properties for relationships
+        // Collections for relationships
         public virtual Serie Serie { get; set; } = null!;
         public virtual ICollection<Episode> Episodes { get; set; }
         public virtual ICollection<UserSeasonFavorite> UsersWhoBookmarkedIt { get; set; }

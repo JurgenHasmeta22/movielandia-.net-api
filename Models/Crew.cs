@@ -10,7 +10,7 @@ namespace movielandia_.net_api.Models
         public string Description { get; set; }
         public string Debut { get; set; }
 
-        // Navigation properties for relationships
+        // Collections for relationships
         public virtual ICollection<CrewMovie> ProducedMovies { get; set; }
         public virtual ICollection<CrewSerie> ProducedSeries { get; set; }
         public virtual ICollection<CrewReview> Reviews { get; set; }

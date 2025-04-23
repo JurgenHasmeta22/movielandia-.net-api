@@ -10,7 +10,7 @@ namespace movielandia_.net_api.Models
         public int PostId { get; set; }
         public int EditedById { get; set; }
 
-        // Navigation properties
+        // Collections
         public required virtual ForumPost Post { get; set; }
         public virtual required User EditedBy { get; set; }
     }

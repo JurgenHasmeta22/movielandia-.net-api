@@ -7,7 +7,7 @@ namespace movielandia_.net_api.Models
         public int MovieId { get; set; }
         public int MovieReviewId { get; set; }
 
-        // Navigation properties
+        // Collections
         public virtual User? User { get; set; }
         public virtual Movie? Movie { get; set; }
         public virtual MovieReview? MovieReview { get; set; }
