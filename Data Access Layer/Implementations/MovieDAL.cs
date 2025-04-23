@@ -8,15 +8,19 @@ namespace movielandia_.net_api.Repositories.Implementations
 {
     public class MovieDAL : GenericDAL<Movie>, IMovieDAL
     {
+        #region Fields
         private new readonly ApplicationDbContext _context;
+        #endregion
 
+        #region Constructor
         public MovieDAL(ApplicationDbContext context)
             : base(context)
         {
             _context = context;
         }
+        #endregion
 
-        // #region GET Methods
+        #region Get Methods
         public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
         {
             return await _context.Movie.ToListAsync();
@@ -318,9 +322,9 @@ namespace movielandia_.net_api.Repositories.Implementations
 
             return (relatedMovies, totalCount);
         }
+        #endregion
 
-        // #endregion
-
+        #region Search and Count Methods
         public async Task<int> GetMoviesTotalCountAsync()
         {
             return await _context.Movie.CountAsync();
@@ -374,7 +378,9 @@ namespace movielandia_.net_api.Repositories.Implementations
 
             return (movies, totalCount);
         }
+        #endregion
 
+        #region Movie Status Methods
         public async Task<bool> IsMovieBookmarkedByUserAsync(int movieId, int userId)
         {
             return await _context.UserMovieFavorite.AnyAsync(f =>
@@ -442,7 +448,9 @@ namespace movielandia_.net_api.Repositories.Implementations
 
             return result;
         }
+        #endregion
 
+        #region Helper Methods
         private static System.Linq.Expressions.Expression<Func<T, object>> GetLambdaExpression<T>(
             string propertyName
         )
@@ -456,5 +464,6 @@ namespace movielandia_.net_api.Repositories.Implementations
                 parameter
             );
         }
+        #endregion
     }
 }

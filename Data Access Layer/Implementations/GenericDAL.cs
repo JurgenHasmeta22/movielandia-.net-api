@@ -47,6 +47,7 @@ namespace movielandia_.net_api.Repositories.Implementations
         public virtual async Task<bool> DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
+            
             if (entity == null)
             {
                 return false;
