@@ -18,28 +18,23 @@ namespace movielandia_.net_api.Extensions
 
                 try
                 {
-                    // 1. Seed users first
-                    await dbContext.User.AddRangeAsync(); // Users from UserSeedConfiguration
+                    await dbContext.User.AddRangeAsync();
                     await dbContext.SaveChangesAsync();
 
-                    // 2. Seed basic entities
-                    await dbContext.Genre.AddRangeAsync(); // Genres from GenreSeedConfiguration
-                    await dbContext.Movie.AddRangeAsync(); // Movies from MovieSeedConfiguration
-                    await dbContext.Actor.AddRangeAsync(); // Actors from ActorSeedConfiguration
+                    await dbContext.Genre.AddRangeAsync();
+                    await dbContext.Movie.AddRangeAsync();
+                    await dbContext.Actor.AddRangeAsync();
                     await dbContext.SaveChangesAsync();
 
-                    // 3. Seed relationship entities
-                    await dbContext.MovieGenre.AddRangeAsync(); // MovieGenres from MovieGenreSeedConfiguration
-                    await dbContext.CastMovie.AddRangeAsync(); // CastMovies from CastMovieSeedConfiguration
+                    await dbContext.MovieGenre.AddRangeAsync();
+                    await dbContext.CastMovie.AddRangeAsync();
                     await dbContext.SaveChangesAsync();
 
-                    // 4. Seed review-related entities
-                    await dbContext.MovieReview.AddRangeAsync(); // MovieReviews from MovieReviewSeedConfiguration
+                    await dbContext.MovieReview.AddRangeAsync();
                     await dbContext.SaveChangesAsync();
 
-                    // 5. Seed review interaction entities
-                    await dbContext.UpvoteMovieReview.AddRangeAsync(); // Upvotes from UpvoteMovieReviewSeedConfiguration
-                    await dbContext.DownvoteMovieReview.AddRangeAsync(); // Downvotes from DownvoteMovieReviewSeedConfiguration
+                    await dbContext.UpvoteMovieReview.AddRangeAsync();
+                    await dbContext.DownvoteMovieReview.AddRangeAsync();
                     await dbContext.SaveChangesAsync();
 
                     await dbContext.Database.CommitTransactionAsync();
