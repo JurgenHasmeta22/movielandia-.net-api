@@ -28,26 +28,28 @@ namespace movielandia_.net_api.Data.Configurations
                 .HasForeignKey(dmr => dmr.UserId)
                 .IsRequired();
 
-            // Seed data using anonymous type to bypass navigation property requirements
-            var data = new[]
-            {
-                new
+            // Configure ignore rules for seeding
+            builder.Ignore(dmr => dmr.User);
+            builder.Ignore(dmr => dmr.Movie);
+            builder.Ignore(dmr => dmr.MovieReview);
+
+            // Seed data
+            builder.HasData(
+                new DownvoteMovieReview
                 {
                     Id = 1,
                     UserId = 6,
                     MovieId = 1,
                     MovieReviewId = 2,
                 },
-                new
+                new DownvoteMovieReview
                 {
                     Id = 2,
-                    UserId = 4,
+                    UserId = 7,
                     MovieId = 1,
-                    MovieReviewId = 5,
-                },
-            };
-
-            builder.HasData(data);
+                    MovieReviewId = 3,
+                }
+            );
         }
     }
 }

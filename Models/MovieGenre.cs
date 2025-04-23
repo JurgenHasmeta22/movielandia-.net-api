@@ -7,7 +7,7 @@ namespace movielandia_.net_api.Models
         public int GenreId { get; set; }
 
         // Navigation properties
-        public virtual required Movie Movie { get; set; }
-        public virtual required Genre Genre { get; set; }
+        public virtual Movie? Movie { get; set; }
+        public virtual Genre? Genre { get; set; }
     }
 }

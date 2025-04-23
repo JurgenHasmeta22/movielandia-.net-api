@@ -103,6 +103,16 @@ namespace movielandia_.net_api.Data
         public DbSet<ContentHistory> ContentHistory { get; set; }
         public DbSet<ContentChangeLog> ContentChangeLog { get; set; }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<MovieGenre> MovieGenres { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<CastMovie> CastMovies { get; set; }
+        public DbSet<MovieReview> MovieReviews { get; set; }
+        public DbSet<UpvoteMovieReview> UpvoteMovieReviews { get; set; }
+        public DbSet<DownvoteMovieReview> DownvoteMovieReviews { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure singular table names

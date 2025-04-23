@@ -8,6 +8,13 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
+            builder.Property(m => m.Title).IsRequired();
+            builder.Property(m => m.Description).IsRequired();
+            builder.Property(m => m.DateAired).IsRequired();
+            builder.Property(m => m.Duration).IsRequired();
+            builder.Property(m => m.PhotoSrc).IsRequired();
+            builder.Property(m => m.PhotoSrcProd).IsRequired();
+
             builder.HasData(
                 new Movie
                 {
@@ -52,6 +59,21 @@ namespace movielandia_.net_api.Data.Configurations
                         "http://localhost:4000/images/movies/8c9fce3c0ffa46576423d44b525447edc25f1396.jpg",
                     PhotoSrcProd =
                         "https://movielandia-avenger22s-projects.vercel.app/images/movies/8c9fce3c0ffa46576423d44b525447edc25f1396.jpg",
+                },
+                new Movie
+                {
+                    Id = 5,
+                    Title = "Spider-Man: No Way Home",
+                    TrailerSrc = "https://www.youtube.com/embed/JfVOs4VSpmA",
+                    Duration = 148,
+                    DateAired = new DateTime(2021, 12, 17),
+                    RatingImdb = 8.3f,
+                    Description =
+                        "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
+                    PhotoSrc =
+                        "http://localhost:4000/images/movies/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+                    PhotoSrcProd =
+                        "https://movielandia-avenger22s-projects.vercel.app/images/movies/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
                 }
             );
         }

@@ -21,30 +21,50 @@ namespace movielandia_.net_api.Data.Configurations
                 .HasForeignKey(mg => mg.GenreId)
                 .IsRequired();
 
-            // Seed data using anonymous type to bypass navigation property requirements
-            var data = new[]
-            {
-                new
+            // Configure ignore rules for seeding
+            builder.Ignore(mg => mg.Movie);
+            builder.Ignore(mg => mg.Genre);
+
+            builder.HasData(
+                // Freaks Out (Movie Id = 1)
+                new MovieGenre
                 {
                     Id = 1,
                     MovieId = 1,
-                    GenreId = 1,
+                    GenreId = 1, // Action
                 },
-                new
+                new MovieGenre
                 {
                     Id = 2,
                     MovieId = 1,
-                    GenreId = 2,
+                    GenreId = 2, // Drama
                 },
-                new
+                new MovieGenre
                 {
                     Id = 3,
                     MovieId = 1,
-                    GenreId = 3,
+                    GenreId = 10, // Fantasy
                 },
-            };
-
-            builder.HasData(data);
+                // Spider-Man: No Way Home (Movie Id = 5)
+                new MovieGenre
+                {
+                    Id = 4,
+                    MovieId = 5,
+                    GenreId = 1, // Action
+                },
+                new MovieGenre
+                {
+                    Id = 5,
+                    MovieId = 5,
+                    GenreId = 4, // Science Fiction
+                },
+                new MovieGenre
+                {
+                    Id = 6,
+                    MovieId = 5,
+                    GenreId = 10, // Fantasy
+                }
+            );
         }
     }
 }

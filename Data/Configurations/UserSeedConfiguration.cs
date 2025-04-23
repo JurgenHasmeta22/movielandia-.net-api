@@ -9,55 +9,82 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            // Configure required properties
+            builder.Property(u => u.UserName).IsRequired();
+            builder.Property(u => u.Email).IsRequired();
+            builder.Property(u => u.Password).IsRequired();
+
+            var now = new DateTime(2025, 4, 10);
+
             builder.HasData(
                 new User
                 {
                     Id = 1,
                     UserName = "admin22",
-                    Email = "admin@yahoo.com",
+                    Email = "admin@movielandia.com",
                     Password = BCrypt.Net.BCrypt.HashPassword("Admin22%"),
                     Role = UserType.Admin,
-                    Bio = "Admin bio test",
+                    Bio = "System administrator",
                     Active = true,
                 },
                 new User
                 {
                     Id = 2,
-                    UserName = "test1",
-                    Email = "test1@email.com",
-                    Password = BCrypt.Net.BCrypt.HashPassword("Test2222%"),
+                    UserName = "moviefan1",
+                    Email = "moviefan1@movielandia.com",
+                    Password = BCrypt.Net.BCrypt.HashPassword("MovieFan1%"),
                     Role = UserType.User,
-                    Bio = "Test 1 bio test",
+                    Bio = "Passionate about movies",
                     Active = true,
                 },
                 new User
                 {
                     Id = 3,
-                    UserName = "test2",
-                    Email = "test2@email.com",
-                    Password = BCrypt.Net.BCrypt.HashPassword("Test2222%"),
+                    UserName = "cinephile2",
+                    Email = "cinephile2@movielandia.com",
+                    Password = BCrypt.Net.BCrypt.HashPassword("Cinephile2%"),
                     Role = UserType.User,
-                    Bio = "Test 2 bio test",
+                    Bio = "Film enthusiast and reviewer",
                     Active = true,
                 },
                 new User
                 {
                     Id = 4,
-                    UserName = "test3",
-                    Email = "test3@email.com",
-                    Password = BCrypt.Net.BCrypt.HashPassword("Test3333%"),
+                    UserName = "reviewer3",
+                    Email = "reviewer3@movielandia.com",
+                    Password = BCrypt.Net.BCrypt.HashPassword("Reviewer3%"),
                     Role = UserType.User,
-                    Bio = "Test 3 bio test",
+                    Bio = "Professional movie critic",
                     Active = true,
                 },
                 new User
                 {
                     Id = 5,
-                    UserName = "test4",
-                    Email = "test4@email.com",
-                    Password = BCrypt.Net.BCrypt.HashPassword("Test4444%"),
+                    UserName = "filmcritic4",
+                    Email = "filmcritic4@movielandia.com",
+                    Password = BCrypt.Net.BCrypt.HashPassword("FilmCritic4%"),
                     Role = UserType.User,
-                    Bio = "Test 4 bio test",
+                    Bio = "Aspiring film critic",
+                    Active = true,
+                },
+                new User
+                {
+                    Id = 6,
+                    UserName = "moviebuff5",
+                    Email = "moviebuff5@movielandia.com",
+                    Password = BCrypt.Net.BCrypt.HashPassword("MovieBuff5%"),
+                    Role = UserType.User,
+                    Bio = "Movie enthusiast",
+                    Active = true,
+                },
+                new User
+                {
+                    Id = 7,
+                    UserName = "filmlover6",
+                    Email = "filmlover6@movielandia.com",
+                    Password = BCrypt.Net.BCrypt.HashPassword("FilmLover6%"),
+                    Role = UserType.User,
+                    Bio = "Just love watching movies",
                     Active = true,
                 }
             );

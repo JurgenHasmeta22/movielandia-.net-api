@@ -31,42 +31,65 @@ namespace movielandia_.net_api.Data.Configurations
             builder.Property(r => r.CreatedAt).IsRequired();
             builder.Property(r => r.Content).IsRequired();
 
-            // Ignore required navigation properties during seeding
-            var data = new[]
-            {
-                new
-                {
-                    Id = 1,
-                    Content = "test",
-                    Rating = 4.5f,
-                    CreatedAt = now,
-                    UpdatedAt = (DateTime?)null,
-                    UserId = 2,
-                    MovieId = 1,
-                },
-                new
-                {
-                    Id = 2,
-                    Content = "test",
-                    Rating = 4.0f,
-                    CreatedAt = now,
-                    UpdatedAt = (DateTime?)null,
-                    UserId = 3,
-                    MovieId = 1,
-                },
-                new
-                {
-                    Id = 3,
-                    Content = "test",
-                    Rating = 3.5f,
-                    CreatedAt = now,
-                    UpdatedAt = (DateTime?)null,
-                    UserId = 4,
-                    MovieId = 1,
-                },
-            };
+            // Configure ignore rules for seeding
+            builder.Ignore(r => r.User);
+            builder.Ignore(r => r.Movie);
 
-            builder.HasData(data);
+            builder.HasData(
+                new[]
+                {
+                    new MovieReview
+                    {
+                        Id = 1,
+                        UserId = 2,
+                        MovieId = 1,
+                        Content = "Great movie, highly recommended!",
+                        Rating = 4.5f,
+                        CreatedAt = now,
+                        UpdatedAt = now,
+                    },
+                    new MovieReview
+                    {
+                        Id = 2,
+                        UserId = 3,
+                        MovieId = 1,
+                        Content = "Interesting plot and good acting.",
+                        Rating = 4.0f,
+                        CreatedAt = now,
+                        UpdatedAt = now,
+                    },
+                    new MovieReview
+                    {
+                        Id = 3,
+                        UserId = 4,
+                        MovieId = 1,
+                        Content = "Could have been better, but still entertaining.",
+                        Rating = 3.5f,
+                        CreatedAt = now,
+                        UpdatedAt = now,
+                    },
+                    new MovieReview
+                    {
+                        Id = 4,
+                        UserId = 5,
+                        MovieId = 1,
+                        Content = "Excellent cinematography and direction!",
+                        Rating = 5.0f,
+                        CreatedAt = now,
+                        UpdatedAt = now,
+                    },
+                    new MovieReview
+                    {
+                        Id = 5,
+                        UserId = 6,
+                        MovieId = 1,
+                        Content = "A decent watch, nothing special.",
+                        Rating = 3.0f,
+                        CreatedAt = now,
+                        UpdatedAt = now,
+                    },
+                }
+            );
         }
     }
 }

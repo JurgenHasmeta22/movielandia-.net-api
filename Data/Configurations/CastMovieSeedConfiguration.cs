@@ -8,66 +8,61 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<CastMovie> builder)
         {
+            builder
+                .HasOne(cm => cm.Movie)
+                .WithMany(m => m.Cast)
+                .HasForeignKey(cm => cm.MovieId)
+                .IsRequired();
+
+            builder
+                .HasOne(cm => cm.Actor)
+                .WithMany(a => a.Movies)
+                .HasForeignKey(cm => cm.ActorId)
+                .IsRequired();
+
+            builder.Ignore(cm => cm.Movie);
+            builder.Ignore(cm => cm.Actor);
+
             builder.HasData(
                 new CastMovie
                 {
                     Id = 1,
                     MovieId = 5,
                     ActorId = 1,
+                    Movie = null,
+                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 2,
                     MovieId = 5,
                     ActorId = 2,
+                    Movie = null,
+                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 3,
                     MovieId = 5,
                     ActorId = 3,
+                    Movie = null,
+                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 4,
-                    MovieId = 13,
+                    MovieId = 1,
                     ActorId = 4,
+                    Movie = null,
+                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 5,
-                    MovieId = 13,
+                    MovieId = 1,
                     ActorId = 5,
-                },
-                new CastMovie
-                {
-                    Id = 6,
-                    MovieId = 13,
-                    ActorId = 6,
-                },
-                new CastMovie
-                {
-                    Id = 7,
-                    MovieId = 14,
-                    ActorId = 7,
-                },
-                new CastMovie
-                {
-                    Id = 8,
-                    MovieId = 14,
-                    ActorId = 8,
-                },
-                new CastMovie
-                {
-                    Id = 9,
-                    MovieId = 1,
-                    ActorId = 11,
-                },
-                new CastMovie
-                {
-                    Id = 10,
-                    MovieId = 1,
-                    ActorId = 12,
+                    Movie = null,
+                    Actor = null,
                 }
             );
         }
