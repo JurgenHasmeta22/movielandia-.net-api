@@ -62,9 +62,12 @@ namespace movielandia_.net_api.DAL.Implementations
                         case FilterOperator.Contains:
                             if (property.PropertyType == typeof(string))
                             {
+                                var searchValue =
+                                    filterValue != null ? filterValue.ToString() : string.Empty;
+
                                 query = query.Where(m =>
                                     EF.Property<string>(m, filter.FilterNameString)
-                                        .Contains(filterValue.ToString())
+                                        .Contains(searchValue ?? string.Empty)
                                 );
                             }
 
@@ -73,11 +76,13 @@ namespace movielandia_.net_api.DAL.Implementations
                             query = query.Where(m =>
                                 EF.Property<object>(m, filter.FilterNameString).Equals(filterValue)
                             );
+
                             break;
                         case FilterOperator.GreaterThan:
                             if (property.PropertyType == typeof(int))
                             {
                                 int value = Convert.ToInt32(filterValue);
+
                                 query = query.Where(m =>
                                     EF.Property<int>(m, filter.FilterNameString) > value
                                 );
@@ -96,6 +101,7 @@ namespace movielandia_.net_api.DAL.Implementations
                             if (property.PropertyType == typeof(int))
                             {
                                 int value = Convert.ToInt32(filterValue);
+
                                 query = query.Where(m =>
                                     EF.Property<int>(m, filter.FilterNameString) < value
                                 );
@@ -108,6 +114,7 @@ namespace movielandia_.net_api.DAL.Implementations
                                     EF.Property<float>(m, filter.FilterNameString) < value
                                 );
                             }
+
                             break;
                     }
                 }
@@ -127,12 +134,12 @@ namespace movielandia_.net_api.DAL.Implementations
                         .First(m => m.Name == methodName && m.GetParameters().Length == 2)
                         .MakeGenericMethod(typeof(Movie), property.PropertyType);
 
-                    query =
-                        (IQueryable<Movie>)
-                            orderBy.Invoke(
-                                null,
-                                [query, GetLambdaExpression<Movie>(filter.SortBy)]
-                            );
+                    var result = orderBy.Invoke(
+                        null,
+                        [query, GetLambdaExpression<Movie>(filter.SortBy)]
+                    );
+
+                    query = result as IQueryable<Movie> ?? query;
                 }
                 else
                 {
@@ -211,7 +218,7 @@ namespace movielandia_.net_api.DAL.Implementations
                 movie.Reviews = reviewsQuery.Skip(skip).Take(take).ToList();
             }
 
-            return movie;
+            return movie ?? throw new KeyNotFoundException($"Movie with ID '{id}' was not found.");
         }
 
         public async Task<Movie> GetMovieByTitleWithDetailsAsync(
@@ -264,7 +271,10 @@ namespace movielandia_.net_api.DAL.Implementations
                 movie.Reviews = reviewsQuery.Skip(skip).Take(take).ToList();
             }
 
-            return movie;
+            return movie
+                ?? throw new KeyNotFoundException(
+                    $"Movie with title '{processedTitle}' was not found."
+                );
         }
 
         public async Task<IEnumerable<Movie>> GetLatestMoviesAsync(
@@ -320,6 +330,8 @@ namespace movielandia_.net_api.DAL.Implementations
                 .Movie.Where(m => pagedIds.Contains(m.Id))
                 .ToListAsync();
 
+            relatedMovies ??= new List<Movie>();
+
             return (relatedMovies, totalCount);
         }
         #endregion
@@ -351,12 +363,12 @@ namespace movielandia_.net_api.DAL.Implementations
                         .First(m => m.Name == methodName && m.GetParameters().Length == 2)
                         .MakeGenericMethod(typeof(Movie), property.PropertyType);
 
-                    query =
-                        (IQueryable<Movie>)
-                            orderBy.Invoke(
-                                null,
-                                [query, GetLambdaExpression<Movie>(filter.SortBy)]
-                            );
+                    var result = orderBy.Invoke(
+                        null,
+                        [query, GetLambdaExpression<Movie>(filter.SortBy)]
+                    );
+
+                    query = result as IQueryable<Movie> ?? query;
                 }
                 else
                 {
@@ -410,7 +422,7 @@ namespace movielandia_.net_api.DAL.Implementations
                 return (0, 0);
             }
 
-            float totalRating = reviews.Sum(r => r.Rating ?? 0);
+            float totalRating = reviews.Sum(r => r.Rating.GetValueOrDefault(0));
             float averageRating = totalRating / totalReviews;
 
             return (averageRating, totalReviews);
@@ -428,7 +440,7 @@ namespace movielandia_.net_api.DAL.Implementations
                 .Select(g => new
                 {
                     MovieId = g.Key,
-                    AverageRating = g.Average(r => r.Rating ?? 0),
+                    AverageRating = g.Average(r => r.Rating.GetValueOrDefault(0)),
                     TotalReviews = g.Count(),
                 })
                 .ToListAsync();

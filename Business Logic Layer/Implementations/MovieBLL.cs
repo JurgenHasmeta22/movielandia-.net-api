@@ -154,7 +154,7 @@ namespace movielandia_.net_api.BLLs.Implementations
 
             if (movie == null)
             {
-                return null;
+                throw new KeyNotFoundException("Movie not found.");
             }
 
             var movieDetail = MapToDetailDTO(movie);
@@ -202,9 +202,9 @@ namespace movielandia_.net_api.BLLs.Implementations
         {
             string cacheKey = "LatestMovies";
 
-            if (userId == null && _cache.TryGetValue(cacheKey, out List<MovieDTO> cachedMovies))
+            if (userId == null && _cache.TryGetValue(cacheKey, out List<MovieDTO>? cachedMovies))
             {
-                return cachedMovies;
+                return cachedMovies ?? [];
             }
 
             var movies = await _movieDAL.GetLatestMoviesAsync(userId);
@@ -389,7 +389,14 @@ namespace movielandia_.net_api.BLLs.Implementations
 
             if (existingMovie == null)
             {
-                return null;
+                return new MovieDTO
+                {
+                    Title = string.Empty,
+                    PhotoSrc = string.Empty,
+                    PhotoSrcProd = string.Empty,
+                    TrailerSrc = string.Empty,
+                    Description = string.Empty,
+                };
             }
 
             existingMovie.Title = movieDTO.Title;
@@ -428,7 +435,14 @@ namespace movielandia_.net_api.BLLs.Implementations
         {
             if (movie == null)
             {
-                return null;
+                return new MovieDTO
+                {
+                    Title = string.Empty,
+                    PhotoSrc = string.Empty,
+                    PhotoSrcProd = string.Empty,
+                    TrailerSrc = string.Empty,
+                    Description = string.Empty,
+                };
             }
 
             return new MovieDTO
@@ -448,56 +462,71 @@ namespace movielandia_.net_api.BLLs.Implementations
         private MovieDetailDTO MapToDetailDTO(Movie movie)
         {
             if (movie == null)
-                return null;
+                return new MovieDetailDTO
+                {
+                    Title = string.Empty,
+                    PhotoSrc = string.Empty,
+                    PhotoSrcProd = string.Empty,
+                    TrailerSrc = string.Empty,
+                    Description = string.Empty,
+                    Genres = Enumerable.Empty<MovieGenreDTO>(),
+                    Cast = Enumerable.Empty<MovieCastDTO>(),
+                    Crew = Enumerable.Empty<MovieCrewDTO>(),
+                    Reviews = Enumerable.Empty<MovieReviewDTO>(),
+                };
 
             var dto = new MovieDetailDTO
             {
                 Id = movie.Id,
-                Title = movie.Title,
-                PhotoSrc = movie.PhotoSrc,
-                PhotoSrcProd = movie.PhotoSrcProd,
-                TrailerSrc = movie.TrailerSrc,
+                Title = movie.Title ?? string.Empty,
+                PhotoSrc = movie.PhotoSrc ?? string.Empty,
+                PhotoSrcProd = movie.PhotoSrcProd ?? string.Empty,
+                TrailerSrc = movie.TrailerSrc ?? string.Empty,
                 Duration = movie.Duration,
                 RatingImdb = movie.RatingImdb,
                 DateAired = movie.DateAired,
-                Description = movie.Description,
+                Description = movie.Description ?? string.Empty,
 
-                Genres = movie.Genres?.Select(mg => new MovieGenreDTO
-                {
-                    Id = mg.Id,
-                    GenreId = mg.GenreId,
-                    Name = mg.Genre?.Name,
-                }),
+                Genres =
+                    movie.Genres?.Select(mg => new MovieGenreDTO
+                    {
+                        Id = mg.Id,
+                        GenreId = mg.GenreId,
+                        Name = mg.Genre?.Name ?? string.Empty,
+                    }) ?? Enumerable.Empty<MovieGenreDTO>(),
 
-                Cast = movie.Cast?.Select(cm => new MovieCastDTO
-                {
-                    Id = cm.Id,
-                    ActorId = cm.ActorId,
-                    Fullname = cm.Actor?.Fullname,
-                    PhotoSrc = cm.Actor?.PhotoSrc,
-                }),
+                Cast =
+                    movie.Cast?.Select(cm => new MovieCastDTO
+                    {
+                        Id = cm.Id,
+                        ActorId = cm.ActorId,
+                        Fullname = cm.Actor?.Fullname ?? string.Empty,
+                        PhotoSrc = cm.Actor?.PhotoSrc ?? string.Empty,
+                    }) ?? Enumerable.Empty<MovieCastDTO>(),
 
-                Crew = movie.Crew?.Select(cm => new MovieCrewDTO
-                {
-                    Id = cm.Id,
-                    CrewId = cm.CrewId,
-                    Fullname = cm.Crew?.Fullname,
-                    Role = cm.Crew?.Role,
-                    PhotoSrc = cm.Crew?.PhotoSrc,
-                }),
+                Crew =
+                    movie.Crew?.Select(cm => new MovieCrewDTO
+                    {
+                        Id = cm.Id,
+                        CrewId = cm.CrewId,
+                        Fullname = cm.Crew?.Fullname ?? string.Empty,
+                        Role = cm.Crew?.Role ?? string.Empty,
+                        PhotoSrc = cm.Crew?.PhotoSrc ?? string.Empty,
+                    }) ?? Enumerable.Empty<MovieCrewDTO>(),
 
-                Reviews = movie.Reviews?.Select(r => new MovieReviewDTO
-                {
-                    Id = r.Id,
-                    Content = r.Content,
-                    Rating = r.Rating,
-                    CreatedAt = r.CreatedAt,
-                    UpdatedAt = r.UpdatedAt,
-                    UserId = r.UserId,
-                    UserName = r.User?.UserName,
-                    UpvotesCount = r.Upvotes?.Count ?? 0,
-                    DownvotesCount = r.Downvotes?.Count ?? 0,
-                }),
+                Reviews =
+                    movie.Reviews?.Select(r => new MovieReviewDTO
+                    {
+                        Id = r.Id,
+                        Content = r.Content,
+                        Rating = r.Rating,
+                        CreatedAt = r.CreatedAt,
+                        UpdatedAt = r.UpdatedAt,
+                        UserId = r.UserId,
+                        UserName = r.User?.UserName ?? string.Empty,
+                        UpvotesCount = r.Upvotes?.Count ?? 0,
+                        DownvotesCount = r.Downvotes?.Count ?? 0,
+                    }) ?? Enumerable.Empty<MovieReviewDTO>(),
             };
 
             return dto;

@@ -29,7 +29,7 @@ Movielandia is a comprehensive movie platform API built with modern .NET technol
 
 ### Architecture
 
-- N-Tier Architecture (Controllers, BLL, DAL)
+- N-Tier Architecture with Controllers, BLL (Business Logic Layer), DAL (Data Access Layer)
 - Repository Pattern with Generic implementations
 - DTOs for data transfer and validation
 - Rich domain models with proper relationships

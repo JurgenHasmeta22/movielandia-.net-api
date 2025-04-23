@@ -24,7 +24,8 @@ namespace movielandia_.net_api.DAL.Implementations
 
         public virtual async Task<T> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            var entity = await _dbSet.FindAsync(id);
+            return entity ?? throw new KeyNotFoundException($"Entity with id {id} was not found.");
         }
 
         public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression)
