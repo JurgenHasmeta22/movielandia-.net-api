@@ -12,7 +12,7 @@ using movielandia_.net_api.Data;
 namespace movielandia_.net_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250423140518_InitialCreate")]
+    [Migration("20250423150832_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -130,63 +130,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actor", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Debut = "2012",
-                            Description = "Thomas Stanley Holland is an English actor. His accolades include a British Academy Film Award and three Saturn Awards.",
-                            Fullname = "Tom Holland",
-                            PhotoSrc = "http://localhost:4000/images/actors/tom-holland.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/actors/tom-holland.jpg",
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Debut = "2010",
-                            Description = "Zendaya Maree Stoermer Coleman is an American actress and singer. She has received various accolades, including two Primetime Emmy Awards.",
-                            Fullname = "Zendaya",
-                            PhotoSrc = "http://localhost:4000/images/actors/zendaya.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/actors/zendaya.jpg",
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Debut = "2000",
-                            Description = "Benedict Timothy Carlton Cumberbatch CBE is an English actor. He is known for his work on screen and stage.",
-                            Fullname = "Benedict Cumberbatch",
-                            PhotoSrc = "http://localhost:4000/images/actors/benedict-cumberbatch.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/actors/benedict-cumberbatch.jpg",
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Debut = "2019",
-                            Description = "Aurora Giovinazzo is an Italian actress known for her role in Freaks Out.",
-                            Fullname = "Aurora Giovinazzo",
-                            PhotoSrc = "http://localhost:4000/images/actors/aurora-giovinazzo.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/actors/aurora-giovinazzo.jpg",
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Debut = "2015",
-                            Description = "Pietro Castellitto is an Italian actor and director known for his work in Freaks Out.",
-                            Fullname = "Pietro Castellitto",
-                            PhotoSrc = "http://localhost:4000/images/actors/pietro-castellitto.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/actors/pietro-castellitto.jpg",
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.ActorReview", b =>
@@ -322,38 +265,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("CastMovie", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ActorId = 1,
-                            MovieId = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ActorId = 2,
-                            MovieId = 5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ActorId = 3,
-                            MovieId = 5
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ActorId = 4,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ActorId = 5,
-                            MovieId = 1
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.CastSerie", b =>
@@ -782,23 +693,9 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("MovieReviewId");
 
-                    b.ToTable("DownvoteMovieReview", (string)null);
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MovieId = 1,
-                            MovieReviewId = 2,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 2,
-                            MovieId = 1,
-                            MovieReviewId = 3,
-                            UserId = 7
-                        });
+                    b.ToTable("DownvoteMovieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.DownvoteSeasonReview", b =>
@@ -1398,58 +1295,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genre", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Action"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Drama"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Comedy"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Science Fiction"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Horror"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Romance"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Thriller"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Documentary"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Animation"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Fantasy"
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Inbox", b =>
@@ -1744,7 +1589,7 @@ namespace movielandia_.net_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateAired")
+                    b.Property<DateTime?>("DateAired")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -1776,56 +1621,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movie", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateAired = new DateTime(2021, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Matilde, Cencio, Fulvio, and Mario are united when World War II strikes Rome. Israel, their circus owner, disappears in an attempt to find a place abroad for all of them.",
-                            Duration = 141,
-                            PhotoSrc = "http://localhost:4000/images/movies/1TkkTo8UiRl5lWM5qkAISHXg0fU.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/movies/1TkkTo8UiRl5lWM5qkAISHXg0fU.jpg",
-                            RatingImdb = 7.4f,
-                            Title = "Freaks Out",
-                            TrailerSrc = "https://www.youtube.com/embed/D8La5G1DzCM"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateAired = new DateTime(2022, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Through their shared grief and connection to music, an orphaned girl bonds with her emotionally distant, successful violinist uncle.",
-                            Duration = 112,
-                            PhotoSrc = "http://localhost:4000/images/movies/fathersviolin.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/movies/fathersviolin.jpg",
-                            RatingImdb = 6.5f,
-                            Title = "My Father's Violin",
-                            TrailerSrc = "https://www.youtube.com/embed/GAmo87Ep-tI"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateAired = new DateTime(2017, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "A young businessman faces a lawyer in an attempt to prove his innocence for the murder of his girlfriend.",
-                            Duration = 126,
-                            PhotoSrc = "http://localhost:4000/images/movies/8c9fce3c0ffa46576423d44b525447edc25f1396.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/movies/8c9fce3c0ffa46576423d44b525447edc25f1396.jpg",
-                            RatingImdb = 8.1f,
-                            Title = "The Invisible Guest",
-                            TrailerSrc = "https://www.youtube.com/embed/epCg2RbyF80"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateAired = new DateTime(2021, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
-                            Duration = 148,
-                            PhotoSrc = "http://localhost:4000/images/movies/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-                            PhotoSrcProd = "https://movielandia-avenger22s-projects.vercel.app/images/movies/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-                            RatingImdb = 8.3f,
-                            Title = "Spider-Man: No Way Home",
-                            TrailerSrc = "https://www.youtube.com/embed/JfVOs4VSpmA"
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.MovieGenre", b =>
@@ -1849,44 +1644,6 @@ namespace movielandia_.net_api.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("MovieGenre", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            GenreId = 1,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            GenreId = 2,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            GenreId = 10,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            GenreId = 1,
-                            MovieId = 5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            GenreId = 4,
-                            MovieId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            GenreId = 10,
-                            MovieId = 5
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.MovieReview", b =>
@@ -1907,6 +1664,9 @@ namespace movielandia_.net_api.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MovieId1")
+                        .HasColumnType("int");
+
                     b.Property<float?>("Rating")
                         .HasColumnType("real");
 
@@ -1920,61 +1680,11 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("MovieId");
 
+                    b.HasIndex("MovieId1");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("MovieReview", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "Great movie, highly recommended!",
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MovieId = 1,
-                            Rating = 4.5f,
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "Interesting plot and good acting.",
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MovieId = 1,
-                            Rating = 4f,
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Could have been better, but still entertaining.",
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MovieId = 1,
-                            Rating = 3.5f,
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Content = "Excellent cinematography and direction!",
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MovieId = 1,
-                            Rating = 5f,
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Content = "A decent watch, nothing special.",
-                            CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MovieId = 1,
-                            Rating = 3f,
-                            UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 6
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.Notification", b =>
@@ -2442,44 +2152,9 @@ namespace movielandia_.net_api.Migrations
 
                     b.HasIndex("MovieReviewId");
 
-                    b.ToTable("UpvoteMovieReview", (string)null);
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MovieId = 1,
-                            MovieReviewId = 1,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            MovieId = 1,
-                            MovieReviewId = 2,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 3,
-                            MovieId = 1,
-                            MovieReviewId = 4,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 4,
-                            MovieId = 1,
-                            MovieReviewId = 5,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 5,
-                            MovieId = 1,
-                            MovieReviewId = 7,
-                            UserId = 7
-                        });
+                    b.ToTable("UpvoteMovieReview", (string)null);
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.UpvoteSeasonReview", b =>
@@ -2600,113 +2275,6 @@ namespace movielandia_.net_api.Migrations
                         .IsUnique();
 
                     b.ToTable("User", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = true,
-                            Bio = "System administrator",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "admin@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$rqj4V7oWyqUjoglTlOFrguCgAN8iwG7wVoKiVoc9rTQwqu1VqTWry",
-                            Phone = "+11234567890",
-                            Role = 1,
-                            Subscribed = false,
-                            UserName = "admin22"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Active = true,
-                            Bio = "Passionate about movies",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "moviefan1@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$lnb5E0NnJyr9gS7F68ZqL.wk5tn526X9vakv9hnyPJLedrnYGI.Ee",
-                            Phone = "+11234567890",
-                            Role = 0,
-                            Subscribed = false,
-                            UserName = "moviefan1"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Active = true,
-                            Bio = "Film enthusiast and reviewer",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "cinephile2@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$yULbn4xI1tsR0/OwKFoyt.OM//JhI2Dzq5m4v/tcmWwp8cpZyEEeS",
-                            Phone = "+11234567890",
-                            Role = 0,
-                            Subscribed = false,
-                            UserName = "cinephile2"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Active = true,
-                            Bio = "Professional movie critic",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "reviewer3@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$MvO2eliC4YDgsgInhtwZBe4SX69N4e04.8KgeVVhKxV2D76Ne0.4C",
-                            Phone = "+11234567890",
-                            Role = 0,
-                            Subscribed = false,
-                            UserName = "reviewer3"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Active = true,
-                            Bio = "Aspiring film critic",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "filmcritic4@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$5zFvPb/BYoKtmjJQELODdOHWEgQIk.v244MM/IBgFGSRjD4o8YmBK",
-                            Phone = "+11234567890",
-                            Role = 0,
-                            Subscribed = false,
-                            UserName = "filmcritic4"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Active = true,
-                            Bio = "Movie enthusiast",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "moviebuff5@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$VMb/gvH/gk/e1DJTi5FXWOiU29LCI9J0Xokr9eDsDEPllOIah4iA.",
-                            Phone = "+11234567890",
-                            Role = 0,
-                            Subscribed = false,
-                            UserName = "moviebuff5"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = true,
-                            Bio = "Just love watching movies",
-                            CanResetPassword = false,
-                            CountryFrom = "United States",
-                            Email = "filmlover6@movielandia.com",
-                            Gender = 0,
-                            Password = "$2a$11$oLhy8PtEiMAtgby4Boj48ule6JkQVrWgG4FTSKGe3RsgjdHhlZY62",
-                            Phone = "+11234567890",
-                            Role = 0,
-                            Subscribed = false,
-                            UserName = "filmlover6"
-                        });
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.UserActivity", b =>
@@ -3618,17 +3186,21 @@ namespace movielandia_.net_api.Migrations
 
             modelBuilder.Entity("movielandia_.net_api.Models.CastMovie", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Actor", null)
+                    b.HasOne("movielandia_.net_api.Models.Actor", "Actor")
                         .WithMany("Movies")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Movie", null)
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("Cast")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.CastSerie", b =>
@@ -3882,17 +3454,28 @@ namespace movielandia_.net_api.Migrations
 
             modelBuilder.Entity("movielandia_.net_api.Models.DownvoteMovieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Movie", null)
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("DownvoteMovieReviews")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.MovieReview", null)
+                    b.HasOne("movielandia_.net_api.Models.MovieReview", "MovieReview")
                         .WithMany("Downvotes")
                         .HasForeignKey("MovieReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("MovieReview");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.DownvoteSeasonReview", b =>
@@ -4325,32 +3908,44 @@ namespace movielandia_.net_api.Migrations
 
             modelBuilder.Entity("movielandia_.net_api.Models.MovieGenre", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Genre", null)
+                    b.HasOne("movielandia_.net_api.Models.Genre", "Genre")
                         .WithMany("Movies")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.Movie", null)
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("Genres")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Genre");
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.MovieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Movie", null)
-                        .WithMany("Reviews")
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
+                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.User", null)
+                    b.HasOne("movielandia_.net_api.Models.Movie", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("MovieId1");
+
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
                         .WithMany("MovieReviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.NotificationUser", b =>
@@ -4608,17 +4203,28 @@ namespace movielandia_.net_api.Migrations
 
             modelBuilder.Entity("movielandia_.net_api.Models.UpvoteMovieReview", b =>
                 {
-                    b.HasOne("movielandia_.net_api.Models.Movie", null)
+                    b.HasOne("movielandia_.net_api.Models.Movie", "Movie")
                         .WithMany("UpvoteMovieReviews")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("movielandia_.net_api.Models.MovieReview", null)
+                    b.HasOne("movielandia_.net_api.Models.MovieReview", "MovieReview")
                         .WithMany("Upvotes")
                         .HasForeignKey("MovieReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("movielandia_.net_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("MovieReview");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("movielandia_.net_api.Models.UpvoteSeasonReview", b =>
