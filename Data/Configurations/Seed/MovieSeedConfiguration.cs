@@ -22,7 +22,7 @@ namespace movielandia_.net_api.Data.Configurations
                     Title = "Freaks Out",
                     TrailerSrc = "https://www.youtube.com/embed/D8La5G1DzCM",
                     Duration = 141,
-                    DateAired = new DateTime(2021, 10, 28),
+                    DateAired = new DateTime(2021, 10, 28, 0, 0, 0, DateTimeKind.Unspecified),
                     RatingImdb = 7.4f,
                     Description =
                         "Matilde, Cencio, Fulvio, and Mario are united when World War II strikes Rome. Israel, their circus owner, disappears in an attempt to find a place abroad for all of them.",
@@ -37,7 +37,7 @@ namespace movielandia_.net_api.Data.Configurations
                     Title = "My Father's Violin",
                     TrailerSrc = "https://www.youtube.com/embed/GAmo87Ep-tI",
                     Duration = 112,
-                    DateAired = new DateTime(2022, 11, 17),
+                    DateAired = new DateTime(2022, 11, 17, 0, 0, 0, DateTimeKind.Unspecified),
                     RatingImdb = 6.5f,
                     Description =
                         "Through their shared grief and connection to music, an orphaned girl bonds with her emotionally distant, successful violinist uncle.",
@@ -51,7 +51,7 @@ namespace movielandia_.net_api.Data.Configurations
                     Title = "The Invisible Guest",
                     TrailerSrc = "https://www.youtube.com/embed/epCg2RbyF80",
                     Duration = 126,
-                    DateAired = new DateTime(2017, 3, 24),
+                    DateAired = new DateTime(2017, 3, 24, 0, 0, 0, DateTimeKind.Unspecified),
                     RatingImdb = 8.1f,
                     Description =
                         "A young businessman faces a lawyer in an attempt to prove his innocence for the murder of his girlfriend.",
@@ -66,7 +66,7 @@ namespace movielandia_.net_api.Data.Configurations
                     Title = "Spider-Man: No Way Home",
                     TrailerSrc = "https://www.youtube.com/embed/JfVOs4VSpmA",
                     Duration = 148,
-                    DateAired = new DateTime(2021, 12, 17),
+                    DateAired = new DateTime(2021, 12, 17, 0, 0, 0, DateTimeKind.Unspecified),
                     RatingImdb = 8.3f,
                     Description =
                         "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",

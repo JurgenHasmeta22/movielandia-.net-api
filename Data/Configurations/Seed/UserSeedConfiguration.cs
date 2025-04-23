@@ -14,7 +14,7 @@ namespace movielandia_.net_api.Data.Configurations
             builder.Property(u => u.Email).IsRequired();
             builder.Property(u => u.Password).IsRequired();
 
-            var now = new DateTime(2025, 4, 10);
+            // Removed dynamic DateTime variable
 
             builder.HasData(
                 new User

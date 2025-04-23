@@ -8,8 +8,6 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<MovieReview> builder)
         {
-            var now = new DateTime(2025, 4, 10); // Current date for seeding
-
             // Configure navigation properties to be auto-included when loading the entity
             builder.Navigation(r => r.User).AutoInclude();
             builder.Navigation(r => r.Movie).AutoInclude();
@@ -45,8 +43,8 @@ namespace movielandia_.net_api.Data.Configurations
                         MovieId = 1,
                         Content = "Great movie, highly recommended!",
                         Rating = 4.5f,
-                        CreatedAt = now,
-                        UpdatedAt = now,
+                        CreatedAt = new DateTime(2025, 4, 10),
+                        UpdatedAt = new DateTime(2025, 4, 10),
                     },
                     new MovieReview
                     {
@@ -55,8 +53,8 @@ namespace movielandia_.net_api.Data.Configurations
                         MovieId = 1,
                         Content = "Interesting plot and good acting.",
                         Rating = 4.0f,
-                        CreatedAt = now,
-                        UpdatedAt = now,
+                        CreatedAt = new DateTime(2025, 4, 10),
+                        UpdatedAt = new DateTime(2025, 4, 10),
                     },
                     new MovieReview
                     {
@@ -65,8 +63,8 @@ namespace movielandia_.net_api.Data.Configurations
                         MovieId = 1,
                         Content = "Could have been better, but still entertaining.",
                         Rating = 3.5f,
-                        CreatedAt = now,
-                        UpdatedAt = now,
+                        CreatedAt = new DateTime(2025, 4, 10),
+                        UpdatedAt = new DateTime(2025, 4, 10),
                     },
                     new MovieReview
                     {
@@ -75,8 +73,8 @@ namespace movielandia_.net_api.Data.Configurations
                         MovieId = 1,
                         Content = "Excellent cinematography and direction!",
                         Rating = 5.0f,
-                        CreatedAt = now,
-                        UpdatedAt = now,
+                        CreatedAt = new DateTime(2025, 4, 10),
+                        UpdatedAt = new DateTime(2025, 4, 10),
                     },
                     new MovieReview
                     {
@@ -85,8 +83,8 @@ namespace movielandia_.net_api.Data.Configurations
                         MovieId = 1,
                         Content = "A decent watch, nothing special.",
                         Rating = 3.0f,
-                        CreatedAt = now,
-                        UpdatedAt = now,
+                        CreatedAt = new DateTime(2025, 4, 10),
+                        UpdatedAt = new DateTime(2025, 4, 10),
                     },
                 }
             );

@@ -32,12 +32,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-// Seed the database
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await dbContext.Database.MigrateAsync();
-    await dbContext.SeedDatabaseAsync();
+    // await dbContext.SeedDatabaseAsync();
 }
 
 app.Run();
