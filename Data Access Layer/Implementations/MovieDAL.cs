@@ -16,6 +16,7 @@ namespace movielandia_.net_api.Repositories.Implementations
             _context = context;
         }
 
+        // #region GET Methods
         public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
         {
             return await _context.Movie.ToListAsync();
@@ -126,7 +127,7 @@ namespace movielandia_.net_api.Repositories.Implementations
                         (IQueryable<Movie>)
                             orderBy.Invoke(
                                 null,
-                                new object[] { query, GetLambdaExpression<Movie>(filter.SortBy) }
+                                [query, GetLambdaExpression<Movie>(filter.SortBy)]
                             );
                 }
                 else
@@ -318,6 +319,8 @@ namespace movielandia_.net_api.Repositories.Implementations
             return (relatedMovies, totalCount);
         }
 
+        // #endregion
+
         public async Task<int> GetMoviesTotalCountAsync()
         {
             return await _context.Movie.CountAsync();
@@ -348,7 +351,7 @@ namespace movielandia_.net_api.Repositories.Implementations
                         (IQueryable<Movie>)
                             orderBy.Invoke(
                                 null,
-                                new object[] { query, GetLambdaExpression<Movie>(filter.SortBy) }
+                                [query, GetLambdaExpression<Movie>(filter.SortBy)]
                             );
                 }
                 else
