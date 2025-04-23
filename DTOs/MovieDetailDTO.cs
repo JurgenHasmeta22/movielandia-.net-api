@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using movielandia_.net_api.Models;
-
 namespace movielandia_.net_api.DTOs
 {
     public class MovieDetailDTO : MovieDTO

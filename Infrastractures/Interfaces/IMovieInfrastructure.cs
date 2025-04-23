@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Models;
 

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Infrastructures.Interfaces;

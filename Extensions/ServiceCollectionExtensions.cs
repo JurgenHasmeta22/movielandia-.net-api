@@ -1,5 +1,3 @@
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 using movielandia_.net_api.Infrastructures.Implementations;
 using movielandia_.net_api.Infrastructures.Interfaces;
 using movielandia_.net_api.Mappings;
@@ -16,7 +14,6 @@ namespace movielandia_.net_api.Extensions
             services.AddScoped<IMovieInfrastructure, MovieInfrastructure>();
             services.AddMemoryCache();
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
-
             return services;
         }
     }

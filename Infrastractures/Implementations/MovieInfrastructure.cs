@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Infrastructures.Interfaces;

@@ -1,5 +1,3 @@
-using System;
-
 namespace movielandia_.net_api.Models;
 
 public class UserBlock

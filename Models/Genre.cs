@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace movielandia_.net_api.Models
 {
     public class Genre
