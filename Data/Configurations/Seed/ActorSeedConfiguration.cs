@@ -8,7 +8,6 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Actor> builder)
         {
-            // Configure required properties
             builder.Property(a => a.Fullname).IsRequired();
             builder.Property(a => a.Description).IsRequired();
             builder.Property(a => a.PhotoSrc).IsRequired();
@@ -25,8 +24,8 @@ namespace movielandia_.net_api.Data.Configurations
                     PhotoSrc = "http://localhost:4000/images/actors/tom-holland.jpg",
                     PhotoSrcProd =
                         "https://movielandia-avenger22s-projects.vercel.app/images/actors/tom-holland.jpg",
-                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
+                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
                 },
                 new Actor
                 {
@@ -38,8 +37,8 @@ namespace movielandia_.net_api.Data.Configurations
                     PhotoSrc = "http://localhost:4000/images/actors/zendaya.jpg",
                     PhotoSrcProd =
                         "https://movielandia-avenger22s-projects.vercel.app/images/actors/zendaya.jpg",
-                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
+                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
                 },
                 new Actor
                 {
@@ -51,8 +50,8 @@ namespace movielandia_.net_api.Data.Configurations
                     PhotoSrc = "http://localhost:4000/images/actors/benedict-cumberbatch.jpg",
                     PhotoSrcProd =
                         "https://movielandia-avenger22s-projects.vercel.app/images/actors/benedict-cumberbatch.jpg",
-                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
+                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
                 },
                 new Actor
                 {
@@ -64,8 +63,8 @@ namespace movielandia_.net_api.Data.Configurations
                     PhotoSrc = "http://localhost:4000/images/actors/aurora-giovinazzo.jpg",
                     PhotoSrcProd =
                         "https://movielandia-avenger22s-projects.vercel.app/images/actors/aurora-giovinazzo.jpg",
-                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
+                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
                 },
                 new Actor
                 {
@@ -77,8 +76,8 @@ namespace movielandia_.net_api.Data.Configurations
                     PhotoSrc = "http://localhost:4000/images/actors/pietro-castellitto.jpg",
                     PhotoSrcProd =
                         "https://movielandia-avenger22s-projects.vercel.app/images/actors/pietro-castellitto.jpg",
-                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                    CreatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
+                    UpdatedAt = new DateTime(2025, 4, 10, 0, 0, 0),
                 }
             );
         }

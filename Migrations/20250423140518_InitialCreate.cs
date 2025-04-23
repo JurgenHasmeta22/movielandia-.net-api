@@ -2680,13 +2680,13 @@ namespace movielandia_.net_api.Migrations
                 columns: new[] { "Id", "Active", "Age", "Bio", "Birthday", "CanResetPassword", "CountryFrom", "Email", "Gender", "Password", "Phone", "Role", "Subscribed", "UserName" },
                 values: new object[,]
                 {
-                    { 1, true, null, "System administrator", null, false, "United States", "admin@movielandia.com", 0, "$2a$11$eiEY8D/JUBmk2.sFlgy6xeXBUmlN.rULAhKU4foks6fAB.blBIBLO", "+11234567890", 1, false, "admin22" },
-                    { 2, true, null, "Passionate about movies", null, false, "United States", "moviefan1@movielandia.com", 0, "$2a$11$rgwW5vTuKM8Nie6kOu9kxuFvU1deq892VfvDJZVuGzX4vIMLiGh9C", "+11234567890", 0, false, "moviefan1" },
-                    { 3, true, null, "Film enthusiast and reviewer", null, false, "United States", "cinephile2@movielandia.com", 0, "$2a$11$l3dgvC3ytqxXSbz2KMCZaeX4SjT5T66E8e9rLeivn5dnyInCti8hi", "+11234567890", 0, false, "cinephile2" },
-                    { 4, true, null, "Professional movie critic", null, false, "United States", "reviewer3@movielandia.com", 0, "$2a$11$GYCVJ/XUD8/rmplgMKY6CuXRAlBK2wHuT5hzyjSmDOZr7do/yORCe", "+11234567890", 0, false, "reviewer3" },
-                    { 5, true, null, "Aspiring film critic", null, false, "United States", "filmcritic4@movielandia.com", 0, "$2a$11$/JDGb5w8euN7t5w2/xFHWeyfHIU7a9ny.EBuytN2jI0dmbkfr1OvO", "+11234567890", 0, false, "filmcritic4" },
-                    { 6, true, null, "Movie enthusiast", null, false, "United States", "moviebuff5@movielandia.com", 0, "$2a$11$1Mil2vqXySUqLuDghS.v3ePPHFvmizBdEBxtqNtAn3WWexgMVrTZa", "+11234567890", 0, false, "moviebuff5" },
-                    { 7, true, null, "Just love watching movies", null, false, "United States", "filmlover6@movielandia.com", 0, "$2a$11$/jejjVeHtFV4xVsqtBnHeezodkc4vZ/R5PvmlYVDpQ5Aq9i/XreH2", "+11234567890", 0, false, "filmlover6" }
+                    { 1, true, null, "System administrator", null, false, "United States", "admin@movielandia.com", 0, "$2a$11$rqj4V7oWyqUjoglTlOFrguCgAN8iwG7wVoKiVoc9rTQwqu1VqTWry", "+11234567890", 1, false, "admin22" },
+                    { 2, true, null, "Passionate about movies", null, false, "United States", "moviefan1@movielandia.com", 0, "$2a$11$lnb5E0NnJyr9gS7F68ZqL.wk5tn526X9vakv9hnyPJLedrnYGI.Ee", "+11234567890", 0, false, "moviefan1" },
+                    { 3, true, null, "Film enthusiast and reviewer", null, false, "United States", "cinephile2@movielandia.com", 0, "$2a$11$yULbn4xI1tsR0/OwKFoyt.OM//JhI2Dzq5m4v/tcmWwp8cpZyEEeS", "+11234567890", 0, false, "cinephile2" },
+                    { 4, true, null, "Professional movie critic", null, false, "United States", "reviewer3@movielandia.com", 0, "$2a$11$MvO2eliC4YDgsgInhtwZBe4SX69N4e04.8KgeVVhKxV2D76Ne0.4C", "+11234567890", 0, false, "reviewer3" },
+                    { 5, true, null, "Aspiring film critic", null, false, "United States", "filmcritic4@movielandia.com", 0, "$2a$11$5zFvPb/BYoKtmjJQELODdOHWEgQIk.v244MM/IBgFGSRjD4o8YmBK", "+11234567890", 0, false, "filmcritic4" },
+                    { 6, true, null, "Movie enthusiast", null, false, "United States", "moviebuff5@movielandia.com", 0, "$2a$11$VMb/gvH/gk/e1DJTi5FXWOiU29LCI9J0Xokr9eDsDEPllOIah4iA.", "+11234567890", 0, false, "moviebuff5" },
+                    { 7, true, null, "Just love watching movies", null, false, "United States", "filmlover6@movielandia.com", 0, "$2a$11$oLhy8PtEiMAtgby4Boj48ule6JkQVrWgG4FTSKGe3RsgjdHhlZY62", "+11234567890", 0, false, "filmlover6" }
                 });
 
             migrationBuilder.InsertData(

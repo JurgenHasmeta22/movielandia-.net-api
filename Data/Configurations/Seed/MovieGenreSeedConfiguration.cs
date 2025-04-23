@@ -8,7 +8,6 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<MovieGenre> builder)
         {
-            // Configure relationships
             builder
                 .HasOne(mg => mg.Movie)
                 .WithMany(m => m.Genres)
@@ -21,48 +20,45 @@ namespace movielandia_.net_api.Data.Configurations
                 .HasForeignKey(mg => mg.GenreId)
                 .IsRequired();
 
-            // Configure ignore rules for seeding
             builder.Ignore(mg => mg.Movie);
             builder.Ignore(mg => mg.Genre);
 
             builder.HasData(
-                // Freaks Out (Movie Id = 1)
                 new MovieGenre
                 {
                     Id = 1,
                     MovieId = 1,
-                    GenreId = 1, // Action
+                    GenreId = 1,
                 },
                 new MovieGenre
                 {
                     Id = 2,
                     MovieId = 1,
-                    GenreId = 2, // Drama
+                    GenreId = 2,
                 },
                 new MovieGenre
                 {
                     Id = 3,
                     MovieId = 1,
-                    GenreId = 10, // Fantasy
+                    GenreId = 10,
                 },
-                // Spider-Man: No Way Home (Movie Id = 5)
                 new MovieGenre
                 {
                     Id = 4,
                     MovieId = 5,
-                    GenreId = 1, // Action
+                    GenreId = 1,
                 },
                 new MovieGenre
                 {
                     Id = 5,
                     MovieId = 5,
-                    GenreId = 4, // Science Fiction
+                    GenreId = 4,
                 },
                 new MovieGenre
                 {
                     Id = 6,
                     MovieId = 5,
-                    GenreId = 10, // Fantasy
+                    GenreId = 10,
                 }
             );
         }

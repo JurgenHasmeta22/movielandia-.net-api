@@ -29,40 +29,30 @@ namespace movielandia_.net_api.Data.Configurations
                     Id = 1,
                     MovieId = 5,
                     ActorId = 1,
-                    Movie = null,
-                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 2,
                     MovieId = 5,
                     ActorId = 2,
-                    Movie = null,
-                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 3,
                     MovieId = 5,
                     ActorId = 3,
-                    Movie = null,
-                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 4,
                     MovieId = 1,
                     ActorId = 4,
-                    Movie = null,
-                    Actor = null,
                 },
                 new CastMovie
                 {
                     Id = 5,
                     MovieId = 1,
                     ActorId = 5,
-                    Movie = null,
-                    Actor = null,
                 }
             );
         }

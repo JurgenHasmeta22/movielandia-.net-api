@@ -9,12 +9,9 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            // Configure required properties
             builder.Property(u => u.UserName).IsRequired();
             builder.Property(u => u.Email).IsRequired();
             builder.Property(u => u.Password).IsRequired();
-
-            // Removed dynamic DateTime variable
 
             builder.HasData(
                 new User

@@ -9,7 +9,6 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<DownvoteMovieReview> builder)
         {
-            // Configure relationships
             builder
                 .HasOne(dmr => dmr.Movie)
                 .WithMany(m => m.DownvoteMovieReviews)
@@ -28,12 +27,10 @@ namespace movielandia_.net_api.Data.Configurations
                 .HasForeignKey(dmr => dmr.UserId)
                 .IsRequired();
 
-            // Configure ignore rules for seeding
             builder.Ignore(dmr => dmr.User);
             builder.Ignore(dmr => dmr.Movie);
             builder.Ignore(dmr => dmr.MovieReview);
 
-            // Seed data
             builder.HasData(
                 new DownvoteMovieReview
                 {

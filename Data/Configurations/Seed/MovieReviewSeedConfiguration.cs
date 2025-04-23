@@ -8,11 +8,9 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<MovieReview> builder)
         {
-            // Configure navigation properties to be auto-included when loading the entity
             builder.Navigation(r => r.User).AutoInclude();
             builder.Navigation(r => r.Movie).AutoInclude();
 
-            // Configure relationships
             builder
                 .HasOne(r => r.User)
                 .WithMany(u => u.MovieReviews)
@@ -25,11 +23,9 @@ namespace movielandia_.net_api.Data.Configurations
                 .HasForeignKey(r => r.MovieId)
                 .IsRequired();
 
-            // Configure required properties
             builder.Property(r => r.CreatedAt).IsRequired();
             builder.Property(r => r.Content).IsRequired();
 
-            // Configure ignore rules for seeding
             builder.Ignore(r => r.User);
             builder.Ignore(r => r.Movie);
 

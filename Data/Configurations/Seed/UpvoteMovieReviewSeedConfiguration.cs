@@ -8,7 +8,6 @@ namespace movielandia_.net_api.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<UpvoteMovieReview> builder)
         {
-            // Configure relationships
             builder
                 .HasOne(umr => umr.Movie)
                 .WithMany(m => m.UpvoteMovieReviews)
@@ -27,7 +26,6 @@ namespace movielandia_.net_api.Data.Configurations
                 .HasForeignKey(umr => umr.UserId)
                 .IsRequired();
 
-            // Configure ignore rules for seeding
             builder.Ignore(umr => umr.User);
             builder.Ignore(umr => umr.Movie);
             builder.Ignore(umr => umr.MovieReview);

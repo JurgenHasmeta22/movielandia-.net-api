@@ -12,7 +12,7 @@ using movielandia_.net_api.Data;
 namespace movielandia_.net_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250423135934_InitialCreate")]
+    [Migration("20250423140518_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -2611,7 +2611,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "admin@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$eiEY8D/JUBmk2.sFlgy6xeXBUmlN.rULAhKU4foks6fAB.blBIBLO",
+                            Password = "$2a$11$rqj4V7oWyqUjoglTlOFrguCgAN8iwG7wVoKiVoc9rTQwqu1VqTWry",
                             Phone = "+11234567890",
                             Role = 1,
                             Subscribed = false,
@@ -2626,7 +2626,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "moviefan1@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$rgwW5vTuKM8Nie6kOu9kxuFvU1deq892VfvDJZVuGzX4vIMLiGh9C",
+                            Password = "$2a$11$lnb5E0NnJyr9gS7F68ZqL.wk5tn526X9vakv9hnyPJLedrnYGI.Ee",
                             Phone = "+11234567890",
                             Role = 0,
                             Subscribed = false,
@@ -2641,7 +2641,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "cinephile2@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$l3dgvC3ytqxXSbz2KMCZaeX4SjT5T66E8e9rLeivn5dnyInCti8hi",
+                            Password = "$2a$11$yULbn4xI1tsR0/OwKFoyt.OM//JhI2Dzq5m4v/tcmWwp8cpZyEEeS",
                             Phone = "+11234567890",
                             Role = 0,
                             Subscribed = false,
@@ -2656,7 +2656,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "reviewer3@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$GYCVJ/XUD8/rmplgMKY6CuXRAlBK2wHuT5hzyjSmDOZr7do/yORCe",
+                            Password = "$2a$11$MvO2eliC4YDgsgInhtwZBe4SX69N4e04.8KgeVVhKxV2D76Ne0.4C",
                             Phone = "+11234567890",
                             Role = 0,
                             Subscribed = false,
@@ -2671,7 +2671,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "filmcritic4@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$/JDGb5w8euN7t5w2/xFHWeyfHIU7a9ny.EBuytN2jI0dmbkfr1OvO",
+                            Password = "$2a$11$5zFvPb/BYoKtmjJQELODdOHWEgQIk.v244MM/IBgFGSRjD4o8YmBK",
                             Phone = "+11234567890",
                             Role = 0,
                             Subscribed = false,
@@ -2686,7 +2686,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "moviebuff5@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$1Mil2vqXySUqLuDghS.v3ePPHFvmizBdEBxtqNtAn3WWexgMVrTZa",
+                            Password = "$2a$11$VMb/gvH/gk/e1DJTi5FXWOiU29LCI9J0Xokr9eDsDEPllOIah4iA.",
                             Phone = "+11234567890",
                             Role = 0,
                             Subscribed = false,
@@ -2701,7 +2701,7 @@ namespace movielandia_.net_api.Migrations
                             CountryFrom = "United States",
                             Email = "filmlover6@movielandia.com",
                             Gender = 0,
-                            Password = "$2a$11$/jejjVeHtFV4xVsqtBnHeezodkc4vZ/R5PvmlYVDpQ5Aq9i/XreH2",
+                            Password = "$2a$11$oLhy8PtEiMAtgby4Boj48ule6JkQVrWgG4FTSKGe3RsgjdHhlZY62",
                             Phone = "+11234567890",
                             Role = 0,
                             Subscribed = false,
