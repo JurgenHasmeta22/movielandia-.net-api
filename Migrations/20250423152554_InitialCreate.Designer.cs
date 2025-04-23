@@ -12,7 +12,7 @@ using movielandia_.net_api.Data;
 namespace movielandia_.net_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250423150832_InitialCreate")]
+    [Migration("20250423152554_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
