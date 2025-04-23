@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 // Add movie services
-builder.Services.AddMovieInfrastructures();
+builder.Services.AddMovieBLLs();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();

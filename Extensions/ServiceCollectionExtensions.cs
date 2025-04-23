@@ -1,17 +1,17 @@
-using movielandia_.net_api.Infrastructures.Implementations;
-using movielandia_.net_api.Infrastructures.Interfaces;
+using movielandia_.net_api.BLLs.Implementations;
+using movielandia_.net_api.BLLs.Interfaces;
 using movielandia_.net_api.Mappings;
 using movielandia_.net_api.Repositories.Implementations;
 using movielandia_.net_api.Repositories.Interfaces;
 
 namespace movielandia_.net_api.Extensions
 {
-    public static class InfrastructureCollectionExtensions
+    public static class BLLCollectionExtensions
     {
-        public static IServiceCollection AddMovieInfrastructures(this IServiceCollection services)
+        public static IServiceCollection AddMovieBLLs(this IServiceCollection services)
         {
-            services.AddScoped<IMovieRepository, MovieRepository>();
-            services.AddScoped<IMovieInfrastructure, MovieInfrastructure>();
+            services.AddScoped<IMovieDAL, MovieDAL>();
+            services.AddScoped<IMovieBLL, MovieBLL>();
             services.AddMemoryCache();
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
             return services;

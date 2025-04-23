@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 
 namespace movielandia_.net_api.Repositories.Interfaces
 {
-    public interface IGenericRepository<T>
+    public interface IGenericDAL<T>
         where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();

@@ -5,13 +5,13 @@ using movielandia_.net_api.Repositories.Interfaces;
 
 namespace movielandia_.net_api.Repositories.Implementations
 {
-    public class GenericRepository<T> : IGenericRepository<T>
+    public class GenericDAL<T> : IGenericDAL<T>
         where T : class
     {
         protected readonly ApplicationDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public GenericRepository(ApplicationDbContext context)
+        public GenericDAL(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

@@ -3,7 +3,7 @@ using movielandia_.net_api.Models;
 
 namespace movielandia_.net_api.Repositories.Interfaces
 {
-    public interface IMovieRepository : IGenericRepository<Movie>
+    public interface IMovieDAL : IGenericDAL<Movie>
     {
         Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
             MovieFilterDTO filter

@@ -6,11 +6,11 @@ using movielandia_.net_api.Repositories.Interfaces;
 
 namespace movielandia_.net_api.Repositories.Implementations
 {
-    public class MovieRepository : GenericRepository<Movie>, IMovieRepository
+    public class MovieDAL : GenericDAL<Movie>, IMovieDAL
     {
         private new readonly ApplicationDbContext _context;
 
-        public MovieRepository(ApplicationDbContext context)
+        public MovieDAL(ApplicationDbContext context)
             : base(context)
         {
             _context = context;

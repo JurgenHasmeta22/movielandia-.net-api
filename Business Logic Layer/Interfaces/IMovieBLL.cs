@@ -1,9 +1,9 @@
 using movielandia_.net_api.DTOs;
 using movielandia_.net_api.Models;
 
-namespace movielandia_.net_api.Infrastructures.Interfaces
+namespace movielandia_.net_api.BLLs.Interfaces
 {
-    public interface IMovieInfrastructure
+    public interface IMovieBLL
     {
         Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
             MovieFilterDTO filter

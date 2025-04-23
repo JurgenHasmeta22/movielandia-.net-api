@@ -1,35 +1,35 @@
 using Microsoft.Extensions.Caching.Memory;
+using movielandia_.net_api.BLLs.Interfaces;
 using movielandia_.net_api.DTOs;
-using movielandia_.net_api.Infrastructures.Interfaces;
 using movielandia_.net_api.Models;
 using movielandia_.net_api.Repositories.Interfaces;
 
-namespace movielandia_.net_api.Infrastructures.Implementations
+namespace movielandia_.net_api.BLLs.Implementations
 {
-    public class MovieInfrastructure : IMovieInfrastructure
+    public class MovieBLL : IMovieBLL
     {
-        private readonly IMovieRepository _movieRepository;
+        private readonly IMovieDAL _movieDAL;
         private readonly IMemoryCache _cache;
         private static readonly TimeSpan CacheDuration = TimeSpan.FromDays(1);
 
-        public MovieInfrastructure(IMovieRepository movieRepository, IMemoryCache cache)
+        public MovieBLL(IMovieDAL movieDAL, IMemoryCache cache)
         {
-            _movieRepository = movieRepository;
+            _movieDAL = movieDAL;
             _cache = cache;
         }
 
         public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
         {
-            return await _movieRepository.GetAllMoviesAsync();
+            return await _movieDAL.GetAllMoviesAsync();
         }
 
         public async Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
             MovieFilterDTO filter
         )
         {
-            var (movies, totalCount) = await _movieRepository.GetMoviesWithFiltersAsync(filter);
+            var (movies, totalCount) = await _movieDAL.GetMoviesWithFiltersAsync(filter);
             var movieIds = movies.Select(m => m.Id).ToList();
-            var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
+            var ratingsByMovieId = await _movieDAL.GetMovieRatingsAsync(movieIds);
             List<MovieDTO> result = new List<MovieDTO>();
 
             foreach (var movie in movies)
@@ -44,7 +44,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
                 if (filter.UserId.HasValue)
                 {
-                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(
+                    movieDTO.IsBookmarked = await _movieDAL.IsMovieBookmarkedByUserAsync(
                         movie.Id,
                         filter.UserId.Value
                     );
@@ -60,9 +60,9 @@ namespace movielandia_.net_api.Infrastructures.Implementations
         {
             if (!_cache.TryGetValue("HomePageMovies", out List<MovieDTO>? cachedMovies))
             {
-                var movies = await _movieRepository.GetMoviesForHomePageAsync();
+                var movies = await _movieDAL.GetMoviesForHomePageAsync();
                 var movieIds = movies.Select(m => m.Id);
-                var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
+                var ratingsByMovieId = await _movieDAL.GetMovieRatingsAsync(movieIds);
 
                 cachedMovies = movies
                     .Select(m =>
@@ -87,7 +87,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
         public async Task<MovieDetailDTO> GetMovieByIdAsync(int id, MovieQueryParameters parameters)
         {
-            var movie = await _movieRepository.GetMovieByIdWithDetailsAsync(id, parameters);
+            var movie = await _movieDAL.GetMovieByIdWithDetailsAsync(id, parameters);
 
             if (movie == null)
             {
@@ -102,21 +102,19 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             movieDetail.TotalCast = totalCast;
             movieDetail.TotalCrew = totalCrew;
 
-            var (averageRating, totalReviews) = await _movieRepository.CalculateMovieRatingAsync(
-                id
-            );
+            var (averageRating, totalReviews) = await _movieDAL.CalculateMovieRatingAsync(id);
 
             movieDetail.AverageRating = averageRating;
             movieDetail.TotalReviews = totalReviews;
 
             if (parameters.UserId.HasValue)
             {
-                movieDetail.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(
+                movieDetail.IsBookmarked = await _movieDAL.IsMovieBookmarkedByUserAsync(
                     id,
                     parameters.UserId.Value
                 );
 
-                movieDetail.IsReviewed = await _movieRepository.IsMovieReviewedByUserAsync(
+                movieDetail.IsReviewed = await _movieDAL.IsMovieReviewedByUserAsync(
                     id,
                     parameters.UserId.Value
                 );
@@ -149,7 +147,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             MovieQueryParameters parameters
         )
         {
-            var movie = await _movieRepository.GetMovieByTitleWithDetailsAsync(title, parameters);
+            var movie = await _movieDAL.GetMovieByTitleWithDetailsAsync(title, parameters);
 
             if (movie == null)
             {
@@ -157,21 +155,19 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             }
 
             var movieDetail = MapToDetailDTO(movie);
-            var (averageRating, totalReviews) = await _movieRepository.CalculateMovieRatingAsync(
-                movie.Id
-            );
+            var (averageRating, totalReviews) = await _movieDAL.CalculateMovieRatingAsync(movie.Id);
 
             movieDetail.AverageRating = averageRating;
             movieDetail.TotalReviews = totalReviews;
 
             if (parameters.UserId.HasValue)
             {
-                movieDetail.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(
+                movieDetail.IsBookmarked = await _movieDAL.IsMovieBookmarkedByUserAsync(
                     movie.Id,
                     parameters.UserId.Value
                 );
 
-                movieDetail.IsReviewed = await _movieRepository.IsMovieReviewedByUserAsync(
+                movieDetail.IsReviewed = await _movieDAL.IsMovieReviewedByUserAsync(
                     movie.Id,
                     parameters.UserId.Value
                 );
@@ -208,9 +204,9 @@ namespace movielandia_.net_api.Infrastructures.Implementations
                 return cachedMovies;
             }
 
-            var movies = await _movieRepository.GetLatestMoviesAsync(userId);
+            var movies = await _movieDAL.GetLatestMoviesAsync(userId);
             var movieIds = movies.Select(m => m.Id);
-            var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
+            var ratingsByMovieId = await _movieDAL.GetMovieRatingsAsync(movieIds);
             List<MovieDTO> result = new List<MovieDTO>();
 
             foreach (var movie in movies)
@@ -225,7 +221,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
                 if (userId.HasValue)
                 {
-                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(
+                    movieDTO.IsBookmarked = await _movieDAL.IsMovieBookmarkedByUserAsync(
                         movie.Id,
                         userId.Value
                     );
@@ -262,7 +258,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
                 return cachedResult;
             }
 
-            var (relatedMovies, totalCount) = await _movieRepository.GetRelatedMoviesAsync(
+            var (relatedMovies, totalCount) = await _movieDAL.GetRelatedMoviesAsync(
                 id,
                 userId,
                 page,
@@ -275,7 +271,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             }
 
             var movieIds = relatedMovies.Select(m => m.Id);
-            var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
+            var ratingsByMovieId = await _movieDAL.GetMovieRatingsAsync(movieIds);
             List<MovieDTO> result = new List<MovieDTO>();
 
             foreach (var movie in relatedMovies)
@@ -290,7 +286,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
                 if (userId.HasValue)
                 {
-                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(
+                    movieDTO.IsBookmarked = await _movieDAL.IsMovieBookmarkedByUserAsync(
                         movie.Id,
                         userId.Value
                     );
@@ -314,7 +310,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
                 return cachedCount;
             }
 
-            int count = await _movieRepository.GetMoviesTotalCountAsync();
+            int count = await _movieDAL.GetMoviesTotalCountAsync();
 
             _cache.Set("MoviesTotalCount", count, CacheDuration);
             return count;
@@ -334,7 +330,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
                 Description = movieDTO.Description,
             };
 
-            var createdMovie = await _movieRepository.AddAsync(movie);
+            var createdMovie = await _movieDAL.AddAsync(movie);
             InvalidateMovieCache();
 
             return MapToDTO(createdMovie);
@@ -342,7 +338,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
         public async Task<MovieDTO> UpdateMovieAsync(int id, MovieDTO movieDTO)
         {
-            var existingMovie = await _movieRepository.GetByIdAsync(id);
+            var existingMovie = await _movieDAL.GetByIdAsync(id);
 
             if (existingMovie == null)
             {
@@ -358,7 +354,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             existingMovie.DateAired = movieDTO.DateAired;
             existingMovie.Description = movieDTO.Description;
 
-            await _movieRepository.UpdateAsync(existingMovie);
+            await _movieDAL.UpdateAsync(existingMovie);
 
             InvalidateMovieCache();
             return MapToDTO(existingMovie);
@@ -366,14 +362,14 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
         public async Task<bool> DeleteMovieAsync(int id)
         {
-            var movie = await _movieRepository.GetByIdAsync(id);
+            var movie = await _movieDAL.GetByIdAsync(id);
 
             if (movie == null)
             {
                 return false;
             }
 
-            await _movieRepository.DeleteAsync(movie.Id);
+            await _movieDAL.DeleteAsync(movie.Id);
             InvalidateMovieCache();
             return true;
         }
@@ -383,10 +379,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             MovieFilterDTO filter
         )
         {
-            var (movies, totalCount) = await _movieRepository.SearchMoviesByTitleAsync(
-                title,
-                filter
-            );
+            var (movies, totalCount) = await _movieDAL.SearchMoviesByTitleAsync(title, filter);
 
             if (movies == null || !movies.Any())
             {
@@ -394,7 +387,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
             }
 
             var movieIds = movies.Select(m => m.Id);
-            var ratingsByMovieId = await _movieRepository.GetMovieRatingsAsync(movieIds);
+            var ratingsByMovieId = await _movieDAL.GetMovieRatingsAsync(movieIds);
             List<MovieDTO> result = new List<MovieDTO>();
 
             foreach (var movie in movies)
@@ -409,7 +402,7 @@ namespace movielandia_.net_api.Infrastructures.Implementations
 
                 if (filter.UserId.HasValue)
                 {
-                    movieDTO.IsBookmarked = await _movieRepository.IsMovieBookmarkedByUserAsync(
+                    movieDTO.IsBookmarked = await _movieDAL.IsMovieBookmarkedByUserAsync(
                         movie.Id,
                         filter.UserId.Value
                     );
