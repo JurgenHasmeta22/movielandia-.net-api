@@ -4,7 +4,7 @@ namespace movielandia_.net_api.Models
     {
         public int Id { get; set; }
         public required string Text { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
         public bool Read { get; set; } = false;
         public DateTime? EditedAt { get; set; }
         public int SenderId { get; set; }

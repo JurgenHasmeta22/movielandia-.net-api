@@ -5,7 +5,7 @@ namespace movielandia_.net_api.Models
         public int Id { get; set; }
         public required string OldContent { get; set; }
         public required string NewContent { get; set; }
-        public DateTime EditedAt { get; set; } = DateTime.UtcNow;
+        public DateTime EditedAt { get; set; }
         public required string Reason { get; set; }
         public int PostId { get; set; }
         public int EditedById { get; set; }

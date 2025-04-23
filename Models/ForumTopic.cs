@@ -7,11 +7,11 @@ namespace movielandia_.net_api.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
         public int ViewCount { get; set; } = 0;
         public bool IsPinned { get; set; } = false;
         public string Slug { get; set; }
-        public DateTime LastPostAt { get; set; } = DateTime.UtcNow;
+        public DateTime LastPostAt { get; set; }
         public bool IsModerated { get; set; } = false;
         public DateTime? ClosedAt { get; set; }
         public TopicStatus Status { get; set; } = TopicStatus.Open;

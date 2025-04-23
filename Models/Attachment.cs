@@ -7,7 +7,7 @@ namespace movielandia_.net_api.Models
         public required string FileUrl { get; set; }
         public int FileSize { get; set; }
         public required string MimeType { get; set; }
-        public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UploadedAt { get; set; }
         public bool IsPublic { get; set; } = true;
         public required string Description { get; set; }
         public int PostId { get; set; }

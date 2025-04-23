@@ -4,7 +4,7 @@ namespace movielandia_.net_api.Models
     {
         public int Id { get; set; }
         public string Content { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsEdited { get; set; } = false;
         public int EditCount { get; set; } = 0;

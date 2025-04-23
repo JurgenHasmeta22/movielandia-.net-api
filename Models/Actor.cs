@@ -8,7 +8,7 @@ namespace movielandia_.net_api.Models
         public string? Debut { get; set; }
         public required string PhotoSrc { get; set; }
         public required string PhotoSrcProd { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
         // Collections
