@@ -14,12 +14,7 @@ namespace movielandia_.net_api.DTOs
 
         // Additional properties after calculating ratings
         public float? AverageRating { get; set; }
-        public int TotalReviews { get; set; }
         public bool IsBookmarked { get; set; } = false;
         public bool IsReviewed { get; set; } = false;
-
-        // For detailed view
-        public int? TotalCast { get; set; }
-        public int? TotalCrew { get; set; }
     }
 }

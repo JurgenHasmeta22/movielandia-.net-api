@@ -11,9 +11,6 @@ namespace movielandia_.net_api.Mappings
         public MappingProfile()
         {
             CreateMap<Movie, MovieDTO>()
-                .ForMember(dest => dest.TotalReviews, opt => opt.MapFrom(src => src.Reviews.Count))
-                .ForMember(dest => dest.TotalCast, opt => opt.MapFrom(src => src.Cast.Count))
-                .ForMember(dest => dest.TotalCrew, opt => opt.MapFrom(src => src.Crew.Count))
                 .ForMember(dest => dest.AverageRating, opt => opt.Ignore())
                 .ForMember(dest => dest.IsBookmarked, opt => opt.Ignore())
                 .ForMember(dest => dest.IsReviewed, opt => opt.Ignore());
@@ -64,7 +61,6 @@ namespace movielandia_.net_api.Mappings
                 .ForMember(dest => dest.Genres, opt => opt.Ignore())
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            // Response mappings
             CreateMap<
                 (IEnumerable<MovieDTO> Movies, PaginationMetadata Pagination),
                 MovieListResponseDTO

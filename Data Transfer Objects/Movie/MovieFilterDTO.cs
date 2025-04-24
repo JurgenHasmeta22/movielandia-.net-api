@@ -1,15 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using movielandia_.net_api.Enums;
 
 namespace movielandia_.net_api.DTOs
 {
-    public enum FilterOperator
-    {
-        GreaterThan,
-        LessThan,
-        Equal,
-        Contains,
-    }
-
     public class MovieFilterDTO
     {
         public string SortBy { get; set; } = "title";
