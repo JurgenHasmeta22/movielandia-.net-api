@@ -1,121 +1,120 @@
 You are a senior .NET backend developer and an expert in C#, ASP.NET Core, and Entity Framework Core.
 
-## Project Overview
+# Movielandia API – Project Overview
 
-Movielandia is a comprehensive movie platform API built with modern .NET technologies:
+Movielandia is a modern, scalable movie platform API designed for rich movie data management and user interaction. Built with the latest .NET technologies, it provides a robust backend for movie-centric applications, supporting advanced search, user engagement, and content management.
 
-### Tech Stack
+## Detailed Architecture
 
-- .NET 9.0 with C# latest features
-- ASP.NET Core Web API
-- Entity Framework Core 9.0 with SQL Server
-- AutoMapper for object mapping
-- JWT Authentication
-- Memory Caching for performance optimization
-- Serilog for logging
-- FluentValidation for model validation
-- Swagger/OpenAPI for API documentation
+The application follows a multi-layered architecture with clear separation of concerns. Here's a detailed breakdown using the Movie domain as an example:
 
-### Core Features
+### 1. Controllers Layer (`MovieController`)
 
-- Rich movie management system with detailed metadata
-- User interactions (reviews, ratings, bookmarks)
-- Cast and crew management
-- Genre categorization
-- Advanced filtering and search capabilities
-- Caching strategy for frequently accessed data
-- Pagination and efficient data loading
-- Upvote/downvote system for reviews
+- Entry point for all movie-related API requests
+- Uses attribute routing with `/api/movies` base path
+- Implements standard CRUD operations and specialized endpoints
+- Returns standardized responses with proper HTTP status codes
+- Uses `IMovieManager` for mapping and caching
 
-### Architecture
+### 2. Managers Layer (`MovieManager`)
 
-- N-Tier Architecture with Controllers, BLL (Business Logic Layer), DAL (Data Access Layer)
-- Repository Pattern with Generic implementations
-- DTOs for data transfer and validation
-- Rich domain models with proper relationships
-- Extensive use of async/await for better performance
-- Comprehensive data seeding system
+- Implements `IMovieManager` interface
+- Orchestrates movie operations using MovieBLL
+- Handles caching with `IMemoryCache`
+- Maps domain models to DTOs using AutoMapper
+- Processes input DTOs and constructs response DTOs
+- Manages paginated responses with metadata
+- Coordinates related content (reviews, ratings, similar movies)
 
-### Database Design
+### 3. Business Logic Layer (`MovieBLL`)
 
-- Complex entity relationships (Movies, Actors, Crew, Reviews)
-- User interaction tracking (favorites, ratings, reviews)
-- Content management (photos, trailers)
-- Proper soft deletion and audit trails
+- Implements `IMovieBLL` interface
+- Core business operations
+- Validates business rules and handles domain logic
+- Uses MovieDAL for data access
+- Manages relationships between movies and related entities
 
-## Code Style and Structure
+### 4. Data Access Layer (`MovieDAL`)
 
-- Write concise, idiomatic C# code with accurate examples.
-- Follow .NET and ASP.NET Core conventions and best practices.
-- Use object-oriented and functional programming patterns as appropriate.
-- Prefer LINQ and lambda expressions for collection operations.
-- Use descriptive variable and method names (e.g., 'IsUserSignedIn', 'CalculateTotal').
-- Structure files according to .NET conventions (Controllers, Models, Services, etc.).
+- Implements `IMovieDAL` interface
+- Extends `GenericDAL<Movie>` for common operations
+- Specialized query methods with Entity Framework Core
+- Handles database-specific operations
+- Manages database transactions and concurrency
 
-## Naming Conventions
+  ## Code Style and Structure
 
-- Use PascalCase for class names, method names, and public members.
-- Use camelCase for local variables and private fields.
-- Use UPPERCASE for constants.
-- Prefix interface names with "I" (e.g., 'IUserService').
+  - Write concise, idiomatic C# code with accurate examples.
+  - Follow .NET and ASP.NET Core conventions and best practices.
+  - Use object-oriented and functional programming patterns as appropriate.
+  - Prefer LINQ and lambda expressions for collection operations.
+  - Use descriptive variable and method names (e.g., 'IsUserSignedIn', 'CalculateTotal').
+  - Structure files according to .NET conventions (Controllers, Models, Services, etc.).
 
-## C# and .NET Usage
+  ## Naming Conventions
 
-- Use C# 10+ features when appropriate (e.g., record types, pattern matching, null-coalescing assignment).
-- Leverage built-in ASP.NET Core features and middleware.
-- Use Entity Framework Core effectively for database operations.
+  - Use PascalCase for class names, method names, and public members.
+  - Use camelCase for local variables and private fields.
+  - Use UPPERCASE for constants.
+  - Prefix interface names with "I" (e.g., 'IUserService').
 
-## Syntax and Formatting
+  ## C# and .NET Usage
 
-- Follow the C# Coding Conventions (https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
-- Use C#'s expressive syntax (e.g., null-conditional operators, string interpolation)
-- Use 'var' for implicit typing when the type is obvious.
+  - Use C# 10+ features when appropriate (e.g., record types, pattern matching, null-coalescing assignment).
+  - Leverage built-in ASP.NET Core features and middleware.
+  - Use Entity Framework Core effectively for database operations.
 
-## Error Handling and Validation
+  ## Syntax and Formatting
 
-- Use exceptions for exceptional cases, not for control flow.
-- Implement proper error logging using built-in .NET logging or a third-party logger.
-- Use Data Annotations or Fluent Validation for model validation.
-- Implement global exception handling middleware.
-- Return appropriate HTTP status codes and consistent error responses.
+  - Follow the C# Coding Conventions (https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
+  - Use C#'s expressive syntax (e.g., null-conditional operators, string interpolation)
+  - Use 'var' for implicit typing when the type is obvious.
 
-## API Design
+  ## Error Handling and Validation
 
-- Follow RESTful API design principles.
-- Use attribute routing in controllers.
-- Implement versioning for your API.
-- Use action filters for cross-cutting concerns.
+  - Use exceptions for exceptional cases, not for control flow.
+  - Implement proper error logging using built-in .NET logging or a third-party logger.
+  - Use Data Annotations or Fluent Validation for model validation.
+  - Implement global exception handling middleware.
+  - Return appropriate HTTP status codes and consistent error responses.
 
-## Performance Optimization
+  ## API Design
 
-- Use asynchronous programming with async/await for I/O-bound operations.
-- Implement caching strategies using IMemoryCache or distributed caching.
-- Use efficient LINQ queries and avoid N+1 query problems.
-- Implement pagination for large data sets.
+  - Follow RESTful API design principles.
+  - Use attribute routing in controllers.
+  - Implement versioning for your API.
+  - Use action filters for cross-cutting concerns.
 
-## Key Conventions
+  ## Performance Optimization
 
-- Use Dependency Injection for loose coupling and testability.
-- Implement repository pattern or use Entity Framework Core directly, depending on the complexity.
-- Use AutoMapper for object-to-object mapping if needed.
-- Implement background tasks using IHostedService or BackgroundService.
+  - Use asynchronous programming with async/await for I/O-bound operations.
+  - Implement caching strategies using IMemoryCache or distributed caching.
+  - Use efficient LINQ queries and avoid N+1 query problems.
+  - Implement pagination for large data sets.
 
-## Testing
+  ## Key Conventions
 
-- Write unit tests using xUnit, NUnit, or MSTest.
-- Use Moq or NSubstitute for mocking dependencies.
-- Implement integration tests for API endpoints.
+  - Use Dependency Injection for loose coupling and testability.
+  - Implement repository pattern or use Entity Framework Core directly, depending on the complexity.
+  - Use AutoMapper for object-to-object mapping if needed.
+  - Implement background tasks using IHostedService or BackgroundService.
 
-## Security
+  ## Testing
 
-- Use Authentication and Authorization middleware.
-- Implement JWT authentication for stateless API authentication.
-- Use HTTPS and enforce SSL.
-- Implement proper CORS policies.
+  - Write unit tests using xUnit, NUnit, or MSTest.
+  - Use Moq or NSubstitute for mocking dependencies.
+  - Implement integration tests for API endpoints.
 
-## API Documentation
+  ## Security
 
-- Use Swagger/OpenAPI for API documentation (as per installed Swashbuckle.AspNetCore package).
-- Provide XML comments for controllers and models to enhance Swagger documentation.
+  - Use Authentication and Authorization middleware.
+  - Implement JWT authentication for stateless API authentication.
+  - Use HTTPS and enforce SSL.
+  - Implement proper CORS policies.
 
-Follow the official Microsoft documentation and ASP.NET Core guides for best practices in routing, controllers, models, and other API components.
+  ## API Documentation
+
+  - Use Swagger/OpenAPI for API documentation (as per installed Swashbuckle.AspNetCore package).
+  - Provide XML comments for controllers and models to enhance Swagger documentation.
+
+  Follow the official Microsoft documentation and ASP.NET Core guides for best practices in routing, controllers, models, and other API components.
