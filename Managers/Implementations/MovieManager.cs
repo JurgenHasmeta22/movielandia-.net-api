@@ -2,6 +2,8 @@ using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
 using movielandia_.net_api.BLLs.Interfaces;
 using movielandia_.net_api.DTOs;
+using movielandia_.net_api.DTOs.Requests;
+using movielandia_.net_api.DTOs.Responses;
 using movielandia_.net_api.Managers.Interfaces;
 using movielandia_.net_api.Models;
 
@@ -24,17 +26,13 @@ namespace movielandia_.net_api.Managers.Implementations
         #endregion
 
         #region Query Methods
-        public async Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
-            MovieFilterDTO filter
-        )
+        public async Task<MovieListResponse> GetMoviesWithFiltersAsync(MovieFilterDTO filter)
         {
             string cacheKey = $"movies_filtered_{filter.GetHashCode()}";
 
             if (
-                _cache.TryGetValue(
-                    cacheKey,
-                    out (IEnumerable<MovieDTO> Movies, int TotalCount) cachedResult
-                )
+                _cache.TryGetValue(cacheKey, out MovieListResponse? cachedResult)
+                && cachedResult != null
             )
             {
                 return cachedResult;
@@ -42,10 +40,21 @@ namespace movielandia_.net_api.Managers.Implementations
 
             var (movies, totalCount) = await _movieBLL.GetMoviesWithFiltersAsync(filter);
             var movieDTOs = _mapper.Map<IEnumerable<MovieDTO>>(movies);
-            var result = (movieDTOs, totalCount);
 
-            _cache.Set(cacheKey, result, CacheDuration);
-            return result;
+            var response = new MovieListResponse
+            {
+                Movies = movieDTOs,
+                Pagination = new PaginationMetadata
+                {
+                    CurrentPage = filter.Page,
+                    PageSize = filter.PerPage,
+                    TotalCount = totalCount,
+                    TotalPages = (int)Math.Ceiling(totalCount / (double)filter.PerPage),
+                },
+            };
+
+            _cache.Set(cacheKey, response, CacheDuration);
+            return response;
         }
 
         public async Task<IEnumerable<MovieDTO>> GetMoviesForHomePageAsync()
@@ -67,12 +76,15 @@ namespace movielandia_.net_api.Managers.Implementations
             return movieDTOs;
         }
 
-        public async Task<MovieDetailDTO> GetMovieByIdAsync(int id, MovieQueryParameters parameters)
+        public async Task<MovieDetailResponse> GetMovieByIdAsync(
+            int id,
+            MovieQueryParameters parameters
+        )
         {
             string cacheKey = $"movie_detail_{id}_{parameters.GetHashCode()}";
 
             if (
-                _cache.TryGetValue(cacheKey, out MovieDetailDTO? cachedMovie)
+                _cache.TryGetValue(cacheKey, out MovieDetailResponse? cachedMovie)
                 && cachedMovie != null
             )
             {
@@ -80,13 +92,23 @@ namespace movielandia_.net_api.Managers.Implementations
             }
 
             var movie = await _movieBLL.GetMovieByIdAsync(id, parameters);
-            var movieDTO = _mapper.Map<MovieDetailDTO>(movie);
+            if (movie == null)
+                return new MovieDetailResponse(); // Return empty response instead of null
 
-            _cache.Set(cacheKey, movieDTO, CacheDuration);
-            return movieDTO;
+            var movieDTO = _mapper.Map<MovieDetailDTO>(movie);
+            var relatedContent = await GetRelatedContentAsync(id, parameters.UserId);
+
+            var response = new MovieDetailResponse
+            {
+                Movie = movieDTO,
+                RelatedContent = relatedContent,
+            };
+
+            _cache.Set(cacheKey, response, CacheDuration);
+            return response;
         }
 
-        public async Task<MovieDetailDTO> GetMovieByTitleAsync(
+        public async Task<MovieDetailResponse> GetMovieByTitleAsync(
             string title,
             MovieQueryParameters parameters
         )
@@ -94,7 +116,7 @@ namespace movielandia_.net_api.Managers.Implementations
             string cacheKey = $"movie_title_{title}_{parameters.GetHashCode()}";
 
             if (
-                _cache.TryGetValue(cacheKey, out MovieDetailDTO? cachedMovie)
+                _cache.TryGetValue(cacheKey, out MovieDetailResponse? cachedMovie)
                 && cachedMovie != null
             )
             {
@@ -102,10 +124,18 @@ namespace movielandia_.net_api.Managers.Implementations
             }
 
             var movie = await _movieBLL.GetMovieByTitleAsync(title, parameters);
-            var movieDTO = _mapper.Map<MovieDetailDTO>(movie);
+            if (movie == null)
+                return new MovieDetailResponse(); // Return empty response instead of null
 
-            _cache.Set(cacheKey, movieDTO, CacheDuration);
-            return movieDTO;
+            var movieDTO = _mapper.Map<MovieDetailDTO>(movie);
+            var response = new MovieDetailResponse
+            {
+                Movie = movieDTO,
+                RelatedContent = await GetRelatedContentAsync(movie.Id, parameters.UserId),
+            };
+
+            _cache.Set(cacheKey, response, CacheDuration);
+            return response;
         }
 
         public async Task<IEnumerable<MovieDTO>> GetLatestMoviesAsync(int? userId = null)
@@ -185,29 +215,66 @@ namespace movielandia_.net_api.Managers.Implementations
             return count;
         }
 
-        public async Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> SearchMoviesByTitleAsync(
-            string title,
-            MovieFilterDTO filter
-        )
+        public async Task<MovieListResponse> SearchMoviesAsync(SearchMovieRequestDTO request)
         {
-            var (movies, totalCount) = await _movieBLL.SearchMoviesByTitleAsync(title, filter);
-            var movieDTOs = _mapper.Map<IEnumerable<MovieDTO>>(movies);
-            return (movieDTOs, totalCount);
+            var (movieList, totalCount) = await _movieBLL.SearchMoviesAsync(
+                request.SearchTerm,
+                request.Page,
+                request.PerPage,
+                request.SortBy,
+                request.SortDirection,
+                request.MinRating,
+                request.MaxRating,
+                request.FromDate,
+                request.ToDate,
+                request.GenreIds ?? Enumerable.Empty<int>()
+            );
+
+            var movieDTOs = _mapper.Map<IEnumerable<MovieDTO>>(movieList);
+
+            return new MovieListResponse
+            {
+                Movies = movieDTOs,
+                Pagination = new PaginationMetadata
+                {
+                    CurrentPage = request.Page,
+                    PageSize = request.PerPage,
+                    TotalCount = totalCount,
+                    TotalPages = (int)Math.Ceiling(totalCount / (double)request.PerPage),
+                },
+            };
+        }
+
+        private async Task<RelatedContentMetadata> GetRelatedContentAsync(int movieId, int? userId)
+        {
+            var similarMovies = await _movieBLL.GetSimilarMoviesAsync(movieId, 6);
+            var directorMovies = await _movieBLL.GetMoviesByDirectorAsync(movieId, 6);
+            var stats = await _movieBLL.GetMovieStatsAsync(movieId);
+
+            return new RelatedContentMetadata
+            {
+                TotalReviews = stats.TotalReviews,
+                AverageRating = stats.AverageRating,
+                ReviewsCount = stats.ReviewsCount,
+                BookmarksCount = stats.BookmarksCount,
+                SimilarMovies = _mapper.Map<IEnumerable<MovieDTO>>(similarMovies),
+                MoreFromDirector = _mapper.Map<IEnumerable<MovieDTO>>(directorMovies),
+            };
         }
         #endregion
 
         #region Command Methods
-        public async Task<MovieDTO> CreateMovieAsync(MovieDTO movieDTO)
+        public async Task<MovieDTO> CreateMovieAsync(CreateMovieRequestDTO request)
         {
-            var movie = _mapper.Map<Movie>(movieDTO);
+            var movie = _mapper.Map<Movie>(request);
             var createdMovie = await _movieBLL.CreateMovieAsync(movie);
             InvalidateMovieCache();
             return _mapper.Map<MovieDTO>(createdMovie);
         }
 
-        public async Task<MovieDTO> UpdateMovieAsync(int id, MovieDTO movieDTO)
+        public async Task<MovieDTO> UpdateMovieAsync(int id, UpdateMovieRequestDTO request)
         {
-            var movie = _mapper.Map<Movie>(movieDTO);
+            var movie = _mapper.Map<Movie>(request);
             var updatedMovie = await _movieBLL.UpdateMovieAsync(id, movie);
             InvalidateMovieCache();
             return _mapper.Map<MovieDTO>(updatedMovie);

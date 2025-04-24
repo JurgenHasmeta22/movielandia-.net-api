@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using movielandia_.net_api.DTOs;
+using movielandia_.net_api.DTOs.Requests;
+using movielandia_.net_api.DTOs.Responses;
 using movielandia_.net_api.Managers.Interfaces;
 
 namespace movielandia_.net_api.Controllers
@@ -16,17 +18,16 @@ namespace movielandia_.net_api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MovieListResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMoviesWithFilters(
+        public async Task<ActionResult<MovieListResponseDTO>> GetMoviesWithFilters(
             [FromQuery] MovieFilterDTO filter
         )
         {
             try
             {
-                var (movies, totalCount) = await _movieManager.GetMoviesWithFiltersAsync(filter);
-                Response.Headers.Append("X-Total-Count", totalCount.ToString());
-                return Ok(movies);
+                var result = await _movieManager.GetMoviesWithFiltersAsync(filter);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -38,7 +39,7 @@ namespace movielandia_.net_api.Controllers
         }
 
         [HttpGet("homepage")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MovieDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMoviesForHomePage()
         {
@@ -57,22 +58,22 @@ namespace movielandia_.net_api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MovieDetailResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDetailDTO>> GetMovieById(
+        public async Task<ActionResult<MovieDetailResponse>> GetMovieById(
             int id,
             [FromQuery] MovieQueryParameters parameters
         )
         {
             try
             {
-                var movie = await _movieManager.GetMovieByIdAsync(id, parameters);
-                if (movie == null)
+                var result = await _movieManager.GetMovieByIdAsync(id, parameters);
+                if (result == null)
                 {
                     return NotFound(new { message = $"Movie with ID {id} not found" });
                 }
-                return Ok(movie);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -83,29 +84,79 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        [HttpGet("title/{title}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPost]
+        [ProducesResponseType(typeof(MovieDTO), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDetailDTO>> GetMovieByTitle(
-            string title,
-            [FromQuery] MovieQueryParameters parameters
+        public async Task<ActionResult<MovieDTO>> CreateMovie(
+            [FromBody] CreateMovieRequestDTO request
         )
         {
             try
             {
-                var movie = await _movieManager.GetMovieByTitleAsync(title, parameters);
-                if (movie == null)
-                {
-                    return NotFound(new { message = $"Movie with title '{title}' not found" });
-                }
-                return Ok(movie);
+                var createdMovie = await _movieManager.CreateMovieAsync(request);
+
+                return CreatedAtAction(
+                    nameof(GetMovieById),
+                    new { id = createdMovie.Id },
+                    createdMovie
+                );
             }
             catch (Exception ex)
             {
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
-                    new { message = $"Error retrieving movie: {ex.Message}" }
+                    new { message = $"Error creating movie: {ex.Message}" }
+                );
+            }
+        }
+
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(typeof(MovieDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<MovieDTO>> UpdateMovie(
+            int id,
+            [FromBody] UpdateMovieRequestDTO request
+        )
+        {
+            try
+            {
+                var updatedMovie = await _movieManager.UpdateMovieAsync(id, request);
+                if (updatedMovie == null)
+                {
+                    return NotFound(new { message = $"Movie with ID {id} not found" });
+                }
+                return Ok(updatedMovie);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new { message = $"Error updating movie: {ex.Message}" }
+                );
+            }
+        }
+
+        [HttpGet("search")]
+        [ProducesResponseType(typeof(MovieListResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<MovieListResponseDTO>> SearchMovies(
+            [FromQuery] SearchMovieRequestDTO request
+        )
+        {
+            try
+            {
+                var result = await _movieManager.SearchMoviesAsync(request);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new { message = $"Error searching movies: {ex.Message}" }
                 );
             }
         }
@@ -150,10 +201,12 @@ namespace movielandia_.net_api.Controllers
                     page,
                     perPage
                 );
+
                 if (movies == null || totalCount == 0)
                 {
                     return NotFound(new { message = $"No related movies found for movie ID {id}" });
                 }
+
                 Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
@@ -181,97 +234,6 @@ namespace movielandia_.net_api.Controllers
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     new { message = $"Error retrieving movie count: {ex.Message}" }
-                );
-            }
-        }
-
-        [HttpGet("search")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<MovieDTO>>> SearchMovies(
-            [FromQuery] string title,
-            [FromQuery] MovieFilterDTO filter
-        )
-        {
-            if (string.IsNullOrWhiteSpace(title))
-            {
-                return BadRequest(new { message = "Search title is required" });
-            }
-
-            try
-            {
-                var (movies, totalCount) = await _movieManager.SearchMoviesByTitleAsync(
-                    title,
-                    filter
-                );
-                Response.Headers.Append("X-Total-Count", totalCount.ToString());
-                return Ok(movies);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new { message = $"Error searching movies: {ex.Message}" }
-                );
-            }
-        }
-
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDTO>> CreateMovie([FromBody] MovieDTO movieDTO)
-        {
-            try
-            {
-                if (movieDTO == null)
-                {
-                    return BadRequest(new { message = "Movie data is required" });
-                }
-
-                var createdMovie = await _movieManager.CreateMovieAsync(movieDTO);
-                return CreatedAtAction(
-                    nameof(GetMovieById),
-                    new { id = createdMovie.Id },
-                    createdMovie
-                );
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new { message = $"Error creating movie: {ex.Message}" }
-                );
-            }
-        }
-
-        [HttpPut("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDTO>> UpdateMovie(int id, [FromBody] MovieDTO movieDTO)
-        {
-            try
-            {
-                if (movieDTO == null)
-                {
-                    return BadRequest(new { message = "Movie data is required" });
-                }
-
-                var updatedMovie = await _movieManager.UpdateMovieAsync(id, movieDTO);
-                if (updatedMovie == null)
-                {
-                    return NotFound(new { message = $"Movie with ID {id} not found" });
-                }
-
-                return Ok(updatedMovie);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new { message = $"Error updating movie: {ex.Message}" }
                 );
             }
         }

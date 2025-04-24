@@ -87,6 +87,56 @@ namespace movielandia_.net_api.BLLs.Implementations
         {
             return await _movieDAL.SearchMoviesByTitleAsync(title, filter);
         }
+
+        public async Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesAsync(
+            string searchTerm,
+            int page,
+            int perPage,
+            string sortBy,
+            string sortDirection,
+            float? minRating,
+            float? maxRating,
+            DateTime? fromDate,
+            DateTime? toDate,
+            IEnumerable<int> genreIds
+        )
+        {
+            var filter = new MovieFilterDTO
+            {
+                Title = searchTerm,
+                Page = page,
+                PerPage = perPage,
+                SortBy = sortBy,
+                AscOrDesc = sortDirection,
+                FilterNameString = "RatingImdb",
+                FilterValue = minRating?.ToString() ?? string.Empty,
+                FilterOperatorString = FilterOperator.GreaterThan,
+            };
+
+            var (movies, count) = await _movieDAL.GetMoviesWithFiltersAsync(filter);
+
+            if (maxRating.HasValue)
+            {
+                movies = movies.Where(m => m.RatingImdb <= maxRating.Value);
+            }
+
+            if (fromDate.HasValue)
+            {
+                movies = movies.Where(m => m.DateAired >= fromDate.Value);
+            }
+
+            if (toDate.HasValue)
+            {
+                movies = movies.Where(m => m.DateAired <= toDate.Value);
+            }
+
+            if (genreIds?.Any() == true)
+            {
+                movies = movies.Where(m => m.Genres.Any(g => genreIds.Contains(g.GenreId)));
+            }
+
+            return (movies, count);
+        }
         #endregion
 
         #region CRUD Operations
@@ -127,6 +177,59 @@ namespace movielandia_.net_api.BLLs.Implementations
 
             await _movieDAL.DeleteAsync(movie.Id);
             return true;
+        }
+        #endregion
+
+        #region Additional Operations
+        public async Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId, int count)
+        {
+            var movie = await _movieDAL.GetByIdAsync(movieId);
+            if (movie == null)
+                throw new KeyNotFoundException($"Movie with ID {movieId} not found.");
+
+            var (movies, _) = await _movieDAL.GetRelatedMoviesAsync(movieId, null, 1, count);
+            return movies;
+        }
+
+        public async Task<IEnumerable<Movie>> GetMoviesByDirectorAsync(int movieId, int count)
+        {
+            var movie = await _movieDAL.GetByIdAsync(movieId);
+            if (movie == null)
+                throw new KeyNotFoundException($"Movie with ID {movieId} not found.");
+
+            var director = movie
+                .Crew.FirstOrDefault(c => c.Crew.Role.ToLower() == "director")
+                ?.Crew;
+            if (director == null)
+                return Enumerable.Empty<Movie>();
+
+            var directorMovies = await _movieDAL.GetAllAsync();
+            return directorMovies
+                .Where(m =>
+                    m.Id != movieId
+                    && m.Crew.Any(c =>
+                        c.CrewId == director.Id && c.Crew.Role.ToLower() == "director"
+                    )
+                )
+                .Take(count);
+        }
+
+        public async Task<(
+            float AverageRating,
+            int TotalReviews,
+            int ReviewsCount,
+            int BookmarksCount
+        )> GetMovieStatsAsync(int movieId)
+        {
+            var movie = await _movieDAL.GetByIdAsync(movieId);
+            if (movie == null)
+                throw new KeyNotFoundException($"Movie with ID {movieId} not found.");
+
+            var (avgRating, totalReviews) = await _movieDAL.CalculateMovieRatingAsync(movieId);
+            var reviewsCount = movie.Reviews?.Count ?? 0;
+            var bookmarksCount = movie.UsersWhoBookmarkedIt?.Count ?? 0;
+
+            return (avgRating, totalReviews, reviewsCount, bookmarksCount);
         }
         #endregion
     }
