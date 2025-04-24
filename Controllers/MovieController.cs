@@ -5,7 +5,7 @@ using movielandia_.net_api.DTOs;
 namespace movielandia_.net_api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/movies")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieBLL _movieBLL;
