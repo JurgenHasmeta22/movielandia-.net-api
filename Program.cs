@@ -10,9 +10,14 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
-builder.Services.AddMovieBLLs();
-builder.Services.AddEndpointsApiExplorer();
 
+// Add AutoMapper
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+// Add application services
+builder.Services.AddMovieServices();
+
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc(
@@ -39,7 +44,6 @@ builder.Services.AddSwaggerGen(c =>
     }
 
     c.EnableAnnotations();
-    c.CustomSchemaIds(type => type.FullName);
 });
 
 builder.Services.AddCors(options =>

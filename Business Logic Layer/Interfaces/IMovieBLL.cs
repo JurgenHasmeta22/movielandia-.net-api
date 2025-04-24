@@ -5,27 +5,27 @@ namespace movielandia_.net_api.BLLs.Interfaces
 {
     public interface IMovieBLL
     {
-        Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
+        Task<IEnumerable<Movie>> GetAllMoviesAsync();
+        Task<(IEnumerable<Movie> Movies, int TotalCount)> GetMoviesWithFiltersAsync(
             MovieFilterDTO filter
         );
-        Task<IEnumerable<MovieDTO>> GetMoviesForHomePageAsync();
-        Task<IEnumerable<Movie>> GetAllMoviesAsync();
-        Task<MovieDetailDTO> GetMovieByIdAsync(int id, MovieQueryParameters parameters);
-        Task<MovieDetailDTO> GetMovieByTitleAsync(string title, MovieQueryParameters parameters);
-        Task<IEnumerable<MovieDTO>> GetLatestMoviesAsync(int? userId = null);
-        Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> GetRelatedMoviesAsync(
+        Task<IEnumerable<Movie>> GetMoviesForHomePageAsync();
+        Task<Movie> GetMovieByIdAsync(int id, MovieQueryParameters parameters);
+        Task<Movie> GetMovieByTitleAsync(string title, MovieQueryParameters parameters);
+        Task<IEnumerable<Movie>> GetLatestMoviesAsync(int? userId = null);
+        Task<(IEnumerable<Movie> Movies, int TotalCount)> GetRelatedMoviesAsync(
             int id,
             int? userId,
             int page,
             int perPage
         );
         Task<int> GetMoviesTotalCountAsync();
-        Task<MovieDTO> CreateMovieAsync(MovieDTO movieDTO);
-        Task<MovieDTO> UpdateMovieAsync(int id, MovieDTO movieDTO);
-        Task<bool> DeleteMovieAsync(int id);
-        Task<(IEnumerable<MovieDTO> Movies, int TotalCount)> SearchMoviesByTitleAsync(
+        Task<(IEnumerable<Movie> Movies, int TotalCount)> SearchMoviesByTitleAsync(
             string title,
             MovieFilterDTO filter
         );
+        Task<Movie> CreateMovieAsync(Movie movie);
+        Task<Movie> UpdateMovieAsync(int id, Movie movie);
+        Task<bool> DeleteMovieAsync(int id);
     }
 }

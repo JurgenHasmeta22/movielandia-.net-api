@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using movielandia_.net_api.BLLs.Interfaces;
 using movielandia_.net_api.DTOs;
+using movielandia_.net_api.Managers.Interfaces;
 
 namespace movielandia_.net_api.Controllers
 {
@@ -8,16 +8,13 @@ namespace movielandia_.net_api.Controllers
     [Route("api/movies")]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieBLL _movieBLL;
+        private readonly IMovieManager _movieManager;
 
-        public MovieController(IMovieBLL movieBLL)
+        public MovieController(IMovieManager movieManager)
         {
-            _movieBLL = movieBLL;
+            _movieManager = movieManager;
         }
 
-        /// <summary>
-        /// Get all movies with optional filtering and pagination
-        /// </summary>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -27,7 +24,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var (movies, totalCount) = await _movieBLL.GetMoviesWithFiltersAsync(filter);
+                var (movies, totalCount) = await _movieManager.GetMoviesWithFiltersAsync(filter);
                 Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
@@ -40,9 +37,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Get movies for the home page
-        /// </summary>
         [HttpGet("homepage")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -50,7 +44,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movies = await _movieBLL.GetMoviesForHomePageAsync();
+                var movies = await _movieManager.GetMoviesForHomePageAsync();
                 return Ok(movies);
             }
             catch (Exception ex)
@@ -62,9 +56,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Get a specific movie by ID with all its details
-        /// </summary>
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -76,13 +67,11 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movie = await _movieBLL.GetMovieByIdAsync(id, parameters);
-
+                var movie = await _movieManager.GetMovieByIdAsync(id, parameters);
                 if (movie == null)
                 {
                     return NotFound(new { message = $"Movie with ID {id} not found" });
                 }
-
                 return Ok(movie);
             }
             catch (Exception ex)
@@ -94,9 +83,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Get a specific movie by title with all its details
-        /// </summary>
         [HttpGet("title/{title}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -108,13 +94,11 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movie = await _movieBLL.GetMovieByTitleAsync(title, parameters);
-
+                var movie = await _movieManager.GetMovieByTitleAsync(title, parameters);
                 if (movie == null)
                 {
                     return NotFound(new { message = $"Movie with title '{title}' not found" });
                 }
-
                 return Ok(movie);
             }
             catch (Exception ex)
@@ -126,9 +110,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Get the latest movies
-        /// </summary>
         [HttpGet("latest")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -138,7 +119,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var movies = await _movieBLL.GetLatestMoviesAsync(userId);
+                var movies = await _movieManager.GetLatestMoviesAsync(userId);
                 return Ok(movies);
             }
             catch (Exception ex)
@@ -150,9 +131,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Get movies related to a specific movie
-        /// </summary>
         [HttpGet("{id:int}/related")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -166,18 +144,16 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var (movies, totalCount) = await _movieBLL.GetRelatedMoviesAsync(
+                var (movies, totalCount) = await _movieManager.GetRelatedMoviesAsync(
                     id,
                     userId,
                     page,
                     perPage
                 );
-
                 if (movies == null || totalCount == 0)
                 {
                     return NotFound(new { message = $"No related movies found for movie ID {id}" });
                 }
-
                 Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
@@ -190,9 +166,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Get the total count of movies in the database
-        /// </summary>
         [HttpGet("count")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -200,7 +173,7 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var count = await _movieBLL.GetMoviesTotalCountAsync();
+                var count = await _movieManager.GetMoviesTotalCountAsync();
                 return Ok(count);
             }
             catch (Exception ex)
@@ -212,9 +185,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Search for movies by title
-        /// </summary>
         [HttpGet("search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -230,7 +200,10 @@ namespace movielandia_.net_api.Controllers
 
             try
             {
-                var (movies, totalCount) = await _movieBLL.SearchMoviesByTitleAsync(title, filter);
+                var (movies, totalCount) = await _movieManager.SearchMoviesByTitleAsync(
+                    title,
+                    filter
+                );
                 Response.Headers.Append("X-Total-Count", totalCount.ToString());
                 return Ok(movies);
             }
@@ -243,9 +216,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Create a new movie
-        /// </summary>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -259,7 +229,7 @@ namespace movielandia_.net_api.Controllers
                     return BadRequest(new { message = "Movie data is required" });
                 }
 
-                var createdMovie = await _movieBLL.CreateMovieAsync(movieDTO);
+                var createdMovie = await _movieManager.CreateMovieAsync(movieDTO);
                 return CreatedAtAction(
                     nameof(GetMovieById),
                     new { id = createdMovie.Id },
@@ -275,9 +245,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Update an existing movie
-        /// </summary>
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -292,8 +259,7 @@ namespace movielandia_.net_api.Controllers
                     return BadRequest(new { message = "Movie data is required" });
                 }
 
-                var updatedMovie = await _movieBLL.UpdateMovieAsync(id, movieDTO);
-
+                var updatedMovie = await _movieManager.UpdateMovieAsync(id, movieDTO);
                 if (updatedMovie == null)
                 {
                     return NotFound(new { message = $"Movie with ID {id} not found" });
@@ -310,9 +276,6 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
-        /// <summary>
-        /// Delete a movie
-        /// </summary>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -321,13 +284,11 @@ namespace movielandia_.net_api.Controllers
         {
             try
             {
-                var result = await _movieBLL.DeleteMovieAsync(id);
-
+                var result = await _movieManager.DeleteMovieAsync(id);
                 if (!result)
                 {
                     return NotFound(new { message = $"Movie with ID {id} not found" });
                 }
-
                 return NoContent();
             }
             catch (Exception ex)
