@@ -64,10 +64,10 @@ namespace movielandia_.net_api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(MovieDetailResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MovieDetailResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDetailResponse>> GetMovieById(
+        public async Task<ActionResult<MovieDetailResponseDTO>> GetMovieById(
             int id,
             [FromQuery] MovieQueryParameters parameters
         )

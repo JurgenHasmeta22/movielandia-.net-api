@@ -51,9 +51,9 @@ namespace movielandia_.net_api.DTOs.Validators
                 .When(x => x.Crew != null);
         }
 
-        private bool BeAValidUrl(string url)
+        private bool BeAValidUrl(string? url)
         {
-            return Uri.TryCreate(url, UriKind.Absolute, out _);
+            return url != null && Uri.TryCreate(url, UriKind.Absolute, out _);
         }
     }
 }

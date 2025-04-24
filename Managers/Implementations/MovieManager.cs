@@ -26,12 +26,12 @@ namespace movielandia_.net_api.Managers.Implementations
         #endregion
 
         #region Query Methods
-        public async Task<MovieListResponse> GetMoviesWithFiltersAsync(MovieFilterDTO filter)
+        public async Task<MovieListResponseDTO> GetMoviesWithFiltersAsync(MovieFilterDTO filter)
         {
             string cacheKey = $"movies_filtered_{filter.GetHashCode()}";
 
             if (
-                _cache.TryGetValue(cacheKey, out MovieListResponse? cachedResult)
+                _cache.TryGetValue(cacheKey, out MovieListResponseDTO? cachedResult)
                 && cachedResult != null
             )
             {
@@ -41,7 +41,7 @@ namespace movielandia_.net_api.Managers.Implementations
             var (movies, totalCount) = await _movieBLL.GetMoviesWithFiltersAsync(filter);
             var movieDTOs = _mapper.Map<IEnumerable<MovieDTO>>(movies);
 
-            var response = new MovieListResponse
+            var response = new MovieListResponseDTO
             {
                 Movies = movieDTOs,
                 Pagination = new PaginationMetadata
@@ -76,7 +76,7 @@ namespace movielandia_.net_api.Managers.Implementations
             return movieDTOs;
         }
 
-        public async Task<MovieDetailResponse> GetMovieByIdAsync(
+        public async Task<MovieDetailResponseDTO> GetMovieByIdAsync(
             int id,
             MovieQueryParameters parameters
         )
@@ -84,7 +84,7 @@ namespace movielandia_.net_api.Managers.Implementations
             string cacheKey = $"movie_detail_{id}_{parameters.GetHashCode()}";
 
             if (
-                _cache.TryGetValue(cacheKey, out MovieDetailResponse? cachedMovie)
+                _cache.TryGetValue(cacheKey, out MovieDetailResponseDTO? cachedMovie)
                 && cachedMovie != null
             )
             {
@@ -92,13 +92,37 @@ namespace movielandia_.net_api.Managers.Implementations
             }
 
             var movie = await _movieBLL.GetMovieByIdAsync(id, parameters);
+
             if (movie == null)
-                return new MovieDetailResponse(); // Return empty response instead of null
+                return new MovieDetailResponseDTO
+                {
+                    Movie = new MovieDetailDTO
+                    {
+                        Title = string.Empty,
+                        PhotoSrc = string.Empty,
+                        PhotoSrcProd = string.Empty,
+                        TrailerSrc = string.Empty,
+                        Description = string.Empty,
+                        Genres = Enumerable.Empty<MovieGenreDTO>(),
+                        Cast = Enumerable.Empty<MovieCastDTO>(),
+                        Crew = Enumerable.Empty<MovieCrewDTO>(),
+                        Reviews = Enumerable.Empty<MovieReviewDTO>(),
+                    },
+                    RelatedContent = new RelatedContentMetadata
+                    {
+                        TotalReviews = 0,
+                        AverageRating = 0,
+                        ReviewsCount = 0,
+                        BookmarksCount = 0,
+                        SimilarMovies = Enumerable.Empty<MovieDTO>(),
+                        MoreFromDirector = Enumerable.Empty<MovieDTO>(),
+                    },
+                };
 
             var movieDTO = _mapper.Map<MovieDetailDTO>(movie);
             var relatedContent = await GetRelatedContentAsync(id, parameters.UserId);
 
-            var response = new MovieDetailResponse
+            var response = new MovieDetailResponseDTO
             {
                 Movie = movieDTO,
                 RelatedContent = relatedContent,
@@ -108,7 +132,7 @@ namespace movielandia_.net_api.Managers.Implementations
             return response;
         }
 
-        public async Task<MovieDetailResponse> GetMovieByTitleAsync(
+        public async Task<MovieDetailResponseDTO> GetMovieByTitleAsync(
             string title,
             MovieQueryParameters parameters
         )
@@ -116,7 +140,7 @@ namespace movielandia_.net_api.Managers.Implementations
             string cacheKey = $"movie_title_{title}_{parameters.GetHashCode()}";
 
             if (
-                _cache.TryGetValue(cacheKey, out MovieDetailResponse? cachedMovie)
+                _cache.TryGetValue(cacheKey, out MovieDetailResponseDTO? cachedMovie)
                 && cachedMovie != null
             )
             {
@@ -125,10 +149,33 @@ namespace movielandia_.net_api.Managers.Implementations
 
             var movie = await _movieBLL.GetMovieByTitleAsync(title, parameters);
             if (movie == null)
-                return new MovieDetailResponse(); // Return empty response instead of null
+                return new MovieDetailResponseDTO
+                {
+                    Movie = new MovieDetailDTO
+                    {
+                        Title = string.Empty,
+                        PhotoSrc = string.Empty,
+                        PhotoSrcProd = string.Empty,
+                        TrailerSrc = string.Empty,
+                        Description = string.Empty,
+                        Genres = Enumerable.Empty<MovieGenreDTO>(),
+                        Cast = Enumerable.Empty<MovieCastDTO>(),
+                        Crew = Enumerable.Empty<MovieCrewDTO>(),
+                        Reviews = Enumerable.Empty<MovieReviewDTO>(),
+                    },
+                    RelatedContent = new RelatedContentMetadata
+                    {
+                        TotalReviews = 0,
+                        AverageRating = 0,
+                        ReviewsCount = 0,
+                        BookmarksCount = 0,
+                        SimilarMovies = Enumerable.Empty<MovieDTO>(),
+                        MoreFromDirector = Enumerable.Empty<MovieDTO>(),
+                    },
+                };
 
             var movieDTO = _mapper.Map<MovieDetailDTO>(movie);
-            var response = new MovieDetailResponse
+            var response = new MovieDetailResponseDTO
             {
                 Movie = movieDTO,
                 RelatedContent = await GetRelatedContentAsync(movie.Id, parameters.UserId),
@@ -215,7 +262,7 @@ namespace movielandia_.net_api.Managers.Implementations
             return count;
         }
 
-        public async Task<MovieListResponse> SearchMoviesAsync(SearchMovieRequestDTO request)
+        public async Task<MovieListResponseDTO> SearchMoviesAsync(SearchMovieRequestDTO request)
         {
             var (movieList, totalCount) = await _movieBLL.SearchMoviesAsync(
                 request.SearchTerm,
@@ -232,7 +279,7 @@ namespace movielandia_.net_api.Managers.Implementations
 
             var movieDTOs = _mapper.Map<IEnumerable<MovieDTO>>(movieList);
 
-            return new MovieListResponse
+            return new MovieListResponseDTO
             {
                 Movies = movieDTOs,
                 Pagination = new PaginationMetadata

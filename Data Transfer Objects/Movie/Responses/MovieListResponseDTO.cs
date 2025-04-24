@@ -2,8 +2,8 @@ namespace movielandia_.net_api.DTOs.Responses
 {
     public class MovieListResponseDTO
     {
-        public IEnumerable<MovieDTO> Movies { get; set; }
-        public PaginationMetadata Pagination { get; set; }
+        public required IEnumerable<MovieDTO> Movies { get; set; }
+        public required PaginationMetadata Pagination { get; set; }
     }
 
     public class PaginationMetadata

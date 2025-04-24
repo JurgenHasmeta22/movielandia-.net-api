@@ -67,7 +67,7 @@ namespace movielandia_.net_api.Mappings
             // Response mappings
             CreateMap<
                 (IEnumerable<MovieDTO> Movies, PaginationMetadata Pagination),
-                MovieListResponse
+                MovieListResponseDTO
             >()
                 .ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.Movies))
                 .ForMember(dest => dest.Pagination, opt => opt.MapFrom(src => src.Pagination));

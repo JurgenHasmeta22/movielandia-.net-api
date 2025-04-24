@@ -21,10 +21,10 @@ namespace movielandia_.net_api.DTOs
         [Range(1, int.MaxValue)]
         public int Page { get; set; } = 1;
 
-        public required string Title { get; set; }
+        public string? Title { get; set; }
 
-        public required object FilterValue { get; set; }
-        public required string FilterNameString { get; set; }
+        public object? FilterValue { get; set; }
+        public string? FilterNameString { get; set; }
         public FilterOperator? FilterOperatorString { get; set; }
 
         // User identification

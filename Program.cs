@@ -7,18 +7,17 @@ using movielandia_.net_api.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidationExceptionFilter>();
 });
 
-// Configure Entity Framework with SQL Server
+builder.Services.AddMemoryCache();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// Add AutoMapper and other services
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddMovieServices();
 

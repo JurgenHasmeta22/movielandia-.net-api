@@ -6,10 +6,10 @@ namespace movielandia_.net_api.Managers.Interfaces
 {
     public interface IMovieManager
     {
-        Task<MovieListResponse> GetMoviesWithFiltersAsync(MovieFilterDTO filter);
+        Task<MovieListResponseDTO> GetMoviesWithFiltersAsync(MovieFilterDTO filter);
         Task<IEnumerable<MovieDTO>> GetMoviesForHomePageAsync();
-        Task<MovieDetailResponse> GetMovieByIdAsync(int id, MovieQueryParameters parameters);
-        Task<MovieDetailResponse> GetMovieByTitleAsync(
+        Task<MovieDetailResponseDTO> GetMovieByIdAsync(int id, MovieQueryParameters parameters);
+        Task<MovieDetailResponseDTO> GetMovieByTitleAsync(
             string title,
             MovieQueryParameters parameters
         );
@@ -23,7 +23,7 @@ namespace movielandia_.net_api.Managers.Interfaces
             int page,
             int perPage
         );
-        Task<MovieListResponse> SearchMoviesAsync(SearchMovieRequestDTO request);
+        Task<MovieListResponseDTO> SearchMoviesAsync(SearchMovieRequestDTO request);
         Task<int> GetMoviesTotalCountAsync();
     }
 }
