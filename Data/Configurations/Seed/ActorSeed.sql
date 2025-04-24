@@ -15,8 +15,7 @@ INSERT INTO
         Debut,
         PhotoSrc,
         PhotoSrcProd,
-        CreatedAt,
-        Gender
+        CreatedAt
     )
 VALUES
     (
@@ -26,8 +25,7 @@ VALUES
         '2012',
         'http://localhost:4000/images/actors/tom-holland.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/actors/tom-holland.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         2,
@@ -36,8 +34,7 @@ VALUES
         '2010',
         'http://localhost:4000/images/actors/zendaya.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/actors/zendaya.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         3,
@@ -46,8 +43,7 @@ VALUES
         '2000',
         'http://localhost:4000/images/actors/benedict-cumberbatch.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/actors/benedict-cumberbatch.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         4,
@@ -56,8 +52,7 @@ VALUES
         '2012',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         5,
@@ -66,8 +61,7 @@ VALUES
         '2014',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         6,
@@ -76,8 +70,7 @@ VALUES
         '2015',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         7,
@@ -86,8 +79,7 @@ VALUES
         '1999',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         8,
@@ -96,8 +88,7 @@ VALUES
         '2013',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         9,
@@ -106,8 +97,7 @@ VALUES
         '2010',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         10,
@@ -116,8 +106,7 @@ VALUES
         '2007',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         11,
@@ -126,8 +115,7 @@ VALUES
         '1999',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         12,
@@ -136,8 +124,7 @@ VALUES
         '2005',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         13,
@@ -146,8 +133,7 @@ VALUES
         '2009',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         14,
@@ -156,8 +142,7 @@ VALUES
         '2011',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         15,
@@ -166,8 +151,7 @@ VALUES
         '2006',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         16,
@@ -176,8 +160,7 @@ VALUES
         '2010',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         17,
@@ -186,8 +169,7 @@ VALUES
         '2006',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         18,
@@ -196,8 +178,7 @@ VALUES
         '2001',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         19,
@@ -206,8 +187,7 @@ VALUES
         '1996',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         20,
@@ -216,8 +196,7 @@ VALUES
         '1992',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         21,
@@ -226,8 +205,7 @@ VALUES
         '1984',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         22,
@@ -236,8 +214,7 @@ VALUES
         '1994',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         23,
@@ -246,8 +223,7 @@ VALUES
         '2013',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         24,
@@ -256,8 +232,7 @@ VALUES
         '1987',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         25,
@@ -266,8 +241,7 @@ VALUES
         '1996',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         26,
@@ -276,8 +250,7 @@ VALUES
         '2006',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         27,
@@ -286,8 +259,7 @@ VALUES
         '2007',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         28,
@@ -296,8 +268,7 @@ VALUES
         '2008',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         29,
@@ -306,8 +277,7 @@ VALUES
         '2011',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         30,
@@ -316,8 +286,7 @@ VALUES
         '2008',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         31,
@@ -326,8 +295,7 @@ VALUES
         '1997',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         32,
@@ -336,8 +304,7 @@ VALUES
         '1996',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         33,
@@ -346,8 +313,7 @@ VALUES
         '2010',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         34,
@@ -356,8 +322,7 @@ VALUES
         '2009',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         35,
@@ -366,8 +331,7 @@ VALUES
         '2000',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         36,
@@ -376,8 +340,7 @@ VALUES
         '2003',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         37,
@@ -386,8 +349,7 @@ VALUES
         '2001',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         38,
@@ -396,8 +358,7 @@ VALUES
         '2000',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         39,
@@ -406,8 +367,7 @@ VALUES
         '2011',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         40,
@@ -416,8 +376,7 @@ VALUES
         '2000',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         41,
@@ -426,8 +385,7 @@ VALUES
         '2005',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         42,
@@ -436,8 +394,7 @@ VALUES
         '2014',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         43,
@@ -446,8 +403,7 @@ VALUES
         '2011',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         44,
@@ -456,8 +412,7 @@ VALUES
         '2009',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         45,
@@ -466,8 +421,7 @@ VALUES
         '2003',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         46,
@@ -476,8 +430,7 @@ VALUES
         '1987',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         47,
@@ -486,8 +439,7 @@ VALUES
         '1993',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         48,
@@ -496,8 +448,7 @@ VALUES
         '2013',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     ),
     (
         49,
@@ -506,8 +457,7 @@ VALUES
         '2000',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        0
+        '2025-04-10'
     ),
     (
         50,
@@ -516,8 +466,7 @@ VALUES
         '2011',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
-        1
+        '2025-04-10'
     );
 
 SET

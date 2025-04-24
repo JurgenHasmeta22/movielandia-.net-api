@@ -14,7 +14,9 @@ INSERT INTO
         Gender,
         Active,
         Subscribed,
-        CanResetPassword
+        CanResetPassword,
+        Phone,
+        CountryFrom
     )
 VALUES
     (
@@ -24,10 +26,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         0,
         'Admin bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355671234567',
+        'Albania'
     ),
     (
         2,
@@ -36,10 +40,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 1 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355672234567',
+        'Albania'
     ),
     (
         3,
@@ -48,10 +54,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 2 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355673234567',
+        'Albania'
     ),
     (
         4,
@@ -60,10 +68,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 3 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355674234567',
+        'Albania'
     ),
     (
         5,
@@ -72,10 +82,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 4 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355675234567',
+        'Albania'
     ),
     (
         6,
@@ -84,10 +96,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 5 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355676234567',
+        'Albania'
     ),
     (
         7,
@@ -96,10 +110,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 6 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355677234567',
+        'Albania'
     ),
     (
         8,
@@ -108,10 +124,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 7 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355678234567',
+        'Albania'
     ),
     (
         9,
@@ -120,10 +138,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 8 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355679234567',
+        'Albania'
     ),
     (
         10,
@@ -132,10 +152,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 9 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355670234567',
+        'Albania'
     ),
     (
         11,
@@ -144,10 +166,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 10 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355671034567',
+        'Albania'
     ),
     (
         12,
@@ -156,10 +180,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 11 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355671134567',
+        'Albania'
     ),
     (
         13,
@@ -168,10 +194,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 12 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355671234567',
+        'Albania'
     ),
     (
         14,
@@ -180,10 +208,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 13 bio test',
-        0,
+        0, -- Male
         1,
         0,
-        0
+        0,
+        '+355671334567',
+        'Albania'
     ),
     (
         15,
@@ -192,10 +222,12 @@ VALUES
         '$2a$12$LIkI5Cs1ADMlIzSgIKJ9keFi8VGEW6uNT1Y.6OHzKRHWMvSCmFKCO',
         1,
         'Test 14 bio test',
-        0,
+        1, -- Female
         1,
         0,
-        0
+        0,
+        '+355671434567',
+        'Albania'
     );
 
 SET

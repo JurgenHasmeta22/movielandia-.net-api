@@ -15,7 +15,6 @@ INSERT INTO
         Debut,
         PhotoSrc,
         PhotoSrcProd,
-        CreatedAt,
         Role
     )
 VALUES
@@ -26,7 +25,6 @@ VALUES
         '1971',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -36,7 +34,6 @@ VALUES
         '1998',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -46,7 +43,6 @@ VALUES
         '1984',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Cinematographer'
     ),
     (
@@ -56,7 +52,6 @@ VALUES
         '1991',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Cinematographer'
     ),
     (
@@ -66,7 +61,6 @@ VALUES
         '1984',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Composer'
     ),
     (
@@ -76,7 +70,6 @@ VALUES
         '1958',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Composer'
     ),
     (
@@ -86,7 +79,6 @@ VALUES
         '1992',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Writer'
     ),
     (
@@ -96,7 +88,6 @@ VALUES
         '1988',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Writer'
     ),
     (
@@ -106,7 +97,6 @@ VALUES
         '1998',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -116,7 +106,6 @@ VALUES
         '2006',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -126,7 +115,6 @@ VALUES
         '2004',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Cinematographer'
     ),
     (
@@ -136,7 +124,6 @@ VALUES
         '1979',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Composer'
     ),
     (
@@ -146,7 +133,6 @@ VALUES
         '2006',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -156,7 +142,6 @@ VALUES
         '1990',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Cinematographer'
     ),
     (
@@ -166,7 +151,6 @@ VALUES
         '1983',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Writer'
     ),
     (
@@ -176,7 +160,6 @@ VALUES
         '1986',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -186,7 +169,6 @@ VALUES
         '1985',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Cinematographer'
     ),
     (
@@ -196,7 +178,6 @@ VALUES
         '2008',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Composer'
     ),
     (
@@ -206,7 +187,6 @@ VALUES
         '1999',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Director'
     ),
     (
@@ -216,7 +196,6 @@ VALUES
         '1997',
         'http://localhost:4000/images/placeholder.jpg',
         'https://movielandia-avenger22s-projects.vercel.app/images/placeholder.jpg',
-        '2025-04-10',
         'Composer'
     );
 

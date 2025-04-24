@@ -14,7 +14,7 @@ INSERT INTO
         PhotoSrc,
         PhotoSrcProd,
         Description,
-        Trailer,
+        TrailerSrc,
         DateAired,
         RatingImdb
     )
