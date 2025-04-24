@@ -1,19 +1,3 @@
-IF EXISTS (
-    SELECT
-        1
-    FROM
-        CastMovie
-)
-DELETE FROM CastMovie;
-
-IF EXISTS (
-    SELECT
-        1
-    FROM
-        CrewMovie
-)
-DELETE FROM CrewMovie;
-
 INSERT INTO
     MovieGenre (MovieId, GenreId)
 VALUES

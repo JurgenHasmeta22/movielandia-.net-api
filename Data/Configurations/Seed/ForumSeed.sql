@@ -49,9 +49,7 @@ VALUES
 SET
     IDENTITY_INSERT ForumCategory OFF;
 
-END
--- Forum Tags - Only insert if table is empty
-IF NOT EXISTS (
+END IF NOT EXISTS (
     SELECT
         1
     FROM
