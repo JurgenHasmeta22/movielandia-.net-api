@@ -6,42 +6,42 @@ namespace movielandia_.net_api.DTOs.Requests
     {
         [Required]
         [StringLength(200)]
-        public string Title { get; set; }
+        public required string Title { get; set; }
 
         [Required]
         [Url]
-        public string PhotoSrc { get; set; }
+        public required string PhotoSrc { get; set; }
 
         [Required]
         [Url]
-        public string PhotoSrcProd { get; set; }
+        public required string PhotoSrcProd { get; set; }
 
         [Required]
         [Url]
-        public string TrailerSrc { get; set; }
+        public required string TrailerSrc { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]
-        public int Duration { get; set; }
+        public required int Duration { get; set; }
 
         [Required]
         [Range(0, 10)]
-        public float RatingImdb { get; set; }
+        public required float RatingImdb { get; set; }
 
         public DateTime? DateAired { get; set; }
 
         [Required]
         [StringLength(2000)]
-        public string Description { get; set; }
+        public required string Description { get; set; }
 
         [Required]
-        public List<int> GenreIds { get; set; }
+        public required List<int> GenreIds { get; set; }
 
         [Required]
-        public List<MovieCastRequest> Cast { get; set; }
+        public required List<MovieCastRequest> Cast { get; set; }
 
         [Required]
-        public List<MovieCrewRequest> Crew { get; set; }
+        public required List<MovieCrewRequest> Crew { get; set; }
     }
 
     public class MovieCastRequest
@@ -51,7 +51,7 @@ namespace movielandia_.net_api.DTOs.Requests
 
         [Required]
         [StringLength(100)]
-        public string Role { get; set; }
+        public required string Role { get; set; }
     }
 
     public class MovieCrewRequest
@@ -61,6 +61,6 @@ namespace movielandia_.net_api.DTOs.Requests
 
         [Required]
         [StringLength(100)]
-        public string Role { get; set; }
+        public required string Role { get; set; }
     }
 }

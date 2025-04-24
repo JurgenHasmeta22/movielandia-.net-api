@@ -6,7 +6,7 @@ namespace movielandia_.net_api.DTOs.Requests
     {
         [Required]
         [MinLength(2)]
-        public string SearchTerm { get; set; }
+        public required string SearchTerm { get; set; }
 
         [Range(1, int.MaxValue)]
         public int Page { get; set; } = 1;
@@ -17,7 +17,6 @@ namespace movielandia_.net_api.DTOs.Requests
         public string SortBy { get; set; } = "title";
         public string SortDirection { get; set; } = "asc";
 
-        // Optional filters
         public float? MinRating { get; set; }
         public float? MaxRating { get; set; }
         public DateTime? FromDate { get; set; }

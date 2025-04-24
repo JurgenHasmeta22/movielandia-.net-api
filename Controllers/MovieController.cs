@@ -10,12 +10,18 @@ namespace movielandia_.net_api.Controllers
     [Route("api/movies")]
     public class MovieController : ControllerBase
     {
+        #region Constructor
+
         private readonly IMovieManager _movieManager;
 
         public MovieController(IMovieManager movieManager)
         {
             _movieManager = movieManager;
         }
+
+        #endregion
+
+        #region Query Operations
 
         [HttpGet]
         [ProducesResponseType(typeof(MovieListResponseDTO), StatusCodes.Status200OK)]
@@ -69,10 +75,12 @@ namespace movielandia_.net_api.Controllers
             try
             {
                 var result = await _movieManager.GetMovieByIdAsync(id, parameters);
+
                 if (result == null)
                 {
                     return NotFound(new { message = $"Movie with ID {id} not found" });
                 }
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -80,61 +88,6 @@ namespace movielandia_.net_api.Controllers
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     new { message = $"Error retrieving movie: {ex.Message}" }
-                );
-            }
-        }
-
-        [HttpPost]
-        [ProducesResponseType(typeof(MovieDTO), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDTO>> CreateMovie(
-            [FromBody] CreateMovieRequestDTO request
-        )
-        {
-            try
-            {
-                var createdMovie = await _movieManager.CreateMovieAsync(request);
-
-                return CreatedAtAction(
-                    nameof(GetMovieById),
-                    new { id = createdMovie.Id },
-                    createdMovie
-                );
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new { message = $"Error creating movie: {ex.Message}" }
-                );
-            }
-        }
-
-        [HttpPut("{id:int}")]
-        [ProducesResponseType(typeof(MovieDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<MovieDTO>> UpdateMovie(
-            int id,
-            [FromBody] UpdateMovieRequestDTO request
-        )
-        {
-            try
-            {
-                var updatedMovie = await _movieManager.UpdateMovieAsync(id, request);
-                if (updatedMovie == null)
-                {
-                    return NotFound(new { message = $"Movie with ID {id} not found" });
-                }
-                return Ok(updatedMovie);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new { message = $"Error updating movie: {ex.Message}" }
                 );
             }
         }
@@ -238,6 +191,67 @@ namespace movielandia_.net_api.Controllers
             }
         }
 
+        #endregion
+
+        #region Command Operations
+
+        [HttpPost]
+        [ProducesResponseType(typeof(MovieDTO), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<MovieDTO>> CreateMovie(
+            [FromBody] CreateMovieRequestDTO request
+        )
+        {
+            try
+            {
+                var createdMovie = await _movieManager.CreateMovieAsync(request);
+
+                return CreatedAtAction(
+                    nameof(GetMovieById),
+                    new { id = createdMovie.Id },
+                    createdMovie
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new { message = $"Error creating movie: {ex.Message}" }
+                );
+            }
+        }
+
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(typeof(MovieDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<MovieDTO>> UpdateMovie(
+            int id,
+            [FromBody] UpdateMovieRequestDTO request
+        )
+        {
+            try
+            {
+                var updatedMovie = await _movieManager.UpdateMovieAsync(id, request);
+
+                if (updatedMovie == null)
+                {
+                    return NotFound(new { message = $"Movie with ID {id} not found" });
+                }
+
+                return Ok(updatedMovie);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new { message = $"Error updating movie: {ex.Message}" }
+                );
+            }
+        }
+
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -247,10 +261,12 @@ namespace movielandia_.net_api.Controllers
             try
             {
                 var result = await _movieManager.DeleteMovieAsync(id);
+
                 if (!result)
                 {
                     return NotFound(new { message = $"Movie with ID {id} not found" });
                 }
+
                 return NoContent();
             }
             catch (Exception ex)
@@ -261,5 +277,7 @@ namespace movielandia_.net_api.Controllers
                 );
             }
         }
+
+        #endregion
     }
 }
