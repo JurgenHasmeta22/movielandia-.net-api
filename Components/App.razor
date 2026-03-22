@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Components.Web
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <title>Movielandia</title>
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn .25s ease-out both',
+                        'slide-up': 'slideUp .3s ease-out both',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%':   { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%':   { opacity: '0', transform: 'translateY(12px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <HeadOutlet @rendermode="@RenderMode.InteractiveServer" />
+</head>
+<body class="bg-gray-950 text-gray-100 antialiased selection:bg-amber-500/30">
+    <Routes @rendermode="@RenderMode.InteractiveServer" />
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>

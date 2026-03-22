@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using movielandia_.net_api.Application.Common.DTOs;
 using movielandia_.net_api.Application.Features.Movies.DTOs;
@@ -12,8 +11,7 @@ namespace movielandia_.net_api.Presentation.Controllers.v1;
 /// Movie resource endpoints — list, detail, search, CRUD.
 /// </summary>
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/movies")]
+[Route("api/movies")]
 [Produces("application/json")]
 public sealed class MoviesController : ControllerBase
 {

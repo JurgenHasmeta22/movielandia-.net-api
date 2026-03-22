@@ -1,0 +1,49 @@
+<a href="/movies/@Movie.Id"
+   class="group relative flex flex-col overflow-hidden rounded-xl
+          bg-gray-800/50 ring-1 ring-gray-700/50
+          hover:ring-amber-500/60 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-amber-500/10
+          transition-all duration-300 cursor-pointer">
+
+    <!-- Poster -->
+    <div class="aspect-[2/3] overflow-hidden bg-gray-800 shrink-0">
+        <img src="@Movie.PhotoSrc"
+             alt="@Movie.Title poster"
+             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+             loading="lazy"
+             onerror="this.src='https://placehold.co/300x450/1f2937/4b5563?text=No+Poster'" />
+    </div>
+
+    <!-- Rating badge -->
+    @if (Movie.RatingImdb > 0)
+    {
+        <div class="absolute top-2 right-2
+                    bg-amber-500 text-black text-[10px] font-black
+                    px-1.5 py-0.5 rounded-md shadow-lg
+                    flex items-center gap-0.5">
+            ★ @Movie.RatingImdb.ToString("F1")
+        </div>
+    }
+
+    <!-- Info -->
+    <div class="p-3 flex-1 flex flex-col justify-between">
+        <h3 class="text-sm font-semibold text-gray-100 truncate leading-snug
+                   group-hover:text-amber-400 transition-colors duration-200">
+            @Movie.Title
+        </h3>
+        <p class="text-gray-500 text-xs mt-1 flex items-center gap-1.5">
+            @if (Movie.DateAired.HasValue)
+            {
+                <span>@Movie.DateAired.Value.Year</span>
+            }
+            @if (Movie.Duration > 0)
+            {
+                <span class="text-gray-700">·</span>
+                <span>@Movie.Duration min</span>
+            }
+        </p>
+    </div>
+</a>
+
+@code {
+    [Parameter, EditorRequired] public MovieDto Movie { get; set; } = default!;
+}

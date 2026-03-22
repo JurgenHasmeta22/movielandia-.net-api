@@ -1,0 +1,36 @@
+<header class="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 shrink-0 group">
+            <span class="text-2xl transition-transform duration-200 group-hover:rotate-12">🎬</span>
+            <span class="font-black text-xl tracking-tight">
+                <span class="text-white">Movie</span><span class="text-amber-500">landia</span>
+            </span>
+        </a>
+
+        <!-- Nav links -->
+        <nav class="hidden md:flex items-center gap-1">
+            <NavLink href="/" Match="NavLinkMatch.All"
+                     class="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800/80 transition-all"
+                     ActiveClass="text-white bg-gray-800">
+                Home
+            </NavLink>
+            <NavLink href="/movies"
+                     class="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800/80 transition-all"
+                     ActiveClass="text-white bg-gray-800">
+                Movies
+            </NavLink>
+        </nav>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-3">
+            <a href="/swagger" target="_blank" rel="noopener noreferrer"
+               class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono
+                      bg-gray-800/80 hover:bg-gray-700 border border-gray-700/60 hover:border-gray-600
+                      text-gray-400 hover:text-white px-3 py-1.5 rounded-lg transition-all duration-200">
+                <span class="text-amber-500">⚡</span> API Docs
+            </a>
+        </div>
+    </div>
+</header>

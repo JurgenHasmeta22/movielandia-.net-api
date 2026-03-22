@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using movielandia_.net_api.Infrastructure.Persistence;
 using movielandia_.net_api.Presentation.Extensions;
@@ -34,17 +34,9 @@ try
     builder.Services.AddControllers(options =>
         options.Filters.Add<GlobalExceptionFilter>());
 
-    // API Versioning
-    builder.Services.AddApiVersioning(options =>
-    {
-        options.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
-        options.AssumeDefaultVersionWhenUnspecified = true;
-        options.ReportApiVersions = true;
-    }).AddApiExplorer(options =>
-    {
-        options.GroupNameFormat = "'v'VVV";
-        options.SubstituteApiVersionInUrl = true;
-    });
+    // ── Blazor Server ─────────────────────────────────────────────────────────
+    builder.Services.AddRazorComponents()
+        .AddInteractiveServerComponents();
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(c =>
@@ -90,8 +82,10 @@ try
     app.UseCors("AllowAll");
     app.UseAuthorization();
 
-    app.MapGet("/", () => Results.Redirect("/swagger"));
     app.MapControllers();
+    app.UseAntiforgery();
+    app.MapRazorComponents<movielandia_.net_api.Components.App>()
+        .AddInteractiveServerRenderMode();
 
     // Health check endpoint
     app.MapHealthChecks("/health", new HealthCheckOptions

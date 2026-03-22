@@ -1,0 +1,21 @@
+@inherits LayoutComponentBase
+
+<div class="min-h-screen flex flex-col bg-gray-950">
+    <NavMenu />
+
+    <main class="flex-1">
+        @Body
+    </main>
+
+    <footer class="border-t border-gray-800/60 mt-20 py-10 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5 text-gray-500">
+                <span class="text-xl">🎬</span>
+                <span class="font-bold text-gray-300">Movie<span class="text-amber-500">landia</span></span>
+                <span class="text-gray-700">·</span>
+                <span class="text-sm">© @DateTime.Now.Year. All rights reserved.</span>
+            </div>
+            <p class="text-xs text-gray-700">Built with .NET 9 · Blazor Server · Tailwind CSS</p>
+        </div>
+    </footer>
+</div>
