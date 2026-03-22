@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using movielandia_.net_api.Data;
+using movielandia_.net_api.Infrastructure.Persistence;
 
 #nullable disable
 
 namespace movielandia_.net_api.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20250424000000_SeedDataMigration")]
     partial class SeedDataMigration
     {

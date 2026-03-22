@@ -1,0 +1,13 @@
+namespace movielandia_.net_api.Domain.Entities
+{
+    public class CrewSerie
+    {
+        public int Id { get; set; }
+        public int SerieId { get; set; }
+        public int CrewId { get; set; }
+
+        // Collections
+        public required virtual Serie Serie { get; set; }
+        public virtual required Crew Crew { get; set; }
+    }
+}

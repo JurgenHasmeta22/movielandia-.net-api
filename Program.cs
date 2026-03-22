@@ -1,68 +1,50 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using movielandia_.net_api.Data;
-using movielandia_.net_api.Extensions;
-using movielandia_.net_api.Filters;
+using Microsoft.OpenApi;
+using movielandia_.net_api.Infrastructure.Persistence;
+using movielandia_.net_api.Presentation.Extensions;
+using movielandia_.net_api.Presentation.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidationExceptionFilter>();
-});
-
+// ── Infrastructure ──────────────────────────────────────────────────────────
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddMemoryCache();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+// ── Application ─────────────────────────────────────────────────────────────
+builder.Services.AddApplicationServices();
 
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddMovieServices();
+// ── Presentation ────────────────────────────────────────────────────────────
+builder.Services.AddControllers(options =>
+    options.Filters.Add<GlobalExceptionFilter>());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc(
-        "v1",
-        new OpenApiInfo
-        {
-            Title = "Movielandia API",
-            Version = "v1",
-            Description = "A comprehensive movie platform API",
-            Contact = new OpenApiContact
-            {
-                Name = "Movielandia Team",
-                Email = "support@movielandia.com",
-            },
-        }
-    );
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Movielandia API",
+        Version = "v1",
+        Description = "A comprehensive movie platform API",
+        Contact = new OpenApiContact { Name = "Movielandia Team", Email = "support@movielandia.com" },
+    });
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
     if (File.Exists(xmlPath))
-    {
         c.IncludeXmlComments(xmlPath);
-    }
 
     c.EnableAnnotations();
 });
 
 builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "AllowAll",
-        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
-    );
-});
+    options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
+// ── Pipeline ─────────────────────────────────────────────────────────────────
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -77,12 +59,14 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCors("AllowAll");
 app.UseAuthorization();
+
 app.MapGet("/", () => Results.Redirect("/swagger"));
 app.MapControllers();
 
+// ── Database Migration ───────────────────────────────────────────────────────
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     await dbContext.Database.MigrateAsync();
 }
 
