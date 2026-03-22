@@ -7,7 +7,7 @@ using movielandia_.net_api.Infrastructure.Repositories;
 namespace movielandia_.net_api.Presentation.Extensions;
 
 /// <summary>
-/// Registers infrastructure services (DbContext, repositories, unit-of-work) into the DI container.
+/// Registers infrastructure services (DbContext, repositories, unit-of-work, health checks) into the DI container.
 /// </summary>
 public static class InfrastructureExtensions
 {
@@ -23,6 +23,10 @@ public static class InfrastructureExtensions
 
         // Repositories
         services.AddScoped<IMovieRepository, MovieRepository>();
+
+        // Health checks — exposes /health endpoint with DB connectivity
+        services.AddHealthChecks()
+            .AddDbContextCheck<AppDbContext>("database", tags: ["db", "ready"]);
 
         return services;
     }

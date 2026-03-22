@@ -1,0 +1,196 @@
+### Movielandia API — Movie Endpoints
+### Requires VS Code REST Client extension (humao.rest-client)
+### Start the API first: dotnet run
+
+@baseUrl = https://localhost:7000/api/v1
+@contentType = application/json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ✅  SEED VERIFICATION
+# Run these first to confirm the seed data came through correctly.
+# Expected: 200 OK with a list of movies/genres.
+# ─────────────────────────────────────────────────────────────────────────────
+
+### [SEED] Verify movies were seeded (should return page 1 with movies)
+GET {{baseUrl}}/movies?page=1&pageSize=5
+Accept: application/json
+
+###
+
+### [SEED] Verify homepage movies (should return up to 30)
+GET {{baseUrl}}/movies/homepage
+Accept: application/json
+
+###
+
+### [SEED] Verify latest movies (should return 6 entries)
+GET {{baseUrl}}/movies/latest
+Accept: application/json
+
+###
+
+### [SEED] Verify total movie count (should be > 0)
+GET {{baseUrl}}/movies/count
+Accept: application/json
+
+###
+
+### [SEED] Get movie ID 1 — should return 'Freaks Out' with cast/crew/reviews
+GET {{baseUrl}}/movies/1
+Accept: application/json
+
+###
+
+### [SEED] Get movie by slug title
+GET {{baseUrl}}/movies/by-title/Freaks-Out
+Accept: application/json
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔍  FILTERING & PAGINATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Page 1, 12 per page, sorted by title ascending
+GET {{baseUrl}}/movies?page=1&pageSize=12&sortBy=title&ascOrDesc=asc
+Accept: application/json
+
+###
+
+### Page 1, sorted by rating descending
+GET {{baseUrl}}/movies?page=1&pageSize=10&sortBy=ratingImdb&ascOrDesc=desc
+Accept: application/json
+
+###
+
+### Filter by title containing "The"
+GET {{baseUrl}}/movies?page=1&pageSize=10&title=The
+Accept: application/json
+
+###
+
+### Filter movies with IMDb rating > 7.5
+GET {{baseUrl}}/movies?page=1&pageSize=10&filterField=RatingImdb&filterValue=7.5&filterOperator=1
+Accept: application/json
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔎  SEARCH
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Full-text search
+GET {{baseUrl}}/movies/search?searchTerm=war&page=1&pageSize=5
+Accept: application/json
+
+###
+
+### Search with rating filter
+GET {{baseUrl}}/movies/search?searchTerm=father&minRating=7&maxRating=10&sortBy=ratingImdb&sortDirection=desc
+Accept: application/json
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔗  RELATED MOVIES
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Get related movies for movie ID 1
+GET {{baseUrl}}/movies/1/related?page=1&pageSize=6
+Accept: application/json
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ➕  CREATE
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Create a new movie
+POST {{baseUrl}}/movies
+Content-Type: {{contentType}}
+
+{
+  "title": "Test Movie",
+  "photoSrc": "https://example.com/photo.jpg",
+  "photoSrcProd": "https://example.com/photo-prod.jpg",
+  "trailerSrc": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  "duration": 120,
+  "ratingImdb": 7.5,
+  "dateAired": "2024-01-15",
+  "description": "A great test movie for development purposes.",
+  "genreIds": [1],
+  "cast": [
+    { "actorId": 1, "role": "Hero" }
+  ],
+  "crew": [
+    { "crewId": 1, "role": "Director" }
+  ]
+}
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ✏️  UPDATE
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Update movie (partial — only changed fields required)
+PUT {{baseUrl}}/movies/1
+Content-Type: {{contentType}}
+
+{
+  "description": "Updated description for Freaks Out."
+}
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ❌  DELETE
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Delete a movie (use carefully — resets seed state)
+# DELETE {{baseUrl}}/movies/999
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🩺  HEALTH CHECK
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Check API + database connectivity
+### Expected: 200 Healthy
+GET https://localhost:7000/health
+Accept: application/json
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ❗  VALIDATION ERRORS (should return 400)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Missing required fields — should return 400
+POST {{baseUrl}}/movies
+Content-Type: {{contentType}}
+
+{
+  "title": "X",
+  "duration": -5,
+  "ratingImdb": 99
+}
+
+###
+
+### Search with too-short term — should return 400
+GET {{baseUrl}}/movies/search?searchTerm=x
+Accept: application/json
+
+###
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🚫  NOT FOUND (should return 404)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Non-existent movie ID — should return 404 ProblemDetails
+GET {{baseUrl}}/movies/99999
+Accept: application/json
+
+###

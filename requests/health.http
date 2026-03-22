@@ -1,0 +1,26 @@
+### Infrastructure Checks
+### Run these to verify the setup is correct before testing the full API.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🩺  Health & Infrastructure
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Database + API health check
+### ✅ Expected: 200 {"status":"Healthy"}
+GET https://localhost:7000/health
+Accept: application/json
+
+###
+
+### Swagger UI available in dev
+### ✅ Expected: 200 with Swagger HTML
+GET https://localhost:7000/swagger
+Accept: text/html
+
+###
+
+### Root redirect — should redirect to /swagger
+GET https://localhost:7000/
+Accept: application/json
+
+###

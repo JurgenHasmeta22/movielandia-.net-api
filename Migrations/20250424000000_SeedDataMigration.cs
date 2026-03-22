@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -9,12 +10,7 @@ namespace movielandia_.net_api.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var cleanupPath = Path.Combine("Data", "Configurations", "Seed", "CleanupAndSetup.sql");
-
-            if (File.Exists(cleanupPath))
-            {
-                migrationBuilder.Sql(File.ReadAllText(cleanupPath));
-            }
+            migrationBuilder.Sql(ReadEmbeddedSql("CleanupAndSetup.sql"));
 
             var seedFiles = new[]
             {
@@ -35,24 +31,30 @@ namespace movielandia_.net_api.Migrations
             };
 
             foreach (var seedFile in seedFiles)
-            {
-                var filePath = Path.Combine("Data", "Configurations", "Seed", seedFile);
-
-                if (File.Exists(filePath))
-                {
-                    migrationBuilder.Sql(File.ReadAllText(filePath));
-                }
-            }
+                migrationBuilder.Sql(ReadEmbeddedSql(seedFile));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            var cleanupPath = Path.Combine("Data", "Configurations", "Seed", "CleanupAndSetup.sql");
+            => migrationBuilder.Sql(ReadEmbeddedSql("CleanupAndSetup.sql"));
 
-            if (File.Exists(cleanupPath))
-            {
-                migrationBuilder.Sql(File.ReadAllText(cleanupPath));
-            }
+        /// <summary>
+        /// Reads an embedded SQL resource by filename.
+        /// Resources are baked into the assembly at build time — no files needed on disk at runtime.
+        /// </summary>
+        private static string ReadEmbeddedSql(string fileName)
+        {
+            var assembly = typeof(SeedDataMigration).Assembly;
+
+            var resourceName = assembly
+                .GetManifestResourceNames()
+                .FirstOrDefault(n => n.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
+                ?? throw new InvalidOperationException(
+                    $"Embedded SQL resource '{fileName}' was not found in assembly '{assembly.GetName().Name}'. " +
+                    $"Available resources: {string.Join(", ", assembly.GetManifestResourceNames())}");
+
+            using var stream = assembly.GetManifestResourceStream(resourceName)!;
+            using var reader = new StreamReader(stream);
+            return reader.ReadToEnd();
         }
     }
 }
